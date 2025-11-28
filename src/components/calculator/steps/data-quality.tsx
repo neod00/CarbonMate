@@ -5,7 +5,6 @@ import { usePCFStore } from "@/lib/store"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Slider } from "@/components/ui/slider"
 import { Info, AlertTriangle, CheckCircle2, TrendingUp, TrendingDown } from "lucide-react"
 import {
     PEDIGREE_MATRIX,
