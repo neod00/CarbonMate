@@ -96,7 +96,7 @@ export function ResultsStep() {
         switch (stageId) {
             case 'raw_materials': {
                 const weight = activityData['raw_material_weight'] || 0
-                const materialId = activityData['material_type'] || 'material_steel_primary'
+                const materialId = activityData['raw_material_type'] || 'material_steel_primary'
                 const factor = MATERIAL_EMISSION_FACTORS.find(f => f.id === materialId)
                     || MATERIAL_EMISSION_FACTORS.find(f => f.id === 'material_steel_primary')!
 
