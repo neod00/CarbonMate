@@ -1,0 +1,1790 @@
+
+--- PAGE 10 ---
+ 
+ISO 14067:2018
+Introduction
+Climate change arising from anthropogenic activity has been identified as one of the greatest challenges 
+facing the world and will continue to affect business and citizens over future decades.
+Climate change has implications for both human and natural systems and could lead to significant 
+impacts on resource availability, economic activity and human wellbeing. In response, international, 
+regional, national and local initiatives are being developed and implemented by public and private 
+sectors to mitigate greenhouse gas (GHG) concentrations in the Earth’s atmosphere as well as to 
+facilitate adaptation to climate change.
+There is a need for an effective and progressive response to the urgent threat of climate change 
+on the basis of the best available scientific knowledge. ISO produces documents that support the 
+transformation of scientific knowledge into tools that will help address climate change.
+GHG initiatives on mitigation rely on the quantification, monitoring, reporting and verification of GHG 
+emissions and/or removals.
+The ISO 14060 family provides clarity and consistency for quantifying, monitoring, reporting and 
+validating or verifying GHG emissions and removals to support sustainable development through a 
+low-carbon economy. It also benefits organizations, project proponents and stakeholders worldwide 
+by providing clarity and consistency on quantifying, monitoring, reporting, and validating or verifying 
+GHG emissions and removals. Specifically, the use of the ISO 14060 family:
+— enhances the environmental integrity of GHG quantification;
+— enhances the credibility, consistency, and transparency of GHG quantification, monitoring, 
+reporting, validation and verification;
+— facilitates the development and implementation of GHG management strategies and plans;
+— facilitates the development and implementation of mitigation actions through emission reductions 
+or removal enhancements;
+— facilitates the ability to track performance and progress in the reduction of GHG emissions and/or 
+increase in GHG removals.
+Applications of the ISO 14060 family include:
+— corporate decisions, such as identifying GHG emission reduction opportunities and increasing 
+profitability by reducing energy consumption;
+— carbon risk management, such as the identification and management of risks and opportunities;
+— voluntary initiatives, such as participation in voluntary GHG registries or sustainability reporting 
+initiatives;
+— GHG markets, such as the buying and selling of GHG allowances or credits;
+— regulatory/government GHG programmes, such as credit for early action, agreements or national 
+and local reporting initiatives.
+ISO 14064‑1 details principles and requirements for designing, developing, managing and reporting 
+organization‑level GHG inventories.
+It includes requirements for determining GHG emission and removal boundaries, quantifying an 
+organization’s GHG emissions and removals, and identifying specific company actions or activities 
+aimed at improving GHG management.
+It also includes requirements and guidance on inventory quality management, reporting, internal 
+auditing and the organization’s responsibilities in verification activities.
+ 
+vi © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 11 ---
+ 
+ISO 14067:2018
+ISO 14064‑2 details principles and requirements for determining baselines and for the monitoring, 
+quantifying and reporting of project emissions. It focuses on GHG projects or project-based activities 
+specifically designed to reduce GHG emissions and/or enhance GHG removals. It provides the basis for 
+GHG projects to be validated and verified.
+ISO 14064-3 details requirements for verifying GHG statements related to GHG inventories, GHG projects, 
+and carbon footprints of products. It describes the process for validation or verification, including 
+validation or verification planning, assessment procedures, and the evaluation of organizational, 
+project and product GHG statements. 
+ISO 14065 defines requirements for bodies that validate and verify GHG statements. Its requirements 
+cover impartiality, competence, communication, validation and verification processes, appeals, 
+complaints, and the management system of validation and verification bodies. It can be used as a 
+basis for accreditation and other forms of recognition in relation to the impartiality, competence, and 
+consistency of validation and verification bodies.
+ISO 14066 specifies competence requirements for validation teams and verification teams. It includes 
+principles and specifies competence requirements based on the tasks that validation teams or 
+verification teams must be able to perform.
+This document defines the principles, requirements and guidelines for the quantification of the carbon 
+footprint of products. The aim of this document is to quantify GHG emissions associated with the life 
+cycle stages of a product, beginning with resource extraction and raw material sourcing and extending 
+through the production, use and end ‑of‑life stages of the product.
+ISO/TR 14069 assists users in the application of ISO 14064‑1, providing guidelines and examples for 
+improving transparency in the quantification of emissions and their reporting. It does not provide 
+additional guidance to ISO 14064‑1.
+Figure 1 illustrates the relationship among the ISO 14060 family of GHG standards.
+Figure 1 — Relationship among the ISO 14060 family of GHG standards
+ 
+© ISO 2018 – All rights reserved vii
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 12 ---
+ 
+ISO 14067:2018
+NOTE In this document, GHG statements are the CFP or the partial CFP.
+GHGs can be emitted and removed throughout the life cycle of a product which includes acquisition 
+of raw material, design, production, transportation/delivery, use and the end-of-life treatment. 
+Quantification of the carbon footprint of a product (CFP) will assist in the understanding and action to 
+increase GHG removals and reduce GHG emissions throughout the life cycle of a product. This document 
+details principles, requirements and guidelines for the quantification of CFPs, i.e. goods and services, 
+based on GHG emissions and removals over their life cycle. Requirements and guidelines for the 
+quantification of a partial CFP are also provided. Communication related to the CFP or the partial CFP 
+is covered in ISO 14026. The development of product category rules (PCR) is covered in ISO/TS 14027.
+This document is based on principles, requirements and guidelines identified in existing International 
+Standards on life cycle assessment (LCA), ISO 14040 and ISO 14044, and aims to set specific 
+requirements for the quantification of a CFP and a partial CFP.
+This document is expected to benefit organizations, governments, industry, service providers, 
+communities and other interested parties by providing clarity and consistency in quantifying CFPs. 
+Specifically, using LCA in accordance with this document, with climate change as the single impact 
+category, can offer benefits through:
+— avoiding burden-shifting from one stage of a product life cycle to another or between product 
+life cycles;
+— providing requirements for the quantification of the CFP;
+— facilitating CFP performance tracking in reducing GHG emissions;
+— providing a better understanding of the CFP such that potential opportunities for increases in GHG 
+removals and reductions of GHG emissions might be identified;
+— helping to promote a sustainable low carbon economy;
+— enhancing the credibility, consistency and transparency of the quantification and reporting of the CFP;
+— facilitating the evaluation of alternative product design and sourcing options, production and 
+manufacturing methods, raw material choices, transportation, recycling and other end-of-
+life processes;
+— facilitating the development and implementation of GHG management strategies and plans across 
+product life cycles, as well as the detection of additional efficiencies in the supply chain;
+— preparing reliable CFP information.
+NOTE In respect to the terminology of ISO 14026 regarding footprint communication, climate change is 
+considered as an example of an “area of concern”.
+Figure 2 illustrates the connection between this document and standards outside the GHG management 
+family of standards.
+ 
+viii © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 13 ---
+ 
+ISO 14067:2018
+Figure 2 — Relationship between this document and standards beyond the GHG management 
+family of standards
+CFPs prepared in accordance with this document contribute to the objectives of GHG-related policies 
+and/or regimes.
+Limitations of CFPs based on this document are described in Annex A.
+ 
+© ISO 2018 – All rights reserved ix
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 14 ---
+This page deliberately left blank
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 15 ---
+ 
+Greenhouse gases - Carbon footprint of products - 
+Requirements and guidelines for quantification
+1 Scope
+This document specifies principles, requirements and guidelines for the quantification and reporting 
+of the carbon footprint of a product (CFP), in a manner consistent with International Standards on life 
+cycle assessment (LCA) (ISO 14040 and ISO 14044).
+Requirements and guidelines for the quantification of a partial CFP are also specified.
+This document is applicable to CFP studies, the results of which provide the basis for different 
+applications (see Clause 4).
+This document addresses only a single impact category: climate change. Carbon offsetting and 
+communication of CFP or partial CFP information are outside the scope of this document.
+This document does not assess any social or economic aspects or impacts, or any other environmental 
+aspects and related impacts potentially arising from the life cycle of a product.
+2 Normative references
+The following documents are referred to in the text in such a way that some or all of their content 
+constitutes requirements of this document. For dated references, only the edition cited applies. For 
+undated references, the latest edition of the referenced document (including any amendments) applies.
+ISO/TS 14027:2017, Environmental labels and declarations — Development of product category rules
+ISO 14044:2006, Environmental management — Life cycle assessment — Requirements and guidelines
+ISO/TS 14071, Environmental management — Life cycle assessment — Critical review processes and 
+reviewer competencies: Additional requirements and guidelines to ISO 14044:2006
+3 Terms, definitions and abbreviated terms
+3.1 Terms and definitions
+For the purposes of this document, the following terms and definitions apply.
+ISO and IEC maintain terminological databases for use in standardization at the following addresses:
+— ISO Online browsing platform: available at https:/ /www.iso.org/obp
+— IEC Electropedia: available at http:/ /www.electropedia.org/
+INTERNATIONAL ST ANDARD ISO 14067:2018
+© ISO 2018 – All rights reserved 1
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 16 ---
+ 
+ISO 14067:2018
+3.1.1 Quantification of the carbon footprint of a product
+3.1.1.1
+carbon footprint of a product
+CFP
+sum of GHG emissions (3.1.2.5) and GHG removals (3.1.2.6) in a product system  (3.1.3.2), expressed as 
+CO2 equivalents (3.1.2.2) and based on a life cycle assessment  (3.1.4.3) using the single impact category 
+(3.1.4.8) of climate change
+Note 1 to entry: A CFP can be disaggregated into a set of figures identifying specific GHG emissions and removals 
+(see Table 1). A CFP can also be disaggregated into the stages of the life cycle (3.1.4.2).
+Note 2 to entry: The results of the quantification of the CFP are documented in the CFP study report  ( 3.1.1.5) 
+expressed in mass of CO 2e per functional unit (3.1.3.7).
+3.1.1.2
+partial carbon footprint of a product
+partial CFP
+sum of GHG emissions (3.1.2.5) and GHG removals (3.1.2.6) of one or more selected process(es) (3.1.3.5) 
+in a product system (3.1.3.2), expressed as CO2 equivalents (3.1.2.2) and based on the selected stages or 
+processes within the life cycle (3.1.4.2)
+Note 1 to entry: A partial CFP is based on or compiled from data related to (a) specific process(es) or footprint 
+information modules, which is (are) part of a product system and can form the basis for quantification of a CFP. 
+More detailed information on information modules is given in ISO 14025:2006, 5.4.
+Note 2 to entry: “Footprint information modules” is defined in ISO 14026:2017, 3.1.4.
+Note 3 to entry: The results of the quantification of the partial CFP are documented in the CFP study report  
+(3.1.3.5) expressed in mass of CO 2e per declared unit (3.1.3.8).
+3.1.1.3
+carbon footprint of a product systematic approach
+CFP systematic approach
+set of procedures to facilitate the quantification of the CFP (3.1.1.6) for two or more products (3.1.3.1) of 
+the same organization (3.1.5.1)
+3.1.1.4
+carbon footprint of a product study
+CFP study
+all activities that are necessary to quantify and report a CFP (3.1.1.1) or a partial CFP (3.1.1.2)
+3.1.1.5
+carbon footprint of a product study report
+CFP study report
+report that documents the CFP study  (3.1.1.4), presents the CFP (3.1.1.1) or partial CFP  (3.1.1.2), and 
+shows the decisions taken within the study
+Note 1 to entry: The CFP study report demonstrates that the provisions of this document are met.
+3.1.1.6
+quantification of the carbon footprint of a product 
+quantification of the CFP
+activities that result in the determination of a CFP (3.1.1.1) or a partial CFP (3.1.1.2)
+Note 1 to entry: Quantification of the CFP or the partial CFP is part of the CFP study (3.1.1.4).
+ 
+2 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 17 ---
+ 
+ISO 14067:2018
+3.1.1.7
+carbon offsetting
+mechanism for compensating for all or a part of the CFP (3.1.1.1) or the partial CFP (3.1.1.2) through 
+the prevention of the release of, reduction in, or removal of an amount of GHG emissions (3.1.2.5) in a 
+process (3.1.3.5) outside the product system (3.1.3.2) under study
+EXAMPLE Investment outside the relevant product system, e.g. in renewable energy technologies, energy 
+efficiency measures, afforestation/reforestation.
+Note 1 to entry: Carbon offsetting is not allowed in the quantification of a CFP  ( 3.1.1.6) or a partial CFP, and 
+communication of carbon offsetting is outside of the scope of this document (see 6.3.4.1).
+Note 2 to entry: Footprint communication and relevant claims regarding carbon offsetting and carbon neutrality 
+are covered in ISO 14026 and ISO 14021.
+Note 3 to entry: Adapted from the definition of “offsetting” in ISO 14021:2016, 3.1.12.
+3.1.1.8
+product category
+group of products (3.1.3.1) that can fulfil equivalent functions
+[SOURCE: ISO 14025:2006, 3.12]
+3.1.1.9
+product category rules
+PCR
+set of specific rules, requirements and guidelines for developing Type III environmental declarations 
+and footprint communications for one or more product categories (3.1.1.8)
+Note 1 to entry: PCR include quantification rules conforming to ISO 14044.
+Note 2 to entry:  ISO/TS 14027 describes the development of PCR applicable to this document.
+Note 3 to entry: “Footprint communication” is defined in ISO 14026:2017, 3.1.1.
+[SOURCE: ISO/TS 14027:2017, 3.1, modified ― Notes 1, 2 and 3 to entry have replaced the original 
+Note 1 to entry.]
+3.1.1.10
+carbon footprint of a product – product category rules
+CFP–PCR
+set of specific rules, requirements and guidelines for CFP (3.1.1.1) or partial CFP (3.1.1.2) quantification 
+and communication for one or more product categories (3.1.1.8)
+Note 1 to entry: CFP–PCR include quantification rules conforming to ISO 14044.
+Note 2 to entry:  ISO/TS 14027 describes the development of PCR (3.1.1.9) applicable to this document.
+3.1.1.11
+carbon footprint of a product performance tracking
+CFP performance tracking
+comparing the CFP ( 3.1.1.1) or the partial CFP  ( 3.1.1.2) of one specific product ( 3.1.3.1) of the same 
+organization (3.1.5.1) over time
+Note 1 to entry: It includes calculating the change to the CFP for one specific product, or between superseding 
+products with the same functional unit (3.1.3.7) or declared unit (3.1.3.8) over time.
+ 
+© ISO 2018 – All rights reserved 3
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 18 ---
+ 
+ISO 14067:2018
+3.1.2 Greenhouse gases
+3.1.2.1
+greenhouse gas
+GHG
+gaseous constituent of the atmosphere, both natural and anthropogenic, that absorbs and emits 
+radiation at specific wavelengths within the spectrum of infrared radiation emitted by the Earth’s 
+surface, the atmosphere and clouds
+Note 1 to entry: For a list of GHGs, see the latest IPCC Assessment Report [16].
+Note 2 to entry: Water vapour and ozone, which are anthropogenic as well as natural GHGs, are not included in 
+the CFP (3.1.1.1) and partial CFP (3.1.1.2).
+Note 3 to entry: The focus of this document is limited to long-lived GHGs and it therefore excludes climate 
+effects due to changes in surface reflectivity (albedo) and short-lived radiative forcing agents (e.g. black carbon 
+and aerosols).
+[SOURCE: ISO 14064-1:2006, 2.1, modified ― Notes 1, 2 and 3 to entry have replaced the original Note 1 
+to entry, which listed examples of GHGs.]
+3.1.2.2
+carbon dioxide equivalent
+CO2 equivalent
+CO2e
+unit for comparing the radiative forcing of a GHG (3.1.2.1) to that of carbon dioxide
+Note 1 to entry: Mass of a GHG is converted into CO 2 equivalents by multiplying the mass of the GHG by the 
+corresponding GWP (3.1.2.4) or GTP (3.1.2.3) of that gas.
+Note 2 to entry: In the case of GTP, CO 2 equivalent is the unit for comparing the change in global mean surface 
+temperature caused by a GHG to the temperature change caused by CO 2.
+[SOURCE: ISO 14064-1:2006, 2.19, modified ― An additional preferred term has been included, 
+Note 1 to entry has been reworded to provide clarification, and Note 2 has been replaced with a new 
+Note 2 to entry.]
+3.1.2.3
+global temperature change potential
+GTP
+index measuring the change in global mean surface temperature at a chosen point in time in response to 
+a GHG (3.1.2.1) emission pulse, relative to the change in temperature attributed to carbon dioxide (CO 2)
+Note 1 to entry: “Index” as used this document is a “characterization factor” as defined in ISO 14040:2006, 3.37.
+Note 2 to entry: The GTP is based on temperature change for a selected year.
+Note 3 to entry: Derived from the Working Group 1 IPCC Fifth Assessment Report (AR5), Climate Change 2013: 
+The Physical Science Basis.
+[SOURCE: IPCC (2013)[16].]
+3.1.2.4
+global warming potential
+GWP
+index, based on radiative properties of GHGs (3.1.2.1), measuring the radiative forcing following a pulse 
+emission of a unit mass of a given GHG in the present-day atmosphere integrated over a chosen time 
+horizon, relative to that of carbon dioxide (CO2)
+Note 1 to entry: “Index” as used in this document is a “characterization factor” as defined in ISO 14040:2006, 3.37.
+Note 2 to entry: A “pulse emission” is an emission at one point in time.
+ 
+4 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 19 ---
+ 
+ISO 14067:2018
+3.1.2.5
+greenhouse gas emission
+GHG emission
+release of a GHG (3.1.2.1) into the atmosphere
+3.1.2.6
+greenhouse gas removal
+GHG removal
+withdrawal of a GHG (3.1.2.1) from the atmosphere
+3.1.2.7
+greenhouse gas emission factor
+GHG emission factor
+coefficient relating activity data with the GHG emission (3.1.2.5)
+3.1.3 Products, product systems and processes
+3.1.3.1
+product
+goods or service
+Note 1 to entry: The product can be categorized as follows: 
+— service (e.g. transport, implementation of events);
+— software (e.g. computer program);
+— hardware (e.g. engine mechanical part);
+— processed material (e.g. lubricant, ore, fuel); 
+— unprocessed material (e.g. agricultural product).
+Note 2 to entry: Services have tangible and intangible elements. Provision of a service can involve, for example, 
+the following: 
+— an activity performed on a customer-supplied tangible product (e.g. automobile to be repaired);
+— an activity performed on a customer-supplied intangible product (e.g. the income statement needed to 
+prepare a tax return);
+— the delivery of an intangible product (e.g. the delivery of information in the context of knowledge transmission);
+— the creation of ambience for the customer (e.g. in hotels and restaurants).
+[SOURCE: ISO 14044:2006, 3.9, modified ― Note 1 to entry and the example have been slightly modified, 
+and Note 3 to entry dealing with the origin of the definition has been omitted.]
+3.1.3.2
+product system
+collection of unit processes (3.1.3.6) with elementary flows (3.1.3.10) and product flows, performing one 
+or more defined functions and which models the life cycle (3.1.4.2) of a product (3.1.3.1)
+Note 1 to entry: “Product flow” is defined in ISO 14040:2006, 3.27.
+[SOURCE: ISO 14044:2006, 3.28, modified ― Note 1 to entry has been added.]
+3.1.3.3
+co-product
+any of two or more products ( 3.1.3.1) coming from the same unit process  ( 3.1.3.6) or product 
+system (3.1.3.2)
+[SOURCE: ISO 14040:2006, 3.10]
+ 
+© ISO 2018 – All rights reserved 5
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 20 ---
+ 
+ISO 14067:2018
+3.1.3.4
+system boundary
+boundary based on a set of criteria representing which unit processes  ( 3.1.3.6) are a part of the 
+system under study
+[SOURCE: ISO 14044:2006, 3.32, modified ― “boundary based on a” has been added, “part of a product 
+system” has been changed to “part of the system under study, and the Note to entry has been deleted.]
+3.1.3.5
+process
+set of interrelated or interacting activities that transforms inputs into outputs
+[SOURCE: ISO 14044:2006, 3.11]
+3.1.3.6
+unit process
+smallest element considered in the life cycle inventory analysis (3.1.4.4) for which input and output data 
+are quantified
+[SOURCE: ISO 14040:2006, 3.34]
+3.1.3.7
+functional unit
+quantified performance of a product system (3.1.3.2) for use as a reference unit
+Note 1 to entry: As the CFP ( 3.1.1.1) treats information on a product ( 3.1.3.1) basis, an additional calculation 
+based on a declared unit (3.1.3.8) can be presented (see also 6.3.3).
+[SOURCE: ISO 14040:2006, 3.20, modified ― Note 1 to entry has been added.]
+3.1.3.8
+declared unit
+quantity of a product (3.1.3.1) for use as a reference unit in the quantification of a partial CFP (3.1.1.2)
+EXAMPLE Mass (1 kg of primary steel), volume (1 m 3 of crude oil).
+[SOURCE: ISO 21930:2017, 3.1.11, modified — The definition was broadened to apply to all products 
+and the quantification of a partial CFP, and the Note 1 to entry was deleted.]
+3.1.3.9
+reference flow
+measure of the inputs to or outputs from processes (3.1.3.5) in a given product system (3.1.3.2) required 
+to fulfil the function expressed by the functional unit (3.1.3.7)
+Note 1 to entry: For an example of applying the concept of a reference flow, see the example in 6.3.3.
+Note 2 to entry: In the case of a partial CFP (3.1.1.2), the reference flow refers to the declared unit ( 3.1.3.8).
+[SOURCE: ISO 14040:2006, 3.29, modified ― “inputs to” and Notes 1 and 2 to entry have been added.]
+3.1.3.10
+elementary flow
+material or energy entering the system being studied that has been drawn from the environment 
+without previous human transformation, or material or energy leaving the system being studied that is 
+released into the environment without subsequent human transformation
+Note 1 to entry: “Environment” is defined in ISO 14001:2015, 3.2.1.
+[SOURCE: ISO 14044:2006, 3.12, modified ― Note 1 to entry has been added.]
+ 
+6 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 21 ---
+ 
+ISO 14067:2018
+3.1.3.11
+service life
+period of time during which a product (3.1.3.1) in use meets or exceeds the performance requirements
+[SOURCE: ISO 15686-1:2011, 3.25, modified ― More general wording has been used.]
+3.1.4 Life cycle assessment
+3.1.4.1
+cut-off criteria
+specification of the amount of material or energy flow or the level of significance of GHG emissions  
+(3.1.2.5) associated with unit processes (3.1.3.6) or the product system  (3.1.3.2) to be excluded from a 
+CFP study (3.1.1.4)
+Note 1 to entry: “Energy flow” is defined in ISO 14040:2006, 3.13.
+[SOURCE: ISO 14044:2006, 3.18, modified ― The term “environmental significance” has been changed 
+to “significance of GHG emissions”, “study” has been changed to “CFP study” and Note 1 to entry has 
+been added.]
+3.1.4.2
+life cycle
+consecutive and interlinked stages related to a product ( 3.1.3.1), from raw material acquisition or 
+generation from natural resources to end ‑of‑life treatment
+Note 1 to entry: “Raw material” is defined in ISO 14040:2006, 3.15.
+Note 2 to entry: Stages of a life cycle related to a product include raw material acquisition, production, 
+distribution, use and end ‑of‑life treatment.
+[SOURCE: ISO 14044:2006, 3.1, modified ― Reference to “final disposal” has been changed to “end-of-
+life treatment” and Notes 1 and 2 to entry have been added.]
+3.1.4.3
+life cycle assessment
+LCA
+compilation and evaluation of the inputs, outputs and the potential environmental impacts of a product 
+system (3.1.3.2) throughout its life cycle (3.1.4.2)
+Note 1 to entry: “Environmental impact” is defined in ISO 14001:2015, 3.2.4.
+[SOURCE: ISO 14044:2006, 3.2, modified ― Note 1 to entry has been added.]
+3.1.4.4
+life cycle inventory analysis
+LCI
+phase of life cycle assessment (3.1.4.3) involving the compilation and quantification of inputs and outputs 
+for a product (3.1.3.1) throughout its life cycle (3.1.4.2)
+[SOURCE: ISO 14044:2006, 3.3]
+3.1.4.5
+life cycle impact assessment
+LCIA
+phase of life cycle assessment  ( 3.1.4.3) aimed at understanding and evaluating the magnitude and 
+significance of the potential environmental impacts for a product system  (3.1.3.2) throughout the life 
+cycle (3.1.4.2) of the product (3.1.3.1)
+[SOURCE: ISO 14044:2006, 3.4]
+ 
+© ISO 2018 – All rights reserved 7
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 22 ---
+ 
+ISO 14067:2018
+3.1.4.6
+life cycle interpretation
+phase of life cycle assessment  ( 3.1.4.3) in which the findings of either the life cycle inventory analysis  
+(3.1.4.4) or the life cycle impact assessment  (3.1.4.5), or both, are evaluated in relation to the defined 
+goal and scope in order to reach conclusions and recommendations
+[SOURCE: ISO 14044:2006, 3.5, modified ― The “inventory analysis” has been expanded by using the 
+term “life cycle inventory analysis”.]
+3.1.4.7
+sensitivity analysis
+systematic procedures for estimating the effects of the choices made regarding methods and data on 
+the outcome of a CFP study (3.1.1.4)
+[SOURCE: ISO 14044:2006, 3.31, modified ― Specific reference to a CFP study has been added.]
+3.1.4.8
+impact category
+class representing environmental issues of concern to which life cycle inventory analysis (3.1.4.4) results 
+may be assigned
+[SOURCE: ISO 14040:2006, 3.39]
+3.1.4.9
+waste
+substances or objects that the holder intends or is required to dispose of
+Note 1 to entry: This definition is taken from the Basel Convention on the Control of Transboundary Movements of 
+Hazardous Wastes and Their Disposal (22 March 1989), but is not confined in this document to hazardous waste.
+[SOURCE: ISO 14040:2006, 3.35]
+3.1.4.10
+critical review
+activity intended to ensure consistency between the CFP study  ( 3.1.1.4) and the principles and 
+requirements of this document
+Note 1 to entry: Requirements for critical review are described in ISO/TS 14071.
+[SOURCE: ISO 14040:2006, 3.45, modified ― “process” has been replaced by “activity”, “life 
+cycle assessment” by “CFP study”, and “the International Standards on life cycle assessment” by 
+“this document”.]
+3.1.4.11
+area of concern
+aspect of the natural environment, human health or resources of interest to society
+EXAMPLE Water, climate change, biodiversity.
+[SOURCE: ISO 14026:2017, 3.2.1]
+3.1.5 Organizations
+3.1.5.1
+organization
+person or group of people that has its own functions with responsibilities, authorities and relationships 
+to achieve its objectives
+Note 1 to entry: The concept of organization includes, but is not limited to, sole-trader, company, corporation, firm, 
+enterprise, authority, partnership, charity or institution, or part or combination thereof, whether incorporated 
+or not, public or private.
+ 
+8 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 23 ---
+ 
+ISO 14067:2018
+[SOURCE: ISO 14001:2015, 3.1.4]
+3.1.5.2
+supply chain
+those involved, through upstream and downstream linkages, in processes ( 3.1.3.5) and activities 
+relating to the provision of products (3.1.3.1) to the user
+Note 1 to entry: In practice, the expression “interlinked chain” applies from suppliers to those involved in end-
+of-life processing, which may include vendors, manufacturing facilities, logistics providers, internal distribution 
+centres, distributors, wholesalers and other entities that lead to the end user.
+[SOURCE: ISO/TR 14062:2002, 3.9, modified ― Examples have been added to Note 1 to entry, and Note 2 
+to entry has been deleted.]
+3.1.6 Data and data quality
+3.1.6.1
+primary data
+quantified value of a process (3.1.3.5) or an activity obtained from a direct measurement or a calculation 
+based on direct measurements
+Note 1 to entry: Primary data need not necessarily originate from the product system  ( 3.1.3.2) under study 
+because primary data might relate to a different but comparable product system to that being studied.
+Note 2 to entry: Primary data can include GHG emission factors  ( 3.1.2.7) and/or GHG activity data (defined in 
+ISO 14064‑1:2006, 2.11).
+3.1.6.2
+site-specific data
+primary data obtained within the product system (3.1.3.2)
+Note 1 to entry: All site-specific data are primary data  (3.1.6.1) but not all primary data are site-specific data 
+because they may be obtained from a different product system.
+Note 2 to entry: Site-specific data include GHG emissions  ( 3.1.2.5) from GHG sources as well as GHG removals  
+(3.1.2.6) by GHG sinks for one specific unit process within a site.
+3.1.6.3
+secondary data
+data which do not fulfil the requirements for primary data (3.1.6.1)
+Note 1 to entry: Secondary data can include data from databases and published literature, default emission 
+factors from national inventories, calculated data, estimates or other representative data, validated by competent 
+authorities.
+Note 2 to entry: Secondary data can include data obtained from proxy processes or estimates.
+3.1.6.4
+uncertainty
+parameter associated with the result of quantification that characterizes the dispersion of the values 
+that could be reasonably attributed to the quantified amount
+Note 1 to entry: Uncertainty can include, for example: 
+— parameter uncertainty, e.g. GHG emission factors (3.1.2.7), activity data;
+— scenario uncertainty, e.g. use stage scenario, end-of-life stage scenario;
+— model uncertainty.
+Note 2 to entry: Uncertainty information typically specifies quantitative estimates of the likely dispersion of 
+values and a qualitative description of the likely causes of the dispersion.
+ 
+© ISO 2018 – All rights reserved 9
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 24 ---
+ 
+ISO 14067:2018
+3.1.7 Biogenic material and land use
+3.1.7.1
+biomass
+material of biological origin, excluding material embedded in geological formations and material 
+transformed to fossilized material
+Note 1 to entry: Biomass includes organic material (both living and dead), e.g. trees, crops, grasses, tree litter, 
+algae, animals, manure and waste (3.1.4.9) of biological origin.
+Note 2 to entry: In this document, biomass excludes peat.
+[SOURCE: ISO 14021:2016, 3.1.1, modified ― “excluding peat” has been deleted and a Note 2 to entry has 
+been added.]
+3.1.7. 2
+biogenic carbon
+carbon derived from biomass (3.1.7.1)
+3.1.7. 3
+fossil carbon
+carbon that is contained in fossilized material
+Note 1 to entry: Examples of fossilized material are coal, oil and natural gas and peat.
+3.1.7.4
+land use
+LU
+human use or management of land within the relevant boundary
+Note 1 to entry: In this document, the relevant boundary is the boundary of the system under study
+Note 2 to entry: Land use is often referred to as “land occupation” in life cycle assessment (LCA).
+3.1.7.5
+direct land use change
+dLUC
+change in the human use of land within the relevant boundary
+Note 1 to entry: In this document, the relevant boundary is the boundary of the system under study.
+Note 2 to entry: Land use change happens when there is a change in the land-use category as defined by the IPCC 
+(e.g. from forest land to cropland).
+3.1.7.6
+indirect land use change
+iLUC
+change in the use of land which is a consequence of direct land use chang e (3.1.7. 5), but which occurs 
+outside the relevant boundary
+Note 1 to entry: In this document, the relevant boundary is the boundary of the system under study.
+Note 2 to entry: Land use change happens when there is a change in the “land-use category” as defined by the 
+IPCC (e.g. from forest land to cropland).
+EXAMPLE If land use on a particular parcel of land changes from food production to biofuel production, 
+land use change might occur elsewhere to meet the demand for food. This land use change elsewhere is indirect 
+land use change.
+ 
+10 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 25 ---
+ 
+ISO 14067:2018
+3.2 Abbreviated terms
+CFP carbon footprint of a product
+CFP–PCR carbon footprint of a product – product category rules
+CO2e carbon dioxide equivalent
+dLUC direct land use change
+GHG greenhouse gas
+GTP global temperature change potential
+GWP global warming potential
+iLUC indirect land use change
+IPCC Intergovernmental Panel on Climate Change
+LCA life cycle assessment
+LCIA life cycle impact assessment
+LCI life cycle inventory analysis
+LU land use
+LUC land use change
+PCR product category rules
+4 Application
+Possible applications of this document include the provision of information for research and 
+development of products, improvement of technologies, CFP performance tracking and communication.
+This document facilitates communication of a CFP and partial CFP in accordance with ISO 14026.
+5 Principles
+5.1 General
+These principles are fundamental and are the basis for the subsequent requirements in this document.
+5.2 Life cycle perspective
+The quantification of a CFP takes into consideration the entire life cycle of a product, including acquisition 
+of raw material, design, production, transportation/delivery, use and the end-of-life treatment.
+NOTE 1 This subclause is adapted from ISO 14040:2006, 4.1.2.
+NOTE 2 Through such a systematic overview and life cycle perspective, the shifting of a potential impact 
+between life cycle stages or individual processes can be identified and possibly avoided.
+ 
+© ISO 2018 – All rights reserved 11
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 26 ---
+ 
+ISO 14067:2018
+5.3 Relative approach and functional or declared unit
+The CFP study is structured around a functional unit (CFP) or a declared unit (partial CFP) and the 
+results are calculated relative to this functional unit or declared unit.
+NOTE This subclause is adapted from ISO 14040:2006, 4.1.4.
+5.4 Iterative approach
+An iterative approach of reassessment is taken when applying the four phases of LCA (goal and scope 
+definition, LCI, LCIA and life cycle interpretation, see 6.3 to 6.6) to a CFP study. The iterative approach 
+contributes to the consistency of the CFP study and the reported results.
+NOTE This subclause is adapted from ISO 14040:2006, 4.1.5.
+5.5 Priority of scientific approach
+Preference to natural science (such as physics, chemistry, biology) is given when making decisions in 
+the CFP study. If this is not possible, other scientific approaches (such as social and economic sciences) 
+or approaches contained in international conventions relevant and valid within the geographical scope 
+as defined in 6.3.2 are used. Only if neither a natural scientific basis exists nor a justification based 
+on other scientific approaches or international conventions is possible are decisions based on value 
+choices permitted.
+NOTE 1 For more information on the allocation procedure, see 6.4.6.2 .
+NOTE 2 This subclause is adapted from ISO 14040:2006, 4.1.8.
+5.6 Relevance
+The selection of data and methods is appropriate to the assessment of the GHG emissions and removals 
+arising from the system under study.
+5.7 Completeness
+All GHG emissions and removals that provide a significant contribution to the CFP or partial CFP of the 
+product system under study are included. The level of significance is determined by the cut-off criteria 
+(see 6.3.4.3).
+5.8 Consistency
+Assumptions, methods and data are applied in the same way throughout the CFP study to arrive at 
+conclusions in accordance with the goal and scope definition.
+5.9 Coherence
+Methodologies, standards and guidance documents that are already recognized internationally and 
+adopted for product categories are applied, to enhance comparability between CFPs within any specific 
+product category.
+5.10 Accuracy
+Quantification of the CFP and partial CFP is accurate, verifiable, relevant and not misleading, and bias 
+and uncertainties are reduced as far as is practical.
+ 
+12 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 27 ---
+ 
+ISO 14067:2018
+5.11 Transparency
+All relevant issues are addressed and documented in an open, comprehensive and understandable 
+presentation of information.
+Any relevant assumptions are disclosed and methodologies and data sources used are appropriately 
+referenced. Any estimates are clearly explained and bias is avoided so that the CFP study report 
+represents what it purports to represent.
+5.12 Avoidance of double-counting
+Double-counting of GHG emissions and removals within the studied product system is avoided when 
+the allocation of the same GHG emissions and removals occurs only once (see 6.4.6.1).
+NOTE See the example given in 6.4.9.4.1.
+6 Methodology for quantification of the CFP and partial CFP
+6.1 General
+A CFP study in accordance with this document shall include the four phases of LCA, i.e. goal and scope 
+definition (see 6.3), LCI (see 6.4), LCIA (see 6.5) and life cycle interpretation (see 6.6), for CFP or partial 
+CFP. The unit processes comprising the product system shall be grouped into life cycle stages, e.g. 
+acquisition of raw material, design, production, transportation/delivery, use (see 6.3.7) and end‑of‑life 
+(see 6.3.8). GHG emissions and removals from the product’s life cycle shall be assigned to the life cycle 
+stage in which the GHG emissions and removals occur. Partial CFPs may be added together to quantify 
+the CFP, provided that they are performed according to the same methodology for the same timeframe 
+and that no gaps or overlaps exist.
+NOTE As an example from the construction sector, it is possible to have a partial CFP for a substance or 
+preparation (e.g. cement), for a bulk product (e.g. gravel), for a service (e.g. maintenance of a building) or for an 
+assembled system (e.g. masonry wall).
+An organization may develop a CFP systematic approach. If it does, it shall be developed in accordance 
+with Annex C.
+6.2 Use of CFP–PCR
+Where relevant PCR or CFP–PCR exist, they shall be adopted. PCR or CFP–PCR are relevant provided:
+— they have been developed in accordance with ISO/TS 14027, or a relevant sector-specific International 
+Standard that applies the requirements of ISO 14044;
+— they conform to the requirements of this clause, 6.3, 6.4 and 6.5;
+— they are considered proper (e.g. for system boundaries, modularity, allocation and data quality) by 
+the organization applying this document and are in accordance with the principles in Clause 5.
+NOTE Examples of organizations that apply this document are providers of goods and services, practitioners 
+and commissioners of the CFP study.
+If more than one set of relevant PCR or CFP–PCR exist, the relevant PCR or CFP–PCR shall be reviewed 
+by the organization applying this document (e.g. for system boundaries, modularity, allocation, data 
+quality). The choice of the PCR or CFP–PCR adopted shall be justified.
+When all requirements in this subclause are met by PCR, those PCR are equivalent to the CFP–PCR.
+If CFP–PCR are adopted for the CFP study, the quantification shall be conducted according to the 
+requirements in these CFP–PCR.
+ 
+© ISO 2018 – All rights reserved 13
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 28 ---
+ 
+ISO 14067:2018
+Where no relevant CFP–PCR exist, the requirements and guidance of other internationally agreed 
+sector-specific documents, related to specific product or material categories, should be adopted if they 
+conform to the requirements of this document and are considered appropriate by the organization 
+applying this document.
+6.3 Goal and scope definition
+6.3.1 Goal of a CFP study
+The overall goal of conducting a CFP study is to calculate the potential contribution of a product to 
+global warming expressed as CO 2e by quantifying all significant GHG emissions and removals over the 
+product’s life cycle or selected processes, in line with cut-off criteria (see 6.3.4.3).
+NOTE 1 This quantification supports a range of objectives and applications, including, but not limited to, 
+individual studies, comparative studies in accordance with Annex B and performance tracking over time, and is 
+intended for a range of audiences.
+In defining the goal of a CFP study, the following items shall be unambiguously stated:
+— the intended application;
+— the reasons for carrying out the CFP study;
+— the intended audience;
+— the intended communication, if any, of the CFP or partial CFP information, in accordance 
+with ISO 14026.
+NOTE 2 This subclause is adapted from ISO 14044:2006, 4.2.2.
+6.3.2 Scope of a CFP study
+The scope of a CFP study shall be consistent with the goal of the CFP study (see 6.3.1).
+In defining the scope of the CFP study, the following items shall be considered and clearly described, 
+taking into account the requirements and guidance given in the relevant subclauses of this document:
+a) the system under study and its functions;
+b) the functional or declared unit (see 6.3.3);
+c) the system boundary, including the geographical scope of the system under study (see 6.3.4);
+d) data and data quality requirements (see 6.3.5);
+e) the time boundary for data (see 6.3.6);
+f) assumptions, especially for the use stage and the end-of-life stage (see 6.3.7 and 6.3.8);
+g) allocation procedures (see 6.4.6);
+h) specific GHG emissions and removals (see 6.4.9), e.g. due to LUC (see 6.4.9.5);
+i) methods to address issues occurring with specific product categories (see 6.4.9);
+j) the CFP study report (see Clause 7);
+k) the type of critical review, if any (see Clause 8);
+l) limitations of the CFP study (see Annex A).
+If a comparison is undertaken, the requirements in Annex B shall be followed.
+ 
+14 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 29 ---
+ 
+ISO 14067:2018
+In some cases, the scope of the CFP study may be revised due to unforeseen limitations, constraints 
+or as a result of additional information. Such modifications, together with their explanation, shall 
+be documented.
+NOTE This subclause is adapted from ISO 14044:2006, 4.2.3.1.
+6.3.3 Functional or declared unit
+A CFP study shall clearly specify the functional or declared unit of the system under study. The 
+functional or declared unit shall be consistent with the goal and scope of the CFP study. The primary 
+purpose of a functional or declared unit is to provide a reference to which the inputs and outputs are 
+related. Therefore, the functional or declared unit shall be clearly defined and measurable.
+The declared unit shall only be used in a partial CFP.
+When CFP–PCR are adopted, the functional or declared unit used shall be that defined in the CFP–PCR.
+Having chosen the functional or declared unit, the associated reference flow shall be defined.
+When a comparison is done between product systems, it shall be made on the basis of the same 
+functional unit(s). Comparisons based on partial carbon footprint (declared unit) are permitted if the 
+omitted life cycle stages are identical (see Annex B). Comparison based on the declared unit may only 
+be used for business-to-business purposes. If additional functions of any of the product systems are 
+not taken into account in the comparison of functional units, then these omissions shall be explained 
+and documented. As an alternative to this approach, systems associated with the delivery of these 
+functions may be added to the boundary of the other product system to make the product systems 
+more comparable. In these cases, the processes selected shall be explained and documented.
+NOTE 1 The choice of the functional or the declared unit and the associated reference flow require special 
+attention, e.g. in order to allow comparisons without bias (see also Annex B).
+EXAMPLE 1 In the function of drying hands, both a paper towel and an air-dryer system are studied. The 
+selected functional unit can be expressed in terms of the identical number of pairs of hands dried for both 
+systems. For each system, it is possible to determine the reference flow, e.g. the average mass of paper or the 
+average volume of hot air required to dry one pair of hands, respectively. For both systems, it is possible to 
+compile an inventory of inputs and outputs on the basis of the reference flows. At its simplest level, in the case of 
+paper towel, this would be related to the paper consumed. In the case of the air-dryer, this would be related to the 
+volume and temperature of hot air needed to dry the hands.
+NOTE 2 The example above is taken from ISO 14040:2006, 5.2.2, with modifications.
+EXAMPLE 2 The functional unit of a tonne of steel cannot be determined because a tonne of steel can 
+be transformed to various products which can fulfil various functions. In this case, use of declared unit is 
+appropriate.
+6.3.4 System boundary
+6.3.4.1 General
+The system boundary shall be the basis used to determine which unit processes are included within 
+the CFP study.
+Where CFP–PCR are used (see 6.2), their requirements on the processes to be included shall also apply.
+The selection of the system boundary shall be consistent with the goal of the CFP study. The criteria, e.g. 
+cut‑off criteria (see 6.3.4.3), used in establishing the system boundary shall be identified and explained.
+Decisions shall be made regarding which unit processes to include in the CFP study and to which level 
+of detail these unit processes shall be studied. The exclusion of life cycle stages, processes, inputs or 
+outputs within the system under study is only permitted if they do not significantly change the overall 
+conclusions of the CFP study. Any decisions to exclude life cycle stages, processes, inputs or outputs 
+ 
+© ISO 2018 – All rights reserved 15
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 30 ---
+ 
+ISO 14067:2018
+shall be clearly stated and the reasons and implications for their exclusion shall be explained. The 
+threshold for significance shall be stated, e.g. as cut-off criteria (see 6.3.4.3), and justified.
+EXAMPLE Capital goods can be excluded in accordance with the goal and scope if their exclusion is not 
+expected to significantly alter the conclusions according to specified criteria.
+Decisions made regarding which unit processes, inputs and outputs shall be included and the level of 
+detail of the quantification of the CFP shall be clearly stated.
+NOTE 1 The first five paragraphs of this subclause are adapted from ISO 14044:2006, 4.2.3.3.
+The CFP and the partial CFP shall not include carbon offsetting.
+NOTE 2 GHG removals that are not linked to carbon offsetting can occur within the system boundary of the 
+product system.
+6.3.4.2 Setting the system boundary
+Quantification carried out in accordance with this document shall include all GHG emissions and 
+removals of those unit processes that are part of the product system that have the potential to make a 
+significant contribution to the CFP or the partial CFP (see 6.3.4.1).
+Within the goal and scope definition phase, consistent criteria shall be defined:
+— for which unit processes a detailed assessment is needed due to an expected significant contribution 
+to the CFP or the partial CFP;
+— for which unit processes the quantification of GHG emissions may be based on secondary data if the 
+collection of primary data are not possible or practicable (see 6.3.5);
+— which unit processes may be merged, e.g. all transport processes within a plant.
+6.3.4.3 Cut-off criteria
+In general, all processes and flows that are attributable to the analysed system shall be included. If 
+individual material or energy flows are found to be insignificant for the carbon footprint of a particular 
+unit process, these may be excluded for practical reasons and shall be reported as data exclusions. 
+Consistent cut ‑off criteria that allow the exclusion of certain processes of minor importance shall be 
+defined within the goal and scope definition phase.
+The effect of the selected cut-off criteria on the outcome of the study shall also be assessed and 
+described in the CFP study report (see 6.4.5 and 6.6).
+NOTE For additional guidance on cut-off criteria, see ISO 14044:2006, 4.2.3.3.3.
+6.3.5 Data and data quality
+Site-specific data shall be collected for individual processes where the organization undertaking the 
+CFP study has financial or operational control. The data shall be representative of the processes for 
+which they are collected. Site-specific data should also be used for those unit processes that are most 
+important and not under financial or operational control.
+NOTE 1 The most important processes are those which together contribute at least 80 % to the CFP, starting 
+from the largest to the smallest contributions after cut ‑off.
+NOTE 2 Site-specific data refer to either direct GHG emissions (determined through direct monitoring, 
+stoichiometry, mass balance or similar methods), activity data (inputs and outputs of processes that result in 
+GHG emissions or removals) or emission factors. Site-specific data can be collected from a specific site, or can 
+be averaged across all sites that contain the process within the system under study. They can be measured or 
+modelled, as long as the result is specific to the process in the product’s life cycle.
+ 
+16 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 31 ---
+ 
+ISO 14067:2018
+Primary data that are not site-specific data, and which have undergone third-party review, should be 
+used when the collection of site-specific data is not practicable.
+Secondary data shall only be used for inputs and outputs where the collection of primary data is not 
+practicable, or for processes of minor importance.
+NOTE 3 In some cases, default emission factors as secondary data are not life cycle based emission factors and 
+might require adaptation or modification.
+Secondary data shall be justified and documented with references in the CFP study report.
+A CFP study should use data that reduce bias and uncertainty as far as practical by using the best 
+quality data available. Data quality shall be characterized by both quantitative and qualitative aspects. 
+Characterization of data quality should address the following:
+a) time‑related coverage: age of data and the minimum length of time over which data should 
+be collected;
+b) geographical coverage: geographical area from which data for unit processes should be collected to 
+satisfy the goal of the CFP study;
+c) technology coverage: specific technology or technology mix;
+d) precision: measure of the variability of each data value expressed (e.g. variance);
+e) completeness: percentage of total flow that is measured or estimated;
+f) representativeness: qualitative assessment of the degree to which the data set reflects the true 
+population of interest (i.e. geographical coverage, time period and technology coverage);
+g) consistency: qualitative assessment of whether or not the study methodology is applied uniformly 
+to the various components of the sensitivity analysis;
+h) reproducibility: qualitative assessment of the extent to which information about the methodology 
+and data values would allow an independent practitioner to reproduce the results reported in 
+the CFP study;
+i) sources of the data; 
+j) uncertainty of the information.
+NOTE 4 The numbered list above is adapted from ISO 14044:2006, 4.2.3.6.2.
+A two-step approach shall be taken for the data quality evaluation:
+— the data quality requirements according to items a) to d) above shall be characterized for 
+the CFP study;
+— data shall be assessed with respect to the requirements for items a) to d) above.
+NOTE 5 Data quality requirements are a mandatory part of CFP–PCR (see 6.2).
+NOTE 6 Data quality requirements might differ for different types of data.
+Organizations undertaking a CFP study should have a system to manage and retain data. They should 
+seek to continuously improve the consistency and quality of their data and control of documented 
+information.
+6.3.6 Time boundary for data
+The time boundary for data is the time period for which the quantified figure for the CFP is 
+representative.
+ 
+© ISO 2018 – All rights reserved 17
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 32 ---
+ 
+ISO 14067:2018
+The time period for which the CFP is representative shall be specified and justified.
+The choice of the time period for data collection should consider intra- and inter-annual variability and, 
+when possible, use values representing the trend over the selected period. Where the GHG emissions 
+and removals associated with specific unit processes within the life cycle of a product vary over time, 
+data shall be collected over a time period appropriate to establish the average GHG emissions and 
+removals associated with the life cycle of the product.
+If a process within the system boundary is linked to a specific time period (e.g. seasonal products such 
+as fruit and vegetables), the assessment of GHG emissions and removals shall cover that particular 
+period in the life cycle of the product. Any activity (or activities) occurring outside that period shall also 
+be included provided that it is within the product system (e.g. GHG emissions related to a tree nursery). 
+These data on GHG emissions and removals shall be related to the functional or declared unit.
+6.3.7 Use stage and use profile
+When the use stage is included within the scope of the CFP study (see 6.3.2), GHG emissions and 
+removals arising from the use stage of the product shall be included. The user of the product and the 
+use profile of the product shall be specified in the CFP study.
+NOTE The use stage starts when the specified user takes possession of the finished product and ends when 
+the product is ready for disposal, reuse for a different function, recycling or energy recovery.
+Service life information shall be verifiable. It shall refer to the intended use conditions and to the 
+related functions of the product. The use profile should seek to represent the actual usage pattern in 
+the selected market.
+Where not otherwise justified, the determination of the use profile (i.e. scenarios for service life and 
+the selected market) shall be based on published technical information, such as:
+a) CFP–PCR (see 6.2);
+b) published International Standards that specify guidance and requirements for development of 
+scenarios and service life for the use stage for the product being assessed;
+c) published national guidelines that specify guidance for development of scenarios and service life 
+for the use stage for the product being assessed;
+d) published industry guidelines that specify guidance for development of scenarios and service life 
+for the use stage for the product being assessed;
+e) use profiles based on documented usage patterns for the product in the selected market.
+Where no method for determining the use profile of products has been established in accordance with 
+a) to e) above, the assumptions made in determining the use profile of products shall be established by 
+the organization carrying out the CFP study. A sensitivity analysis shall be undertaken if the use stage 
+assumption is shown to be significant for the conclusions of the CFP study.
+The manufacturer’s recommendation for proper use (e.g. cooking in an oven at a specified temperature 
+for a specified time) might provide a basis for determining the use profile of a product. The actual usage 
+pattern might, however, differ from those recommended. Any difference should be explained.
+All relevant assumptions for the use stage shall be documented in the CFP study report.
+6.3.8 End-of-life stage
+NOTE 1 The end-of-life stage begins when the used product under study is ready for disposal, recycling, reuse 
+for different purposes or energy recovery.
+ 
+18 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 33 ---
+ 
+ISO 14067:2018
+All the GHG emissions and removals arising from the end ‑of‑life stage of a product shall be included in a 
+CFP study, if this stage is included in the scope (see 6.3.2). End-of-life processes may include:
+a) collection, packaging and transport of end-of-life products;
+b) preparation for recycling and reuse;
+c) dismantling of components from end-of-life products;
+d) shredding and sorting;
+e) material recycling;
+f) organic recovery (e.g. composting and anaerobic digestion);
+g) energy recovery or other recovery processes;
+h) incineration and sorting of bottom ash;
+i) landfilling, landfill maintenance and promoting emissions from decomposition, such as methane.
+NOTE 2 For end-of-life processes, CFP–PCR can provide additional guidance.
+All relevant assumptions regarding end ‑of‑life treatment, shall be:
+— based on best available information;
+— based on current technology;
+— documented in the CFP study report.
+End-of-life scenarios shall reflect the current market and be representative of one of the most likely 
+alternatives, or more than one scenario (including future scenarios) may be assessed. The scenarios 
+will allow users to scale the results to assess realistic options.
+6.4 Life cycle inventory analysis for the CFP
+6.4.1 General
+LCI is the phase of LCA involving the compilation and quantification of inputs and outputs for a product 
+throughout its life cycle.
+After the goal and scope definition phase, the LCI of a CFP study shall be conducted. This consists of the 
+following steps, adapted from ISO 14044, which shall apply when relevant:
+a) data collection;
+b) validation of data;
+c) relating data to unit process and functional or declared unit;
+d) refining the system boundary;
+e) allocation.
+Special provisions in this document apply for:
+— CFP performance tracking;
+— the time period for the assessment of GHG emissions and removals;
+— the treatment of specific GHG emissions and removals.
+ 
+© ISO 2018 – All rights reserved 19
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 34 ---
+ 
+ISO 14067:2018
+If CFP–PCR are adopted for the CFP study, the LCI shall be conducted according to the requirements in 
+the CFP–PCR.
+6.4.2 Data collection
+The qualitative and quantitative data for inclusion in the life cycle inventory shall be collected for all 
+unit processes that are included in the system under study. The collected data, whether measured, 
+calculated or estimated, are used to quantify the inputs and outputs of a unit process. Significant unit 
+processes shall be documented in the CFP study report.
+For those data that might be significant for the conclusions of the CFP study, details about the relevant 
+data collection process, the time when data have been collected, and further information about data 
+quality shall be referenced. If such data do not meet the data quality requirements, this shall be stated.
+Since data collection can span several locations and published references, a representative and 
+consistent data set for the system under study should be used.
+NOTE 1 This subclause is adapted from ISO 14044:2006, 4.3.2. For further guidance, see ISO 14044:2006, 4.3.2.2.
+NOTE 2 For data and data quality, see 6.3.5.
+6.4.3 Validation of data
+A check on data validity shall be conducted during the process of data collection to confirm and provide 
+evidence that the data quality requirements specified in 6.3.5 have been met.
+Validation should involve establishing mass balances, energy balances and/or comparative analyses of 
+emission factors or other appropriate methods. As each unit process obeys the laws of conservation of 
+mass and energy, mass and energy balances provide a useful check on the validity of the description of 
+a unit process.
+NOTE This subclause is adapted from ISO 14044:2006, 4.3.3.2.
+6.4.4 Relating data to unit process and functional or declared unit
+An appropriate flow shall be determined for each unit process. The quantitative input and output data 
+of the unit process shall be calculated in relation to this flow.
+Based on the flow chart and the flows between unit processes, the flows of all unit processes are related 
+to the reference flow. The calculation shall relate system input and output data to the functional or 
+declared unit.
+Care should be taken when aggregating the inputs and outputs in the product system. The level of 
+aggregation shall be consistent with the goal of the CFP study. If more detailed aggregation rules are 
+required, they should be explained in the goal and scope definition phase of the CFP study or should be 
+left to a subsequent LCIA phase.
+NOTE This subclause is adapted from ISO 14044:2006, 4.3.3.3.
+6.4.5 Refining the system boundary
+Reflecting the iterative nature of the quantification of the CFP, if no CFP–PCR are used, decisions 
+regarding the data to be included or excluded shall be based on a sensitivity analysis to determine the 
+significance. The initial system boundary shall be revised, as appropriate, in accordance with the cut-
+off criteria established in the goal and scope definition phase. The results of this refining process and 
+the sensitivity analysis shall be documented in the CFP study report.
+The refining of the system boundary based on a sensitivity analysis as described above may result in
+a) exclusion of life cycle stages or unit processes when lack of significance can be shown,
+ 
+20 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 35 ---
+ 
+ISO 14067:2018
+b) exclusion of inputs and outputs that lack significance to the results of the CFP study, or
+c) inclusion of new unit processes, inputs and outputs that are shown to be significant.
+The refining of the system boundary serves to limit the subsequent data handling to those input and 
+output data that are determined to be significant to the goal of the CFP study.
+NOTE This subclause is adapted from ISO 14044:2006, 4.3.3.4.
+6.4.6 Allocation
+6.4.6.1 General
+The inputs and outputs shall be allocated to the different products according to the clearly stated and 
+justified allocation procedure.
+The sum of the allocated inputs and outputs of a unit process shall be equal to the inputs and outputs of 
+the unit process before allocation.
+Whenever several alternative allocation procedures are applicable, a sensitivity analysis shall be 
+conducted to illustrate the consequences of the departure from the selected approach.
+When PCR or CFP–PCR are developed in accordance with ISO/TS 14027, no further sensitivity analysis 
+shall be required.
+NOTE This subclause is partly adapted from ISO 14044:2006, 4.3.4.2.
+6.4.6.2 Allocation procedure
+The CFP study shall include the identification of the processes shared with other product systems and 
+deal with them in accordance with the stepwise procedure presented below.
+NOTE Formally, step 1 is not part of the allocation procedure.
+a) Step 1: Wherever possible, allocation should be avoided by
+1) dividing the unit process to be allocated into two or more sub-processes separately and 
+collecting the input and output data related to these sub ‑processes, or
+2) expanding the product system to include the additional functions related to the co-products.
+b) Step 2: Where allocation cannot be avoided, the inputs and outputs of the system should be 
+partitioned between its different products or functions in a way that reflects the underlying 
+physical relationships between them.
+c) Step 3: Where physical relationship alone cannot be established or used as the basis for allocation, 
+the inputs should be allocated between the products and the functions in a way that reflects other 
+relationships between them. For example, input and output data might be allocated between co-
+products in proportion to the economic value of the products.
+When outputs include both co ‑products and waste, the ratio between co ‑products and waste shall be 
+identified and the inputs and outputs shall be allocated to the co-products only. Allocation procedures 
+shall be uniformly applied to similar inputs and outputs of the product under study. For example, if 
+allocation is made to usable products (e.g. intermediate or discarded products) leaving the system, 
+then the allocation procedure shall be similar to the allocation procedure used for such products 
+entering the system.
+The life cycle inventory is based on material balances between input and output. Allocation procedures 
+should therefore approximate, as much as possible, such fundamental input/output relationships and 
+characteristics.
+NOTE 1 This subclause is adapted from ISO 14044:2006, 4.3.4.2.
+ 
+© ISO 2018 – All rights reserved 21
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 36 ---
+ 
+ISO 14067:2018
+NOTE 2 For allocation procedures, CFP–PCR can provide additional guidance.
+6.4.6.3 Allocation procedure for reuse and recycling
+The allocation principles and procedures in 6.4.6.1 and 6.4.6.2 also apply to reuse and recycling situations.
+Changes in the inherent properties of materials shall be taken into account. In addition, particularly for 
+the recovery processes between the original and subsequent product system, the system boundary shall 
+be identified and explained, ensuring that the allocation principles are observed as described in 6.4.6.2.
+However, in these situations, additional elaboration is needed for the following reasons:
+— reuse and recycling (as well as composting, energy recovery and other processes that can be 
+assimilated to reuse/recycling) may imply that the inputs and outputs associated with unit processes 
+for extraction and processing of raw material or final disposal of products are to be shared by more 
+than one product system;
+— reuse and recycling may change the inherent properties of materials in subsequent use.
+Specific care should be taken when defining the system boundary with regard to recovery processes.
+Several allocation procedures are applicable for reuse and recycling. The application of some procedures 
+is distinguished in the following to illustrate how the above constraints can be addressed.
+a) A closed-loop allocation procedure applies to closed-loop product systems. It also applies to open-
+loop product systems where no changes occur in the inherent properties of the recycled material. 
+In such cases, the need for allocation is avoided since the use of secondary material displaces the 
+use of virgin (primary) material. However, the first use of virgin material in applicable open-loop 
+product systems may follow an open-loop allocation procedure outlined in b).
+b) An open-loop allocation procedure applies to open-loop product systems where the material is 
+recycled into other product systems and the material undergoes a change to its inherent properties.
+The allocation procedures for the shared unit processes should use, as the basis for allocation, the 
+following order, if feasible:
+— physical properties (e.g. mass);
+— economic value (e.g. market value of the scrap material or recycled material in relation to market 
+value of primary material); or
+— the number of subsequent uses of the recycled material.
+NOTE 1 An example how to treat recycling in LCA studies is given in Annex D.
+NOTE 2 This subclause is adapted from ISO 14044:2006, 4.3.4.3.
+6.4.7 CFP performance tracking
+When the CFP is intended to be used for CFP performance tracking, the following additional 
+requirements for the quantification of the CFP shall be met:
+a) the assessments shall be carried out for different points in time;
+b) the change to the CFP over time shall be calculated for products with an identical functional or 
+declared unit;
+c) the change to the CFP over time shall be calculated using the same method and, if used, the 
+same PCR, for all subsequent assessments (e.g. systems for selecting and managing data, system 
+boundaries, allocation, identical characterization factors).
+ 
+22 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 37 ---
+ 
+ISO 14067:2018
+The time period between the points in time for which the CFP performance tracking is undertaken shall 
+not be shorter than the time boundary for data as described in 6.3.6. It shall be described in the goal 
+and scope of the CFP study.
+6.4.8 Assessing the effect of the timing of GHG emissions and removals
+All GHG emissions and removals shall be calculated as if released or removed at the beginning of the 
+assessment period without taking into account an effect of delayed GHG emissions and removals.
+Where GHG emissions and removals arising from the use stage (see 6.3.7) and/or from the end ‑of‑life 
+stage (see 6.3.8) occur over more than 10 years (if not otherwise specified in the relevant PCR) after 
+the product has been brought into use, the timing of GHG emissions and removals relative to the year 
+of production of the product shall be specified in the life cycle inventory. The effect of timing of the 
+GHG emissions and removals from the product system (as CO 2e), if calculated, shall be documented 
+separately in the CFP study report. The method used to calculate the effect of timing shall be stated and 
+justified in the CFP study report.
+NOTE The time period of 10 years has been selected to avoid undue burden in data collection and additional 
+reporting of GHG emissions and removals over shorter time periods and to achieve comparability in reporting. 
+This value might be revised in future based on experience or improved scientific knowledge.
+6.4.9 Treatment of specific GHG emissions and removals
+6.4.9.1 General
+For the sake of consistency of quantification, specific requirements and guidelines are provided in the 
+following subclauses for specific GHG emissions and removals where different approaches could lead to 
+different results. Additional requirements, guidelines and data might be available in relevant CFP–PCR, 
+other sector guidance documents or footprint programmes.
+6.4.9.2 Fossil and biogenic carbon
+Fossil GHG emissions and removals shall be included in the CFP or the partial CFP and documented 
+separately as a net result. Biogenic GHG emissions and removals shall be included in the CFP or the 
+partial CFP and should each be expressed separately (see Figure 3).
+NOTE 1 An example of fossil GHG removals is capture of fossil emissions from a power plant through a non ‑
+biological process followed by storage through geosequestration.
+All relevant unit processes of the life cycle of biomass-derived products shall be included in the system 
+under study, including, but not limited to, cultivation, production and harvesting of biomass.
+NOTE 2 Treatment of GHG emissions and removals associated with land use change and land use are described 
+in 6.4.9.5 and 6.4.9.6.
+NOTE 3 See Annex E for guidance related to agricultural and forestry products.
+6.4.9.3 Biogenic carbon in products
+NOTE 1 Biomass‑derived carbon contained in a product is referred to as the biogenic carbon content of 
+the product.
+When biogenic carbon is stored in a product for a specified time, this carbon shall be treated in 
+accordance with the provisions in 6.4.8. If a product’s biogenic carbon content is calculated, it shall 
+be documented separately in the CFP study report but it shall not be included in the result of CFP or 
+partial CFP.
+ 
+© ISO 2018 – All rights reserved 23
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 38 ---
+ 
+ISO 14067:2018
+Information on biogenic carbon content shall be provided when performing cradle to gate studies, as this 
+information may be relevant for the remaining value chain. For reporting requirements, see Clause 7.
+NOTE 2 In the case of products containing biomass, the biogenic carbon content is equal to the carbon removal 
+during plant growth. This biogenic carbon can be released in the end ‑of‑life stage.
+6.4.9.4 Electricity
+6.4.9.4.1 General
+The GHG emissions associated with the use of electricity shall include:
+— GHG emissions arising from the life cycle of the electricity supply system, such as upstream emissions 
+(e.g. the mining and transport of fuel to the electricity generator or the growing and processing of 
+biomass for use as a fuel);
+— GHG emissions during generation of electricity, including losses during transmission and 
+distribution;
+— downstream emissions (e.g. the treatment of waste arising from the operation of nuclear electricity 
+generators or treatment of ashes from coal fired electricity plants).
+NOTE The same approach applies to purchased and sold heating and cooling energy and compressed air.
+This document includes the principle of avoidance of double ‑counting in 5.12 and guidance concerning 
+electricity in 6.4.9.4.2 to 6.4.9.4.4.
+EXAMPLES No double-counting occurs:
+— where the process that used the electricity and no other process may claim the generator-specific emission 
+factors for that electricity;
+— where the generator-specific electricity production does not influence the emission factors of any other 
+process or organization.
+6.4.9.4.2 Internally generated electricity
+When electricity is internally generated (e.g. on-site generated electricity) and consumed for a product 
+under study and no contractual instruments have been sold to a third party, then the life cycle data for 
+that electricity shall be used for that product.
+6.4.9.4.3 Electricity from a directly connected supplier
+A GHG emission factor obtained from the organization’s supplier for the consumed electricity may be 
+used if there is a dedicated transmission line between the organization and the generation plant from 
+which the emission factor is derived, and no contractual instruments have been sold to a third party for 
+that consumed electricity.
+6.4.9.4.4 Electricity from the grid
+Life cycle data from a supplier-specific electricity product shall be used when the supplier is able to 
+guarantee through a contractual instrument that the electricity product:
+— conveys the information associated with the unit of electricity delivered together with the 
+characteristics of the generator;
+— is assured with a unique claim (see 5.12);
+— is tracked and redeemed, retired or cancelled by or on behalf of the reporting entity
+ 
+24 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 39 ---
+ 
+ISO 14067:2018
+— is as close as possible to the period to which the contractual instrument is applied and comprises a 
+corresponding timespan;
+— is produced within the country, or within the market boundaries where consumption occurs if the 
+grid is interconnected.
+If processes within the system under study are located in small island developing states (SIDS), the CFP 
+or the partial CFP may additionally be quantified using contractual instruments for such processes, 
+irrespective of grid inter-connectivity.
+NOTE 1 SIDS are defined by the United Nations [20].
+When information on supplier specific electricity is not available, GHG emissions associated with the 
+relevant electricity grid from which the electricity is obtained shall be used. The relevant grid shall 
+reflect the electricity consumption of the related region, excluding any previously claimed attributed 
+electricity. In case no electricity tracking system is in place, the selected grid shall reflect the electricity 
+consumption of the region.
+NOTE 2 Contractual instruments are any type of contract between two parties for the sale and purchase of 
+energy bundled with attributes about the energy generation, or for unbundled attribute claims.
+EXAMPLE Contractual instruments can include energy attribute certificates, renewable energy certificates 
+(RECs), guarantee of origin (GOs) or green energy certificates.
+NOTE 3 Examples of the characteristics of a generator include the registered name of the facility, the owners 
+and the nature of the energy generated, the generation capacity and the renewable energy supplied.
+NOTE 4 If specific life cycle data on a process within the electricity supply system are difficult to access, data 
+from recognized databases (e.g. through the UNEP or UNFCCC) can be used.
+Some electricity attributes, such as green certificates are sold without direct coupling to the electricity 
+itself. In some countries, parts of the electricity from renewable energy sources might be sold/exported 
+as renewable electricity without being excluded from the supplied mix. For this reason, in such cases a 
+sensitivity analysis applying the relevant consumption grid mix shall be conducted and reported in the 
+CFP study report to demonstrate the difference in results of the electricity tracking instruments.
+6.4.9.5 Land use change
+The GHG emissions and removals occurring as a result of direct land use change (dLUC) within the 
+last decades (see NOTE 1) shall be assessed in accordance with internationally recognized methods, 
+such as the IPCC Guidelines for National Greenhouse Gas Inventories [17] and included in the CFP. The 
+net dLUC GHG emissions and removals shall be documented separately in the CFP study report. If site-
+specific data are applied, they shall be transparently documented in the CFP study report. If a national 
+approach is used, the data shall be based on a verified study, a peer reviewed study or similar scientific 
+evidence and shall be documented in the CFP study report.
+NOTE 1 The IPCC tier 1 period of 20 years is frequently used.
+When the process under assessment causes changes in carbon stocks compared to the reference land 
+use, the GHG emissions and removals associated with these changes shall be documented and assigned 
+to the system under study.
+NOTE 2 “Changes in carbon stocks” refers to changes in soil carbon and changes in above ‑ and below‑ground 
+biomass over time.
+NOTE 3 The choice of reference land use can have a significant impact on the CFP and the partial CFP. Annex E 
+provides guidance on choosing the reference land use.
+The net changes shall be assigned to the system under study across the selected time period.
+ 
+© ISO 2018 – All rights reserved 25
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 40 ---
+ 
+ISO 14067:2018
+The time period selected for analysis shall be documented and justified. At a minimum, it shall include 
+at least one full rotation period for processes that involve growing crops or trees.
+NOTE 4 Wood from forest land that remains forest land has zero emissions in terms of LUC. For further 
+guidance on LUC, see Annex E.
+NOTE 5 National approaches can include government ‑recognized and published methods and calculators.
+Indirect land use change (iLUC) should be included in CFP studies once an internationally agreed 
+procedure exists.
+All choices and assumptions, including applied methodologies, shall be justified and documented in the 
+CFP study report.
+NOTE 6 There is ongoing research to develop a methodology and data for the inclusion of iLUC in GHG reporting.
+NOTE 7 LUC emissions do not arise only from production of agricultural and forestry products, e.g. in the 
+context of deforestation or conversion of grassland to energy crops, but also from LUC for other product systems, 
+e.g. related to the conversion of land to quarries, infrastructure and production plants.
+NOTE 8 With respect to GHG emissions and removals connected to marine areas related to products, only 
+very limited information is available.
+6.4.9.6 Land use
+GHG emissions and removals occurring as a result of land use through changes in soil and biomass 
+carbon stocks that are not the result of changes to management of land should be assessed and included 
+in the CFP. If changes in soil and biomass carbon stocks are not assessed, this decision shall be justified 
+in the CFP study report. Where included, these emissions and removals shall be assessed in accordance 
+with internationally recognized methods, such as the IPCC Guidelines for National Greenhouse Gas 
+Inventories[17] and shall be documented separately in the CFP study report.
+When changes in management of land cause changes in soil and biomass carbon stocks, compared 
+with the reference land use, the GHG emissions and removals shall be documented and assigned to the 
+system under study.
+NOTE 1 Changes in management of land within the same land-use category are not considered land use change.
+The net changes in soil and biomass carbon stocks shall be assigned to the system under study across 
+the selected time period.
+The time period selected for analysis shall be documented and justified. At a minimum, it shall include 
+at least one full rotation period for processes that involve growing crops or trees.
+If there is a net increase of soil or biomass carbon due to modified land use practices, the net increase 
+shall be included in the CFP and the partial CFP only if measures are in place to address its permanence. 
+If a national approach is used, the data shall be based on a verified study, a peer reviewed study or 
+similar scientific evidence and shall be documented in the CFP study report.
+NOTE 2 National approaches can include government ‑recognized and published methods and calculators.
+NOTE 3 Ongoing land use can lead to a net increase or decrease of soil carbon, e.g. decrease during drought.
+NOTE 4 There is ongoing research to develop methodology and models, and provide data for the inclusion of 
+soil carbon change in GHG reporting.
+NOTE 5 There are various ways to mitigate the risks of non-permanence of soil and biomass carbon, such as 
+buffers and reserve accounts.
+NOTE 6 If detection of soil carbon change involves direct field measurement, results depend on variables, 
+including the location of sampling sites, the number of replicate soil samples, the timing of sampling, the depth of 
+the soil profile and the sampling techniques. The principles and rules for designing soil sampling strategies and 
+techniques are provided in ISO 10381 (all parts).
+ 
+26 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 41 ---
+ 
+ISO 14067:2018
+NOTE 7 For further guidance on land use, see Annex E.
+6.4.9.7 Aircraft GHG emissions
+Aircraft transportation GHG emissions shall be included in the CFP and documented separately in the 
+CFP study report.
+Where an aviation multiplier is used, the effect of this multiplier shall not be included in the CFP and 
+shall be reported separately together with the source.
+NOTE Aircraft GHG emissions under certain circumstances in high altitudes have additional climate impacts 
+as a result of physical and chemical reactions with the atmosphere. For more information on GHG emissions from 
+aircraft, see the IPCC Guidelines for National Greenhouse Gas Inventories [17] and the IPCC Special Report on 
+Aviation[18].
+6.4.9.8 Summary of requirements and guidance in 6.4.9
+Table 1 provides an informative summary of the requirements and guidance given in 6.4.9. Figure 3 
+shows an informative illustration of the specific components of the CFP. Refer to 6.4.9.2 to 6.4.9.7 for the 
+full requirements and guidance.
+Table 1 — Specific GHG emissions and removals treatment in the CFP or the partial CFP and 
+documented separately in the CFP study report
+Sub-
+clause
+Specific GHG emissions 
+and removalsa
+Treatment in the CFP or the  
+partial CFP
+Documentation in the CFP 
+study report
+Shall be 
+included
+Should be 
+included
+Should be 
+considered 
+for inclu-
+sion
+Shall be 
+documented 
+separately in 
+the CFP study 
+report
+Shall be 
+documented 
+separately in 
+the CFP study 
+report, if  
+calculated
+6.4.9.2 Fossil and biogenic GHG 
+emissions and removals a X   X  
+6.4.9.5 GHG emissions and remov‑
+als occurring as a result of 
+dLUCa
+X   X  
+6.4.9.5 GHG emissions and remov‑
+als occurring as a result of 
+iLUCa
+  X  X
+6.4.9.6 GHG emissions and  
+removals from land use a  X   X
+6.4.9.3 Biogenic carbon in  
+productsa     X
+6.4.9.7 Aircraft GHG emissions X   X  
+ a     For reporting of timing of emissions and removals, see 6.4.8.
+ 
+© ISO 2018 – All rights reserved 27
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 42 ---
+ 
+ISO 14067:2018
+Key
+shall be included in the CFP or the partial CFP 5 emissions from LU excluding change in 
+management of land
+should be included in the CFP or the partial CFP 6 net fossil GHG emission and removal
+shall be documented separately in the CFP study 
+report if calculated, not included in the CFP
+7 biogenic GHG removal
+should be considered separately 8 removal from dLUC and change in the 
+management of land
+1 GHG emissions other than specified 9 removal from LU excluding change in 
+the management of land
+2 aircraft emissions 10 biogenic carbon in the product
+3 biogenic GHG emissions 11 iLUC emissions
+4 emissions from dLUC and change in the 
+management of land
+12 iLUC removals
+Figure 3 — Illustration of the specific components of the CFP and the partial CFP
+NOTE Fossil emissions and removals, dLUC and iLUC can have a positive or negative contribution to the CFP.
+ 
+28 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 43 ---
+ 
+ISO 14067:2018
+6.5 Impact assessment for CFP or partial CFP
+6.5.1 General
+In the LCIA phase of a CFP study, the potential climate change impact of each GHG emitted and removed 
+by the product system shall be calculated by multiplying the mass of GHG released or removed by 
+the 100-year GWP given by the IPCC in units of kg CO2e per kg emission (with carbon feedbacks, 
+according to IPCC).
+NOTE 1 The CFP is the sum of these calculated impacts.
+Where GWP values are amended by the IPCC, the latest values shall be used in the CFP calculations if 
+not otherwise stated and justified.
+GWP for other time horizons and GTP, as given by the IPCC, may be used in addition to GWP 100 but 
+should be reported separately.
+NOTE 2 100-year global warming potential (GWP 100) is used to represent shorter-term impacts of climate 
+change, reflecting the rate of warming. 100-year global temperature potential (GTP 100) is used as an indicator for 
+the longer-term impacts of climate change, reflecting the long-term temperature rise. There is no scientific basis 
+for choosing a 100-year time horizon compared to other time horizons. The time horizon is a value judgement of 
+international convention that weighs the effects that are likely to occur over different time horizons. This text 
+has been adapted from Reference [ 17].
+6.5.2 Impact assessment of biogenic carbon
+Removals of CO2 into biomass shall be characterized in the LCIA as −1 kg CO2e/kg CO2 in the calculation 
+of the CFP when entering the product system.
+Emissions of biogenic CO 2 shall be characterized as +1 kg CO 2e/kg CO 2 of biogenic carbon in the 
+calculation of the CFP.
+NOTE The amount of CO 2 taken up in biomass and the equivalent amount of CO 2 emissions from the 
+biomass at the point of complete oxidation results in zero net CO 2 emissions integrated over time, except when 
+biomass carbon is not converted into methane, non-methane volatile organic compounds (NMVOC) or other 
+precursor gases.
+For fossil and biogenic methane, the characterization factors in accordance with the most recent IPCC 
+report shall be used.
+6.6 Interpretation of CFP or partial CFP
+The life cycle interpretation phase of a CFP study shall comprise the following steps:
+a) identification of the significant issues based on the results of the quantification of the CFP and 
+partial CFP in accordance with LCI and LCIA phases;
+NOTE 1 Significant issues can be life cycle stages, unit processes or flows.
+b) an evaluation that considers completeness, consistency and sensitivity analysis;
+c) the formulation of conclusions, limitations and recommendations.
+The results of the quantification of the CFP and partial CFP according to the LCI or LCIA phases shall be 
+interpreted according to the goal and scope of the CFP study. The interpretation shall:
+— include an assessment of uncertainty, including the application of rounding rules or ranges;
+— identify and document the selected allocation procedures in the CFP study report in detail;
+— identify the limitations of the CFP study (in accordance with, but not limited to, Annex A).
+ 
+© ISO 2018 – All rights reserved 29
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 44 ---
+ 
+ISO 14067:2018
+The interpretation should include:
+— a sensitivity analysis of the significant inputs, outputs and methodological choices, including 
+allocation procedures, in order to understand the sensitivity and uncertainty of the results;
+— an assessment of the influence of alternative use profiles on the final result;
+— an assessment of the influence of different end-of-life scenarios on the final result;
+— an assessment of the consequences of recommendations [see 6.6 c)] on the final result.
+NOTE 2 For more information, see ISO 14044:2006, 4.5, and ISO 14044:2006, Annex B.
+7 CFP study report
+7.1 General
+The purpose of the CFP study report is to describe the CFP study, including the CFP or the partial CFP, 
+and to demonstrate that the provisions of this document have been met.
+Results reported in the CFP study report may be used in footprint communications (see ISO 14026).
+NOTE “CFP study report” is a specific term relating to the carbon footprint of products. Other standards 
+use different terminology for the same type of document (e.g. “third-party report” used in ISO 14044:2006 and 
+“footprint study report” used in ISO 14026).
+The results and conclusions of the CFP study shall be documented in the CFP study report without bias. 
+The results, data, methods, assumptions and the life cycle interpretation (see 6.6) shall be transparent 
+and presented in sufficient detail to allow the reader to comprehend the complexities and trade-offs 
+inherent in the CFP study.
+The type and format of the CFP study report shall be defined in the goal and scope definition phase of 
+the CFP study. The CFP study report shall also allow the results and life cycle interpretation to be used 
+in a manner consistent with the goals of the CFP study.
+7.2 GHG values in the CFP study report
+Results of the quantification of the CFP or the partial CFP shall be documented in the CFP study report 
+in mass of CO2e per functional or declared unit.
+The following GHG values shall be documented separately in the CFP study report:
+a) GHG emissions and removals linked to the main life cycle stages in which they occur, including the 
+absolute and the relative contribution of each life cycle stage;
+b) net fossil GHG emissions and removals (see 6.4.9.2);
+c) biogenic GHG emissions and removals (see 6.4.9.2);
+d) GHG emissions and removals resulting from dLUC (see 6.4.9.5);
+e) GHG emissions resulting from aircraft transportation (see 6.4.9.7).
+The following GHG values shall be documented separately in the CFP study report, if calculated:
+— GHG emissions and removals occurring as a result of iLUC (see 6.4.9.5);
+— GHG emissions and removals occurring as a result of land use (see 6.4.9.6);
+— results of the sensitivity analysis applying the relevant consumption grid mix, when applicable;
+— biogenic carbon content of products;
+ 
+30 © ISO 2018 – All rights reserved
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
+
+--- PAGE 45 ---
+ 
+ISO 14067:2018
+— CFP calculated using GTP 100.
+In cases of processes located in SIDS, an additional CFP or partial CFP, if calculated using contractual 
+instruments for such processes, shall be reported as additional information (see 6.4.9.4.4).
+7.3 Required information for the CFP study report
+The following information on CFP quantification shall be included in the CFP study report:
+a) functional or declared unit and reference flow (see 6.3.3);
+b) system boundary, including
+— the type of inputs and outputs of the system as elementary flows, and
+— decision criteria concerning treatment of unit processes, considering their importance for the 
+conclusions of the CFP study;
+c) list of important unit processes;
+d) data collection information, including data sources (see 6.4.2);
+e) the list of GHGs taken into account;
+f) the selected characterization factors;
+g) the selected cut‑off criteria and cut‑offs (see 6.3.4.3);
+h) the selected allocation procedures (see 6.4.6);
+i) timing of GHG emission and removals (see 6.4.8 and 6.4.9.6), if applicable;
+j) description of data (see 6.3.5), including
+— decisions concerning data, and
+— assessment of data quality;
+k) results of sensitivity analyses and uncertainty assessments;
+l) treatment of electricity (see 6.4.9.4), which should include information on the grid emission factor 
+calculation and relevant grid specific constraints;
+m) results of the life cycle interpretation (see 6.6), including conclusions and limitations (see Annex A);
+n) disclosure and justification of value choices that have been made in the context of decisions within 
+the CFP study;
+o) scope, and modified scope, if applicable, along with justifications and exclusions (see 6.3.2);
+p) description of the stages of the life cycle, including a description of the selected use profiles and 
+end-of-life scenarios, when applicable;
+q) the assessment of influence of alternative use profiles and end-of-life scenarios on the final results;
+r) time period for which the CFP is representative (see 6.3.6);
+s) reference of the PCR applied or other supplementary requirements used in the study;
+t) description of performance tracking (see 6.4.7), when applicable.
+ 
+© ISO 2018 – All rights reserved 31
+BS EN ISO 14067:2018
+Copyright British Standards Institution 
+Provided by IHS Markit under license with BSI - Uncontrolled Copy 
+Licensee=Lloyds Register Group Services/5989898009, User=Kim, Dal
+Not for Resale, 03/30/2021 10:37:21 MDT
+No reproduction or networking permitted without license from IHS
+--```,,,`,,,,`,`,,,,``,```,```,-`-`,,`,,`,`,,`---
