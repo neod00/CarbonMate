@@ -88,7 +88,7 @@ export const METHODOLOGY_LIMITATIONS = [
 export const getApplicableLimitations = (
     boundary: string,
     stages: string[],
-    dataQualityLevel: 'primary' | 'secondary' | 'mixed' = 'secondary'
+    dataQualityLevel: 'primary' | 'secondary' | 'mixed' | 'estimated' = 'secondary'
 ) => {
     const limitations = [...METHODOLOGY_LIMITATIONS]
     
