@@ -113,12 +113,13 @@ export interface StageActivityData {
 export interface SimplifiedActivityData {
     // 원자재
     raw_material_weight?: number
-    raw_material_type?: EmissionSourceType
+    raw_material_type?: string
     
     // 제조
     electricity?: number
     electricity_grid?: string
     gas?: number
+    diesel?: number
     
     // 운송
     transport_distance?: number
