@@ -140,7 +140,7 @@ export const generateReportData = (
             ghgList: GHG_LIST.slice(0, 7).map(ghg => ({
                 formula: ghg.formula,
                 name: ghg.name,
-                gwp: ghg.gwp100
+                gwp: ghg.gwp100_ar6
             })),
             emissionFactorSources: [
                 { name: EMISSION_FACTOR_SOURCES.korea_lci.name, year: EMISSION_FACTOR_SOURCES.korea_lci.year, region: '한국' },
