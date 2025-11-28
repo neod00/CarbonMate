@@ -198,12 +198,12 @@ function RawMaterialsInputs({
                     />
                 </div>
                 <div className="space-y-2">
-                    <Label htmlFor="material_type">주요 원자재 종류</Label>
+                    <Label htmlFor="raw_material_type">주요 원자재 종류</Label>
                     <Select
-                        value={activityData['material_type'] || 'material_steel_primary'}
-                        onValueChange={(value) => setActivityData('material_type', value as any)}
+                        value={activityData['raw_material_type'] || 'material_steel_primary'}
+                        onValueChange={(value) => setActivityData('raw_material_type', value as any)}
                     >
-                        <SelectTrigger id="material_type">
+                        <SelectTrigger id="raw_material_type">
                             <SelectValue placeholder="원자재 선택" />
                         </SelectTrigger>
                         <SelectContent>
