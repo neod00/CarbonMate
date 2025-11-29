@@ -467,8 +467,8 @@ export const AllocationStep = () => {
                                                     onClick={() => setRecyclingAllocationMethod(key)}
                                                     className={`relative p-5 rounded-2xl border-2 text-left transition-all ${
                                                         isSelected
-                                                            ? 'border-green-500 bg-green-50 dark:bg-green-950/30 shadow-lg shadow-green-500/10'
-                                                            : 'border-border hover:border-green-300 hover:bg-muted/50'
+                                                            ? 'border-green-500 bg-green-500/10 shadow-lg shadow-green-500/20'
+                                                            : 'border-border/50 bg-card/50 hover:border-green-500/50 hover:bg-green-500/5'
                                                     }`}
                                                 >
                                                     {key === 'cut_off' && (
@@ -477,12 +477,12 @@ export const AllocationStep = () => {
                                                         </span>
                                                     )}
                                                     <div className={`p-3 rounded-xl inline-block mb-3 ${
-                                                        isSelected ? 'bg-green-500/20' : 'bg-muted'
+                                                        isSelected ? 'bg-green-500/20' : 'bg-muted/50'
                                                     }`}>
-                                                        <Icon className={`w-6 h-6 ${isSelected ? 'text-green-600' : 'text-muted-foreground'}`} />
+                                                        <Icon className={`w-6 h-6 ${isSelected ? 'text-green-400' : 'text-muted-foreground'}`} />
                                                     </div>
                                                     <h4 className={`font-semibold mb-1 ${
-                                                        isSelected ? 'text-green-700 dark:text-green-400' : 'text-foreground'
+                                                        isSelected ? 'text-green-400' : 'text-foreground'
                                                     }`}>
                                                         {method.nameKo}
                                                     </h4>
@@ -527,13 +527,13 @@ export const AllocationStep = () => {
                                                             onClick={() => setRecyclingAllocationMethod(key)}
                                                             className={`p-4 rounded-xl border-2 text-left transition-all flex items-start gap-3 ${
                                                                 isSelected
-                                                                    ? 'border-green-500 bg-green-50 dark:bg-green-950/30'
-                                                                    : 'border-border hover:border-green-300'
+                                                                    ? 'border-green-500 bg-green-500/10'
+                                                                    : 'border-border/50 bg-card/50 hover:border-green-500/50 hover:bg-green-500/5'
                                                             }`}
                                                         >
-                                                            <Icon className={`w-5 h-5 mt-0.5 ${isSelected ? 'text-green-600' : 'text-muted-foreground'}`} />
+                                                            <Icon className={`w-5 h-5 mt-0.5 ${isSelected ? 'text-green-400' : 'text-muted-foreground'}`} />
                                                             <div>
-                                                                <h4 className={`font-medium text-sm ${isSelected ? 'text-green-700' : ''}`}>
+                                                                <h4 className={`font-medium text-sm ${isSelected ? 'text-green-400' : 'text-foreground'}`}>
                                                                     {method.nameKo}
                                                                 </h4>
                                                                 <p className="text-xs text-muted-foreground mt-0.5">
@@ -549,9 +549,9 @@ export const AllocationStep = () => {
                                 </div>
 
                                 {/* 수식 표시 */}
-                                <div className="p-4 bg-muted/50 rounded-xl border border-border">
-                                    <p className="text-xs text-muted-foreground mb-1">적용 수식</p>
-                                    <p className="text-sm font-mono text-foreground">
+                                <div className="p-4 bg-card/50 rounded-xl border border-border/50">
+                                    <p className="text-xs text-green-400 mb-1">적용 수식</p>
+                                    <p className="text-sm font-mono text-foreground/80">
                                         {RECYCLING_ALLOCATION_METHODS[recyclingAllocation.method].formula}
                                     </p>
                                 </div>
@@ -559,12 +559,12 @@ export const AllocationStep = () => {
                                 {/* 파라미터 입력 - 슬라이더 */}
                                 <div className="grid md:grid-cols-2 gap-6">
                                     {/* 재활용 투입 비율 */}
-                                    <div className="space-y-3">
+                                    <div className="p-4 bg-card/50 border border-border/50 rounded-xl space-y-3">
                                         <div className="flex items-center justify-between">
                                             <label className="text-sm font-medium">
                                                 재활용 투입 비율 (R<sub>in</sub>)
                                             </label>
-                                            <span className="text-lg font-bold text-green-600">
+                                            <span className="text-xl font-bold text-green-400">
                                                 {(recyclingAllocation.recycledContentInput * 100).toFixed(0)}%
                                             </span>
                                         </div>
@@ -576,7 +576,7 @@ export const AllocationStep = () => {
                                             onChange={(e) => setRecyclingParams({ 
                                                 recycledContentInput: parseFloat(e.target.value) / 100 
                                             })}
-                                            className="w-full h-3 bg-muted rounded-full appearance-none cursor-pointer accent-green-500"
+                                            className="w-full h-3 bg-green-950/50 rounded-full appearance-none cursor-pointer accent-green-500"
                                         />
                                         <div className="flex justify-between text-xs text-muted-foreground">
                                             <span>0% (모두 버진)</span>
@@ -588,12 +588,12 @@ export const AllocationStep = () => {
                                     </div>
 
                                     {/* 재활용 산출 비율 */}
-                                    <div className="space-y-3">
+                                    <div className="p-4 bg-card/50 border border-border/50 rounded-xl space-y-3">
                                         <div className="flex items-center justify-between">
                                             <label className="text-sm font-medium">
                                                 재활용 산출 비율 (R<sub>out</sub>)
                                             </label>
-                                            <span className="text-lg font-bold text-green-600">
+                                            <span className="text-xl font-bold text-green-400">
                                                 {(recyclingAllocation.recyclabilityOutput * 100).toFixed(0)}%
                                             </span>
                                         </div>
@@ -605,7 +605,7 @@ export const AllocationStep = () => {
                                             onChange={(e) => setRecyclingParams({ 
                                                 recyclabilityOutput: parseFloat(e.target.value) / 100 
                                             })}
-                                            className="w-full h-3 bg-muted rounded-full appearance-none cursor-pointer accent-green-500"
+                                            className="w-full h-3 bg-green-950/50 rounded-full appearance-none cursor-pointer accent-green-500"
                                         />
                                         <div className="flex justify-between text-xs text-muted-foreground">
                                             <span>0% (모두 폐기)</span>
@@ -619,7 +619,7 @@ export const AllocationStep = () => {
 
                                 {/* 품질 계수 */}
                                 {(recyclingAllocation.method === 'pef_formula' || recyclingAllocation.method === 'substitution') && (
-                                    <div className="grid md:grid-cols-2 gap-6 p-4 bg-muted/30 rounded-xl">
+                                    <div className="grid md:grid-cols-2 gap-6 p-4 bg-card/50 border border-border/50 rounded-xl">
                                         <div className="space-y-2">
                                             <label className="text-sm font-medium">
                                                 투입 품질 계수 (Q<sub>s,in</sub>)
@@ -633,7 +633,7 @@ export const AllocationStep = () => {
                                                 onChange={(e) => setRecyclingParams({ 
                                                     qualityFactorInput: parseFloat(e.target.value) || 1 
                                                 })}
-                                                className="w-full px-4 py-2.5 border border-border rounded-xl text-sm bg-background"
+                                                className="w-full px-4 py-2.5 border border-border/50 rounded-xl text-sm bg-background/50 focus:ring-2 focus:ring-green-500/50 focus:border-green-500"
                                             />
                                             <p className="text-xs text-muted-foreground">다운사이클링 시 1 미만</p>
                                         </div>
@@ -650,7 +650,7 @@ export const AllocationStep = () => {
                                                 onChange={(e) => setRecyclingParams({ 
                                                     qualityFactorOutput: parseFloat(e.target.value) || 1 
                                                 })}
-                                                className="w-full px-4 py-2.5 border border-border rounded-xl text-sm bg-background"
+                                                className="w-full px-4 py-2.5 border border-border/50 rounded-xl text-sm bg-background/50 focus:ring-2 focus:ring-green-500/50 focus:border-green-500"
                                             />
                                             <p className="text-xs text-muted-foreground">재활용 원료 품질 계수</p>
                                         </div>
@@ -670,17 +670,17 @@ export const AllocationStep = () => {
                                                 onClick={() => setRecyclingParams({ loopType: option.id as 'closed_loop' | 'open_loop' })}
                                                 className={`flex-1 p-4 rounded-xl border-2 text-left transition-all ${
                                                     recyclingAllocation.loopType === option.id
-                                                        ? 'border-green-500 bg-green-50 dark:bg-green-950/30'
-                                                        : 'border-border hover:border-green-300'
+                                                        ? 'border-green-500 bg-green-500/10'
+                                                        : 'border-border/50 bg-card/50 hover:border-green-500/50 hover:bg-green-500/5'
                                                 }`}
                                             >
                                                 <div className="flex items-center gap-2 mb-1">
                                                     {recyclingAllocation.loopType === option.id ? (
                                                         <CheckCircle className="w-4 h-4 text-green-500" />
                                                     ) : (
-                                                        <div className="w-4 h-4 rounded-full border-2 border-muted-foreground/30" />
+                                                        <div className="w-4 h-4 rounded-full border-2 border-muted-foreground/50" />
                                                     )}
-                                                    <span className="font-medium text-sm">{option.label}</span>
+                                                    <span className={`font-medium text-sm ${recyclingAllocation.loopType === option.id ? 'text-green-400' : 'text-foreground'}`}>{option.label}</span>
                                                 </div>
                                                 <p className="text-xs text-muted-foreground ml-6">{option.desc}</p>
                                             </button>
@@ -689,31 +689,31 @@ export const AllocationStep = () => {
                                 </div>
 
                                 {/* 선택 요약 & 예상 효과 */}
-                                <div className="p-5 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 rounded-2xl border border-green-200 dark:border-green-800">
+                                <div className="p-5 bg-green-500/10 rounded-2xl border border-green-500/30">
                                     <div className="flex items-center gap-2 mb-4">
-                                        <TrendingDown className="w-5 h-5 text-green-600" />
-                                        <h4 className="font-semibold text-green-800 dark:text-green-400">할당 설정 요약 및 예상 효과</h4>
+                                        <TrendingDown className="w-5 h-5 text-green-400" />
+                                        <h4 className="font-semibold text-green-400">할당 설정 요약 및 예상 효과</h4>
                                     </div>
                                     
                                     <div className="grid md:grid-cols-3 gap-4 mb-4">
-                                        <div className="p-3 bg-white/50 dark:bg-black/20 rounded-xl">
+                                        <div className="p-3 bg-background/50 rounded-xl border border-border/30">
                                             <p className="text-xs text-muted-foreground mb-1">방법</p>
-                                            <p className="font-semibold text-green-700 dark:text-green-400">
+                                            <p className="font-semibold text-green-400">
                                                 {RECYCLING_ALLOCATION_METHODS[recyclingAllocation.method].nameKo}
                                             </p>
                                         </div>
-                                        <div className="p-3 bg-white/50 dark:bg-black/20 rounded-xl">
+                                        <div className="p-3 bg-background/50 rounded-xl border border-border/30">
                                             <p className="text-xs text-muted-foreground mb-1">버진 원료 부담</p>
-                                            <p className="font-semibold">
+                                            <p className="font-semibold text-foreground">
                                                 {estimatedEffect.virginBurden.toFixed(0)}%
                                                 <span className="text-xs text-muted-foreground ml-1">
                                                     (투입 {(recyclingAllocation.recycledContentInput * 100).toFixed(0)}% 재활용)
                                                 </span>
                                             </p>
                                         </div>
-                                        <div className="p-3 bg-white/50 dark:bg-black/20 rounded-xl">
+                                        <div className="p-3 bg-background/50 rounded-xl border border-border/30">
                                             <p className="text-xs text-muted-foreground mb-1">폐기 부담</p>
-                                            <p className="font-semibold">
+                                            <p className="font-semibold text-foreground">
                                                 {estimatedEffect.disposalBurden.toFixed(0)}%
                                                 <span className="text-xs text-muted-foreground ml-1">
                                                     (산출 {(recyclingAllocation.recyclabilityOutput * 100).toFixed(0)}% 재활용)
@@ -723,9 +723,9 @@ export const AllocationStep = () => {
                                     </div>
 
                                     {estimatedEffect.creditEffect > 0 && (
-                                        <div className="flex items-center gap-2 p-3 bg-green-100 dark:bg-green-900/30 rounded-xl">
-                                            <Sparkles className="w-4 h-4 text-green-600" />
-                                            <span className="text-sm text-green-700 dark:text-green-400">
+                                        <div className="flex items-center gap-2 p-3 bg-green-500/20 rounded-xl border border-green-500/30">
+                                            <Sparkles className="w-4 h-4 text-green-400" />
+                                            <span className="text-sm text-green-300">
                                                 예상 재활용 크레딧: <strong>-{estimatedEffect.creditEffect.toFixed(2)} kg CO₂e</strong> (버진 원료 대체)
                                             </span>
                                         </div>
@@ -733,14 +733,14 @@ export const AllocationStep = () => {
                                 </div>
 
                                 {/* 적합한 시나리오 */}
-                                <div className="flex items-start gap-3 p-4 bg-emerald-50 dark:bg-emerald-950/30 rounded-xl border border-emerald-200 dark:border-emerald-800">
-                                    <Info className="w-5 h-5 text-emerald-600 mt-0.5" />
+                                <div className="flex items-start gap-3 p-4 bg-green-500/5 rounded-xl border border-green-500/20">
+                                    <Info className="w-5 h-5 text-green-400 mt-0.5" />
                                     <div>
-                                        <p className="font-medium text-emerald-800 dark:text-emerald-400 mb-2">적합한 시나리오</p>
-                                        <ul className="text-sm text-emerald-700 dark:text-emerald-500 space-y-1">
+                                        <p className="font-medium text-green-400 mb-2">적합한 시나리오</p>
+                                        <ul className="text-sm text-green-300/80 space-y-1">
                                             {RECYCLING_ALLOCATION_METHODS[recyclingAllocation.method].suitableFor.map((scenario, i) => (
                                                 <li key={i} className="flex items-center gap-2">
-                                                    <CheckCircle className="w-3 h-3" />
+                                                    <CheckCircle className="w-3 h-3 text-green-400" />
                                                     {scenario}
                                                 </li>
                                             ))}
