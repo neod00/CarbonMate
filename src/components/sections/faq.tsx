@@ -7,10 +7,10 @@ import {
 
 export function FAQ() {
     return (
-        <section id="faq" className="py-20 bg-muted/30">
-            <div className="container max-w-3xl">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold tracking-tight">자주 묻는 질문</h2>
+        <section id="faq" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-muted/30 px-4 sm:px-6">
+            <div className="container max-w-3xl mx-auto">
+                <div className="text-center mb-8 sm:mb-12">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">자주 묻는 질문</h2>
                 </div>
                 <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">

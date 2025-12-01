@@ -522,43 +522,43 @@ export function ResultsStep() {
     // =========================================================================
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
             {/* 헤더 */}
-            <div className="text-center space-y-2">
-                <h3 className="text-2xl font-bold">CFP 계산 결과</h3>
-                <p className="text-muted-foreground">
+            <div className="text-center space-y-2 px-2">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold">CFP 계산 결과</h3>
+                <p className="text-sm sm:text-base text-muted-foreground">
                     제품: <span className="font-semibold text-foreground">
                         {productInfo.name || '미지정 제품'}
                     </span> | 기능단위: {productInfo.unit}
                 </p>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                     시스템 경계: {productInfo.boundary.replace(/-/g, ' → ').replace('to', '')}
                 </p>
             </div>
 
             {/* 메인 결과 카드 */}
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
                 {/* 총 탄소발자국 */}
                 <Card className="bg-primary/5 border-primary/20">
-                    <CardHeader>
-                        <CardTitle className="text-center text-primary">
+                    <CardHeader className="px-4 sm:px-6">
+                        <CardTitle className="text-center text-primary text-base sm:text-lg">
                             총 탄소발자국 (CFP)
                         </CardTitle>
-                        <CardDescription className="text-center">
+                        <CardDescription className="text-center text-xs sm:text-sm">
                             ISO 14067:2018 기준
                         </CardDescription>
                     </CardHeader>
-                    <CardContent className="text-center">
-                        <div className="text-5xl font-extrabold tracking-tight">
+                    <CardContent className="text-center px-4 sm:px-6 pb-4 sm:pb-6">
+                        <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
                             {totalEmission.toFixed(2)}
-                            <span className="text-lg font-normal text-muted-foreground ml-2">
+                            <span className="text-sm sm:text-base md:text-lg font-normal text-muted-foreground ml-1 sm:ml-2">
                                 kg CO₂e
                             </span>
                         </div>
-                        <p className="mt-2 text-sm text-muted-foreground">
+                        <p className="mt-2 text-xs sm:text-sm text-muted-foreground">
                             per {productInfo.unit}
                         </p>
-                        <div className="mt-4 text-xs text-muted-foreground">
+                        <div className="mt-3 sm:mt-4 text-[10px] sm:text-xs text-muted-foreground">
                             불확실성 범위: ±{avgUncertainty.toFixed(0)}%
                             <br />
                             ({(totalEmission * (1 - avgUncertainty/100)).toFixed(2)} ~ {(totalEmission * (1 + avgUncertainty/100)).toFixed(2)} kg CO₂e)
@@ -568,12 +568,12 @@ export function ResultsStep() {
 
                 {/* 단계별 분해 */}
                 <Card>
-                    <CardHeader>
-                        <CardTitle>단계별 배출량</CardTitle>
-                        <CardDescription>ISO 14067 7.2 (a) 준수</CardDescription>
+                    <CardHeader className="px-4 sm:px-6">
+                        <CardTitle className="text-base sm:text-lg">단계별 배출량</CardTitle>
+                        <CardDescription className="text-xs sm:text-sm">ISO 14067 7.2 (a) 준수</CardDescription>
                     </CardHeader>
-                    <CardContent>
-                        <div className="space-y-3">
+                    <CardContent className="px-4 sm:px-6">
+                        <div className="space-y-2 sm:space-y-3">
                             {stages.map(stage => {
                                 const result = stageResults[stage]
                                 const percentage = totalEmission > 0
@@ -582,9 +582,9 @@ export function ResultsStep() {
 
                                 return (
                                     <div key={stage} className="space-y-1">
-                                        <div className="flex items-center justify-between text-sm">
-                                            <span>{STAGE_LABELS[stage] || stage}</span>
-                                            <span className="font-mono">
+                                        <div className="flex items-center justify-between text-xs sm:text-sm">
+                                            <span className="truncate pr-2">{STAGE_LABELS[stage] || stage}</span>
+                                            <span className="font-mono flex-shrink-0">
                                                 {result.total.toFixed(2)} ({percentage.toFixed(1)}%)
                                             </span>
                                         </div>
@@ -604,37 +604,37 @@ export function ResultsStep() {
 
             {/* ISO 14067 7.2 (b)(c)(e) - 화석/생물기원/항공 GHG 분리 */}
             <Card>
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                        <FileText className="h-5 w-5" />
+                <CardHeader className="px-4 sm:px-6">
+                    <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                        <FileText className="h-4 w-4 sm:h-5 sm:w-5" />
                         GHG 배출원 분류
                     </CardTitle>
-                    <CardDescription>ISO 14067 7.2 (b)(c)(e) - 필수 분리 기록</CardDescription>
+                    <CardDescription className="text-xs sm:text-sm">ISO 14067 7.2 (b)(c)(e) - 필수 분리 기록</CardDescription>
                 </CardHeader>
-                <CardContent>
-                    <div className="grid gap-4 md:grid-cols-3">
-                        <div className="flex items-center gap-3 p-4 rounded-lg bg-orange-500/10 border border-orange-500/20">
-                            <Flame className="h-8 w-8 text-orange-500" />
-                            <div>
-                                <p className="text-sm text-muted-foreground">화석 GHG 배출</p>
-                                <p className="text-2xl font-bold">{totalFossil.toFixed(2)}</p>
-                                <p className="text-xs text-muted-foreground">kg CO₂e</p>
+                <CardContent className="px-4 sm:px-6">
+                    <div className="grid gap-3 sm:gap-4 md:grid-cols-3">
+                        <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg bg-orange-500/10 border border-orange-500/20">
+                            <Flame className="h-6 w-6 sm:h-8 sm:w-8 text-orange-500 flex-shrink-0" />
+                            <div className="min-w-0">
+                                <p className="text-xs sm:text-sm text-muted-foreground">화석 GHG 배출</p>
+                                <p className="text-xl sm:text-2xl font-bold">{totalFossil.toFixed(2)}</p>
+                                <p className="text-[10px] sm:text-xs text-muted-foreground">kg CO₂e</p>
                             </div>
                         </div>
-                        <div className="flex items-center gap-3 p-4 rounded-lg bg-green-500/10 border border-green-500/20">
-                            <Leaf className="h-8 w-8 text-green-500" />
-                            <div>
-                                <p className="text-sm text-muted-foreground">생물기원 GHG 배출</p>
-                                <p className="text-2xl font-bold">{totalBiogenic.toFixed(2)}</p>
-                                <p className="text-xs text-muted-foreground">kg CO₂e</p>
+                        <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg bg-green-500/10 border border-green-500/20">
+                            <Leaf className="h-6 w-6 sm:h-8 sm:w-8 text-green-500 flex-shrink-0" />
+                            <div className="min-w-0">
+                                <p className="text-xs sm:text-sm text-muted-foreground">생물기원 GHG 배출</p>
+                                <p className="text-xl sm:text-2xl font-bold">{totalBiogenic.toFixed(2)}</p>
+                                <p className="text-[10px] sm:text-xs text-muted-foreground">kg CO₂e</p>
                             </div>
                         </div>
-                        <div className="flex items-center gap-3 p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
-                            <Plane className="h-8 w-8 text-blue-500" />
-                            <div>
-                                <p className="text-sm text-muted-foreground">항공 운송 GHG</p>
-                                <p className="text-2xl font-bold">{totalAircraft.toFixed(2)}</p>
-                                <p className="text-xs text-muted-foreground">kg CO₂e</p>
+                        <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                            <Plane className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500 flex-shrink-0" />
+                            <div className="min-w-0">
+                                <p className="text-xs sm:text-sm text-muted-foreground">항공 운송 GHG</p>
+                                <p className="text-xl sm:text-2xl font-bold">{totalAircraft.toFixed(2)}</p>
+                                <p className="text-[10px] sm:text-xs text-muted-foreground">kg CO₂e</p>
                             </div>
                         </div>
                     </div>
@@ -646,38 +646,38 @@ export function ResultsStep() {
 
             {/* 데이터 품질 요약 (ISO 14067 6.3.5) */}
             <Card>
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                        <Shield className="h-5 w-5" />
+                <CardHeader className="px-4 sm:px-6">
+                    <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                        <Shield className="h-4 w-4 sm:h-5 sm:w-5" />
                         데이터 품질 요약
                     </CardTitle>
-                    <CardDescription>ISO 14067 6.3.5 - 데이터 품질 평가 결과</CardDescription>
+                    <CardDescription className="text-xs sm:text-sm">ISO 14067 6.3.5 - 데이터 품질 평가 결과</CardDescription>
                 </CardHeader>
-                <CardContent>
-                    <div className="grid gap-4 md:grid-cols-3">
-                        <div className="p-4 rounded-lg bg-muted/50">
-                            <p className="text-sm text-muted-foreground">데이터 유형</p>
-                            <p className="text-lg font-bold mt-1">
+                <CardContent className="px-4 sm:px-6">
+                    <div className="grid gap-3 sm:gap-4 md:grid-cols-3">
+                        <div className="p-3 sm:p-4 rounded-lg bg-muted/50">
+                            <p className="text-xs sm:text-sm text-muted-foreground">데이터 유형</p>
+                            <p className="text-base sm:text-lg font-bold mt-1">
                                 {dataQualityMeta.overallType === 'primary' ? '1차 데이터' : 
                                  dataQualityMeta.overallType === 'secondary' ? '2차 데이터' : '추정'}
                             </p>
-                            <p className="text-xs text-muted-foreground mt-1">
+                            <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">
                                 {dataQualityMeta.overallType === 'primary' 
                                     ? '현장 특정 데이터' 
                                     : '데이터베이스 기반'}
                             </p>
                         </div>
-                        <div className="p-4 rounded-lg bg-muted/50">
-                            <p className="text-sm text-muted-foreground">불확실성 범위</p>
-                            <p className="text-lg font-bold mt-1">±{avgUncertainty.toFixed(0)}%</p>
-                            <p className="text-xs text-muted-foreground mt-1">
+                        <div className="p-3 sm:p-4 rounded-lg bg-muted/50">
+                            <p className="text-xs sm:text-sm text-muted-foreground">불확실성 범위</p>
+                            <p className="text-base sm:text-lg font-bold mt-1">±{avgUncertainty.toFixed(0)}%</p>
+                            <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">
                                 {(totalEmission * (1 - avgUncertainty/100)).toFixed(1)} ~ {(totalEmission * (1 + avgUncertainty/100)).toFixed(1)} kg CO₂e
                             </p>
                         </div>
-                        <div className="p-4 rounded-lg bg-muted/50">
-                            <p className="text-sm text-muted-foreground">기준 연도</p>
-                            <p className="text-lg font-bold mt-1">{dataQualityMeta.baseYear}</p>
-                            <p className="text-xs text-muted-foreground mt-1">배출계수 기준</p>
+                        <div className="p-3 sm:p-4 rounded-lg bg-muted/50">
+                            <p className="text-xs sm:text-sm text-muted-foreground">기준 연도</p>
+                            <p className="text-base sm:text-lg font-bold mt-1">{dataQualityMeta.baseYear}</p>
+                            <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">배출계수 기준</p>
                         </div>
                     </div>
                     <div className="mt-4 p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
@@ -694,49 +694,51 @@ export function ResultsStep() {
 
             {/* 상세 계산 내역 */}
             <Card>
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                        <TrendingDown className="h-5 w-5" />
+                <CardHeader className="px-4 sm:px-6">
+                    <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                        <TrendingDown className="h-4 w-4 sm:h-5 sm:w-5" />
                         상세 계산 내역
                     </CardTitle>
-                    <CardDescription>사용된 배출계수 및 계산 근거</CardDescription>
+                    <CardDescription className="text-xs sm:text-sm">사용된 배출계수 및 계산 근거</CardDescription>
                 </CardHeader>
-                <CardContent>
-                    <div className="space-y-4">
+                <CardContent className="px-4 sm:px-6">
+                    <div className="space-y-3 sm:space-y-4">
                         {stages.map(stage => {
                             const result = stageResults[stage]
                             if (result.details.length === 0) return null
 
                             return (
                                 <div key={stage} className="space-y-2">
-                                    <h4 className="font-medium text-sm">{STAGE_LABELS[stage]}</h4>
-                                    <div className="overflow-x-auto">
-                                        <table className="w-full text-xs">
-                                            <thead>
-                                                <tr className="border-b text-muted-foreground">
-                                                    <th className="text-left py-1 pr-2">항목</th>
-                                                    <th className="text-right py-1 px-2">수량</th>
-                                                    <th className="text-right py-1 px-2">배출계수</th>
-                                                    <th className="text-right py-1 pl-2">배출량</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {result.details.map((detail, idx) => (
-                                                    <tr key={idx} className="border-b border-border/50">
-                                                        <td className="py-1 pr-2">{detail.source}</td>
-                                                        <td className="text-right py-1 px-2">
-                                                            {detail.quantity.toFixed(2)} {detail.unit}
-                                                        </td>
-                                                        <td className="text-right py-1 px-2 text-muted-foreground">
-                                                            {detail.emissionFactor}
-                                                        </td>
-                                                        <td className={`text-right py-1 pl-2 font-mono ${detail.value < 0 ? 'text-green-500' : ''}`}>
-                                                            {detail.value.toFixed(2)}
-                                                        </td>
+                                    <h4 className="font-medium text-xs sm:text-sm">{STAGE_LABELS[stage]}</h4>
+                                    <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+                                        <div className="min-w-[600px] sm:min-w-0">
+                                            <table className="w-full text-xs">
+                                                <thead>
+                                                    <tr className="border-b text-muted-foreground">
+                                                        <th className="text-left py-2 pr-2 sm:py-1">항목</th>
+                                                        <th className="text-right py-2 px-2 sm:py-1">수량</th>
+                                                        <th className="text-right py-2 px-2 sm:py-1">배출계수</th>
+                                                        <th className="text-right py-2 pl-2 sm:py-1">배출량</th>
                                                     </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    {result.details.map((detail, idx) => (
+                                                        <tr key={idx} className="border-b border-border/50">
+                                                            <td className="py-2 pr-2 sm:py-1">{detail.source}</td>
+                                                            <td className="text-right py-2 px-2 sm:py-1">
+                                                                {detail.quantity.toFixed(2)} {detail.unit}
+                                                            </td>
+                                                            <td className="text-right py-2 px-2 sm:py-1 text-muted-foreground text-[10px] sm:text-xs">
+                                                                {detail.emissionFactor}
+                                                            </td>
+                                                            <td className={`text-right py-2 pl-2 sm:py-1 font-mono ${detail.value < 0 ? 'text-green-500' : ''}`}>
+                                                                {detail.value.toFixed(2)}
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             )
@@ -747,25 +749,25 @@ export function ResultsStep() {
 
             {/* 할당 설정 요약 (ISO 14067 6.4.9) */}
             <Card>
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                        <Scale className="h-5 w-5" />
+                <CardHeader className="px-4 sm:px-6">
+                    <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                        <Scale className="h-4 w-4 sm:h-5 sm:w-5" />
                         할당 설정 요약
                     </CardTitle>
-                    <CardDescription>ISO 14067 6.4.9 - 할당 절차</CardDescription>
+                    <CardDescription className="text-xs sm:text-sm">ISO 14067 6.4.9 - 할당 절차</CardDescription>
                 </CardHeader>
-                <CardContent>
-                    <div className="grid gap-4 md:grid-cols-2">
+                <CardContent className="px-4 sm:px-6">
+                    <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
                         {/* 다중 출력 할당 */}
-                        <div className="p-4 rounded-lg bg-indigo-500/10 border border-indigo-500/20">
+                        <div className="p-3 sm:p-4 rounded-lg bg-indigo-500/10 border border-indigo-500/20">
                             <div className="flex items-center gap-2 mb-2">
-                                <Scale className="h-5 w-5 text-indigo-500" />
-                                <span className="font-medium text-indigo-400">다중 출력 프로세스</span>
+                                <Scale className="h-4 w-4 sm:h-5 sm:w-5 text-indigo-500 flex-shrink-0" />
+                                <span className="font-medium text-indigo-400 text-xs sm:text-sm">다중 출력 프로세스</span>
                             </div>
-                            <p className="text-sm font-medium">
+                            <p className="text-xs sm:text-sm font-medium">
                                 {MULTI_OUTPUT_ALLOCATION_METHODS[multiOutputAllocation.method].nameKo}
                             </p>
-                            <p className="text-xs text-muted-foreground mt-1">
+                            <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">
                                 {MULTI_OUTPUT_ALLOCATION_METHODS[multiOutputAllocation.method].descriptionKo}
                             </p>
                             {multiOutputAllocation.coProducts.length > 0 && (
@@ -781,18 +783,18 @@ export function ResultsStep() {
                         </div>
 
                         {/* 재활용 할당 */}
-                        <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20">
+                        <div className="p-3 sm:p-4 rounded-lg bg-green-500/10 border border-green-500/20">
                             <div className="flex items-center gap-2 mb-2">
-                                <Recycle className="h-5 w-5 text-green-500" />
-                                <span className="font-medium text-green-400">재사용/재활용</span>
+                                <Recycle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
+                                <span className="font-medium text-green-400 text-xs sm:text-sm">재사용/재활용</span>
                             </div>
-                            <p className="text-sm font-medium">
+                            <p className="text-xs sm:text-sm font-medium">
                                 {RECYCLING_ALLOCATION_METHODS[recyclingAllocation.method].nameKo}
                             </p>
-                            <p className="text-xs text-muted-foreground mt-1">
+                            <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">
                                 {recyclingAllocation.loopType === 'closed_loop' ? '폐쇄 루프' : '개방 루프'}
                             </p>
-                            <div className="grid grid-cols-2 gap-2 mt-2 text-xs">
+                            <div className="grid grid-cols-2 gap-2 mt-2 text-[10px] sm:text-xs">
                                 <div>
                                     <span className="text-muted-foreground">재활용 투입:</span>
                                     <span className="ml-1 font-mono">{(recyclingAllocation.recycledContentInput * 100).toFixed(0)}%</span>
@@ -907,19 +909,19 @@ export function ResultsStep() {
 
             {/* 보고서 생성 버튼 */}
             <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-purple-500/5">
-                <CardContent className="py-6">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <h3 className="font-semibold text-lg">ISO 14067 준수 보고서</h3>
-                            <p className="text-sm text-muted-foreground mt-1">
+                <CardContent className="py-4 sm:py-6 px-4 sm:px-6">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div className="flex-1">
+                            <h3 className="font-semibold text-base sm:text-lg">ISO 14067 준수 보고서</h3>
+                            <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                                 CFP 연구 보고서를 생성하여 HTML, Markdown, JSON 형식으로 내보내세요.
                             </p>
                         </div>
                         <button
                             onClick={() => setShowReportPreview(true)}
-                            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-purple-600 text-white rounded-xl hover:from-primary/90 hover:to-purple-700 transition-all font-medium shadow-lg shadow-primary/25"
+                            className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-primary to-purple-600 text-white rounded-xl hover:from-primary/90 hover:to-purple-700 transition-all font-medium shadow-lg shadow-primary/25 text-sm sm:text-base w-full sm:w-auto h-11 sm:h-auto"
                         >
-                            <FileDown className="w-5 h-5" />
+                            <FileDown className="w-4 h-4 sm:w-5 sm:h-5" />
                             보고서 생성
                         </button>
                     </div>

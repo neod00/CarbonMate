@@ -46,3 +46,16 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
+/* 터치 최적화 */
+* {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* 모바일에서 스크롤 부드럽게 */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

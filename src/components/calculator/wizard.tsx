@@ -107,9 +107,9 @@ export function CalculatorWizard() {
     const CurrentIcon = currentStepData.icon
 
     return (
-        <div className="w-full max-w-4xl mx-auto">
+        <div className="w-full max-w-4xl mx-auto px-4 sm:px-6">
             {/* Progress Steps */}
-            <div className="mb-8">
+            <div className="mb-6 sm:mb-8">
                 {/* 데스크톱 뷰 */}
                 <div className="hidden md:flex justify-between mb-4">
                     {steps.map((step, index) => {
@@ -186,46 +186,46 @@ export function CalculatorWizard() {
 
             {/* 메인 카드 */}
             <Card className="border-border/50 bg-card/50 backdrop-blur">
-                <CardHeader>
-                    <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-primary/10">
-                            <CurrentIcon className="h-5 w-5 text-primary" />
+                <CardHeader className="px-4 sm:px-6">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                        <div className="p-1.5 sm:p-2 rounded-lg bg-primary/10">
+                            <CurrentIcon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                         </div>
                         <div>
-                            <CardTitle className="text-xl">
+                            <CardTitle className="text-lg sm:text-xl">
                                 {currentStepData.title}
                             </CardTitle>
-                            <CardDescription>
+                            <CardDescription className="text-xs sm:text-sm">
                                 {currentStepData.description}
                             </CardDescription>
                         </div>
                     </div>
                 </CardHeader>
-                <CardContent className="min-h-[400px]">
+                <CardContent className="min-h-[300px] sm:min-h-[400px] px-4 sm:px-6">
                     <CurrentComponent />
                 </CardContent>
-                <CardFooter className="flex justify-between border-t border-border/50 pt-6">
+                <CardFooter className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 border-t border-border/50 pt-4 sm:pt-6 px-4 sm:px-6">
                     <Button
                         variant="outline"
                         onClick={handleBack}
                         disabled={currentStep === 1}
-                        className="gap-2"
+                        className="gap-2 w-full sm:w-auto h-11 sm:h-auto order-2 sm:order-1"
                     >
                         <ChevronLeft className="h-4 w-4" />
                         이전
                     </Button>
                     
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-muted-foreground order-1 sm:order-2">
                         {currentStep} / {steps.length}
                     </div>
 
                     {currentStep < steps.length ? (
-                        <Button onClick={handleNext} className="gap-2">
+                        <Button onClick={handleNext} className="gap-2 w-full sm:w-auto h-11 sm:h-auto order-3">
                             다음
                             <ChevronRight className="h-4 w-4" />
                         </Button>
                     ) : (
-                        <Button onClick={() => window.print()} className="gap-2">
+                        <Button onClick={() => window.print()} className="gap-2 w-full sm:w-auto h-11 sm:h-auto order-3">
                             <Printer className="h-4 w-4" />
                             보고서 인쇄
                         </Button>

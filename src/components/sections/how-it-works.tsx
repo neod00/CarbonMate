@@ -33,15 +33,15 @@ const steps = [
 
 export function HowItWorks() {
     return (
-        <section id="how-it-works" className="py-20 overflow-hidden bg-muted/10">
-            <div className="container">
-                <div className="mx-auto max-w-2xl text-center mb-16">
+        <section id="how-it-works" className="py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden bg-muted/10 px-4 sm:px-6">
+            <div className="container max-w-7xl mx-auto">
+                <div className="mx-auto max-w-2xl text-center mb-8 sm:mb-12 md:mb-16 px-4">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
-                        className="text-3xl font-bold tracking-tight sm:text-4xl"
+                        className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight"
                     >
                         ISO 14067 계산 프로세스
                     </motion.h2>
@@ -50,12 +50,12 @@ export function HowItWorks() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.1 }}
-                        className="mt-4 text-lg text-muted-foreground"
+                        className="mt-3 sm:mt-4 text-base sm:text-lg text-muted-foreground"
                     >
                         복잡한 과정을 4단계로 단순화하여 안내해 드립니다.
                     </motion.p>
                 </div>
-                <div className="grid gap-8 md:grid-cols-4">
+                <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-4">
                     {steps.map((step, index) => (
                         <motion.div
                             key={step.id}
@@ -65,20 +65,20 @@ export function HowItWorks() {
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             className="relative flex flex-col items-center text-center group"
                         >
-                            <div className="mb-6 relative w-full aspect-square max-w-[200px] rounded-2xl overflow-hidden bg-background border border-border/50 shadow-lg transition-transform duration-300 group-hover:scale-105">
+                            <div className="mb-4 sm:mb-6 relative w-full aspect-square max-w-[180px] sm:max-w-[200px] mx-auto rounded-2xl overflow-hidden bg-background border border-border/50 shadow-lg transition-transform duration-300 group-hover:scale-105">
                                 <Image
                                     src={step.image}
                                     alt={step.title}
                                     fill
                                     className="object-cover"
                                 />
-                                <div className="absolute top-2 left-2 flex h-8 w-8 items-center justify-center rounded-full bg-primary/90 text-primary-foreground font-bold text-sm">
+                                <div className="absolute top-2 left-2 flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-primary/90 text-primary-foreground font-bold text-xs sm:text-sm">
                                     {step.id}
                                 </div>
                             </div>
 
-                            <h3 className="mb-2 text-xl font-bold">{step.title}</h3>
-                            <p className="text-muted-foreground text-sm">{step.description}</p>
+                            <h3 className="mb-2 text-lg sm:text-xl font-bold px-2">{step.title}</h3>
+                            <p className="text-muted-foreground text-xs sm:text-sm px-2">{step.description}</p>
 
                             {index < steps.length - 1 && (
                                 <div className="hidden md:block absolute top-[100px] -right-[50%] w-full h-[2px] bg-gradient-to-r from-transparent via-border to-transparent z-[-1]" />

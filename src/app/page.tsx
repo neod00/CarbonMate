@@ -15,13 +15,13 @@ export default function Home() {
         <Hero />
         <Problem />
         <HowItWorks />
-        <section id="calculator" className="py-20 bg-muted/30">
-          <div className="container">
-            <div className="mx-auto max-w-2xl text-center mb-12">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        <section id="calculator" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-muted/30 px-4 sm:px-6">
+          <div className="container max-w-7xl mx-auto">
+            <div className="mx-auto max-w-2xl text-center mb-8 sm:mb-12 px-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                 Start Your PCF Calculation
               </h2>
-              <p className="mt-4 text-lg text-muted-foreground">
+              <p className="mt-3 sm:mt-4 text-base sm:text-lg text-muted-foreground">
                 Follow the steps below to estimate your product's carbon footprint.
               </p>
             </div>

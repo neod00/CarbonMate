@@ -32,12 +32,12 @@ export function SelectTrigger({ className, children, id }: any) {
             type="button"
             onClick={() => setOpen(!open)}
             className={cn(
-                "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+                "flex h-11 sm:h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2.5 sm:py-2 text-base sm:text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 touch-manipulation min-h-[44px] sm:min-h-0",
                 className
             )}
         >
             {children}
-            <ChevronDown className="h-4 w-4 opacity-50" />
+            <ChevronDown className="h-4 w-4 opacity-50 flex-shrink-0" />
         </button>
     )
 }
@@ -68,7 +68,7 @@ export function SelectItem({ value, children }: { value: string; children: React
     return (
         <div
             className={cn(
-                "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+                "relative flex w-full cursor-default select-none items-center rounded-sm py-2.5 sm:py-1.5 pl-8 pr-2 text-base sm:text-sm outline-none hover:bg-accent hover:text-accent-foreground active:bg-accent/80 touch-manipulation min-h-[44px] sm:min-h-0 data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
                 selectedValue === value && "bg-accent text-accent-foreground"
             )}
             onClick={() => {

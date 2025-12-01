@@ -3,17 +3,17 @@ import { AlertTriangle, HelpCircle, FileText } from "lucide-react"
 
 export function Problem() {
     return (
-        <section className="py-20 bg-muted/30">
-            <div className="container">
-                <div className="mx-auto max-w-2xl text-center mb-16">
-                    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-muted/30 px-4 sm:px-6">
+            <div className="container max-w-7xl mx-auto">
+                <div className="mx-auto max-w-2xl text-center mb-8 sm:mb-12 md:mb-16">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight px-4">
                         PCF 계산, 왜 이렇게 어려울까요?
                     </h2>
-                    <p className="mt-4 text-lg text-muted-foreground">
+                    <p className="mt-3 sm:mt-4 text-base sm:text-lg text-muted-foreground px-4">
                         많은 기업들이 탄소발자국 계산을 시작하기도 전에 포기합니다.
                     </p>
                 </div>
-                <div className="grid gap-8 md:grid-cols-3">
+                <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
                     <Card className="bg-background/50 backdrop-blur border-border/50">
                         <CardHeader>
                             <HelpCircle className="h-10 w-10 text-primary mb-4" />
