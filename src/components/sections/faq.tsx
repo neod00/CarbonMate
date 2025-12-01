@@ -37,6 +37,24 @@ export function FAQ() {
                             CBAM(탄소국경조정제도)은 별도의 산정 방식과 리포팅 양식을 요구합니다. 이 도구의 결과값은 CBAM 배출량 산정의 기초 자료로 활용될 수 있으나, CBAM 전용 리포팅을 위해서는 추가적인 컨설팅이 필요합니다.
                         </AccordionContent>
                     </AccordionItem>
+                    <AccordionItem value="item-5">
+                        <AccordionTrigger>모바일이나 태블릿에서도 사용할 수 있나요?</AccordionTrigger>
+                        <AccordionContent>
+                            네, CarbonMate는 모바일, 태블릿, 데스크톱 모든 기기에서 최적화된 반응형 디자인으로 제공됩니다. 스마트폰에서도 쉽게 제품 탄소발자국을 계산하고 결과를 확인할 수 있습니다.
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-6">
+                        <AccordionTrigger>무료로 사용할 수 있나요?</AccordionTrigger>
+                        <AccordionContent>
+                            네, CarbonMate는 완전 무료로 제공됩니다. 사용을 위해서는 회원가입이 필요하며, 별도의 결제 없이 바로 사용하실 수 있습니다. 전문가 검증이나 상세 컨설팅이 필요한 경우에만 별도 문의를 통해 서비스를 제공합니다.
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-7">
+                        <AccordionTrigger>계산 결과 보고서는 어떤 형식으로 받을 수 있나요?</AccordionTrigger>
+                        <AccordionContent>
+                            계산 완료 후 ISO 14067 준수 보고서를 HTML, Markdown, JSON 형식으로 내보낼 수 있습니다. 브라우저의 인쇄 기능을 사용하여 PDF로 저장하거나 인쇄할 수도 있습니다.
+                        </AccordionContent>
+                    </AccordionItem>
                 </Accordion>
             </div>
         </section>
