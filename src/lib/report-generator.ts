@@ -540,13 +540,72 @@ export const generateHTMLReport = (
         ${reportData.limitations.assumptions.map(a => `<li>${a}</li>`).join('')}
     </ul>
 
-    <h2>8. 결론 (Conclusions)</h2>
-    <h3>8.1 주요 발견사항</h3>
+    ${reportData.sensitivityAnalysis?.performed ? `
+    <div class="page-break"></div>
+
+    <h2>8. 민감도 분석 (Sensitivity Analysis)</h2>
+    <p>ISO 14067 조항 6.4.5, 6.4.6.1, 6.4.9.4, 6.6에 따라 민감도 분석을 수행하였습니다.</p>
+    
+    <table>
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>분석 일자</td><td>${reportData.sensitivityAnalysis.analysisDate || reportData.reportDate}</td></tr>
+        <tr><td>기준 CFP</td><td>${reportData.sensitivityAnalysis.baselineCFP.toFixed(2)} kg CO₂e</td></tr>
+        <tr><td>분석 시나리오 수</td><td>${reportData.sensitivityAnalysis.scenarios.length}개</td></tr>
+        <tr><td>유의미한 영향 요인</td><td>${reportData.sensitivityAnalysis.significantFactors.length}개</td></tr>
+    </table>
+
+    ${reportData.sensitivityAnalysis.significantFactors.length > 0 ? `
+    <h3>8.1 유의미한 영향 요인</h3>
+    <p>다음 요인들이 CFP 결과에 5% 이상의 영향을 미치는 것으로 분석되었습니다:</p>
+    <ul>
+        ${reportData.sensitivityAnalysis.significantFactors.map(f => `<li>${f}</li>`).join('')}
+    </ul>
+    ` : ''}
+
+    <h3>8.2 시나리오 분석 결과</h3>
+    <table>
+        <tr><th>시나리오</th><th>유형</th><th>기준값</th><th>대안값</th><th>변화율</th><th>유의성</th></tr>
+        ${reportData.sensitivityAnalysis.scenarios.slice(0, 10).map(s => `
+        <tr>
+            <td>${s.name}</td>
+            <td>${s.type}</td>
+            <td>${s.baseValue}</td>
+            <td>${s.alternativeValue}</td>
+            <td style="color: ${s.percentageChange >= 0 ? '#dc2626' : '#16a34a'}">
+                ${s.percentageChange >= 0 ? '+' : ''}${s.percentageChange.toFixed(1)}%
+            </td>
+            <td>${s.isSignificant ? '⚠️ 유의미' : '정상'}</td>
+        </tr>
+        `).join('')}
+    </table>
+
+    <h3>8.3 ISO 14067 준수 현황</h3>
+    <table>
+        <tr><th>조항</th><th>요구사항</th><th>준수</th></tr>
+        ${reportData.sensitivityAnalysis.isoCompliance.map(c => `
+        <tr>
+            <td>${c.clause}</td>
+            <td>${c.requirement}</td>
+            <td style="color: ${c.satisfied ? '#16a34a' : '#dc2626'}">
+                ${c.satisfied ? '✓ 준수' : '✗ 미준수'}
+            </td>
+        </tr>
+        `).join('')}
+    </table>
+
+    <h3>8.4 권장사항</h3>
+    <ul>
+        ${reportData.sensitivityAnalysis.recommendations.map(r => `<li>${r}</li>`).join('')}
+    </ul>
+    ` : ''}
+
+    <h2>${reportData.sensitivityAnalysis?.performed ? '9' : '8'}. 결론 (Conclusions)</h2>
+    <h3>${reportData.sensitivityAnalysis?.performed ? '9' : '8'}.1 주요 발견사항</h3>
     <ul>
         ${reportData.conclusions?.keyFindings.map(f => `<li>${f}</li>`).join('')}
     </ul>
 
-    <h3>8.2 개선 기회</h3>
+    <h3>${reportData.sensitivityAnalysis?.performed ? '9' : '8'}.2 개선 기회</h3>
     <ul>
         ${reportData.conclusions?.improvementOpportunities?.map(o => `<li>${o}</li>`).join('')}
     </ul>
