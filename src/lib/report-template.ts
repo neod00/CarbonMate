@@ -245,7 +245,8 @@ export const CFP_REPORT_ADDITIONAL_REQUIREMENTS: CFPReportRequirement[] = [
         titleKo: '민감도 분석',
         description: 'Results of sensitivity analysis, if conducted',
         descriptionKo: '민감도 분석 결과 (수행한 경우)',
-        category: 'conditional'
+        category: 'conditional',
+        dataField: 'sensitivityAnalysis'
     },
     // 7.3 i) 불확실성 분석
     {
@@ -423,6 +424,28 @@ export interface CFPReportData {
         keyFindings: string[]
         recommendations?: string[]
         improvementOpportunities?: string[]
+    }
+    
+    // 민감도 분석 (ISO 14067 7.3 h)
+    sensitivityAnalysis?: {
+        performed: boolean
+        analysisDate?: string
+        baselineCFP: number
+        significantFactors: string[]
+        scenarios: {
+            name: string
+            type: string
+            baseValue: string | number
+            alternativeValue: string | number
+            percentageChange: number
+            isSignificant: boolean
+        }[]
+        recommendations: string[]
+        isoCompliance: {
+            clause: string
+            requirement: string
+            satisfied: boolean
+        }[]
     }
     
     // 준수 체크리스트

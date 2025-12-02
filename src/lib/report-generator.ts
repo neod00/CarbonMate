@@ -72,6 +72,27 @@ export interface CalculatedResults {
     uncertainty: number
 }
 
+export interface SensitivityAnalysisData {
+    performed: boolean
+    analysisDate?: string
+    baselineCFP: number
+    significantFactors: string[]
+    scenarios: {
+        name: string
+        type: string
+        baseValue: string | number
+        alternativeValue: string | number
+        percentageChange: number
+        isSignificant: boolean
+    }[]
+    recommendations: string[]
+    isoCompliance: {
+        clause: string
+        requirement: string
+        satisfied: boolean
+    }[]
+}
+
 // =============================================================================
 // 보고서 데이터 생성
 // =============================================================================
@@ -81,7 +102,8 @@ export interface CalculatedResults {
  */
 export const generateReportData = (
     state: PCFState,
-    calculatedResults: CalculatedResults
+    calculatedResults: CalculatedResults,
+    sensitivityData?: SensitivityAnalysisData
 ): CFPReportData => {
     const {
         productInfo,
@@ -211,6 +233,24 @@ export const generateReportData = (
             ],
             improvementOpportunities: generateImprovementOpportunities(calculatedResults)
         },
+        
+        // 민감도 분석 (ISO 14067 7.3 h)
+        sensitivityAnalysis: sensitivityData ? {
+            performed: sensitivityData.performed,
+            analysisDate: sensitivityData.analysisDate,
+            baselineCFP: sensitivityData.baselineCFP,
+            significantFactors: sensitivityData.significantFactors,
+            scenarios: sensitivityData.scenarios.map(s => ({
+                name: s.name,
+                type: s.type,
+                baseValue: s.baseValue,
+                alternativeValue: s.alternativeValue,
+                percentageChange: s.percentageChange,
+                isSignificant: s.isSignificant
+            })),
+            recommendations: sensitivityData.recommendations,
+            isoCompliance: sensitivityData.isoCompliance
+        } : undefined,
         
         // 준수 체크리스트
         complianceChecklist
@@ -617,7 +657,40 @@ ${reportData.results.stageBreakdown.map(s =>
 
 ---
 
-## 6. 제한사항
+## 6. 민감도 분석
+
+${reportData.sensitivityAnalysis?.performed ? `
+### 6.1 분석 개요
+- **분석 일자:** ${reportData.sensitivityAnalysis.analysisDate || '미지정'}
+- **기준 CFP:** ${reportData.sensitivityAnalysis.baselineCFP.toFixed(2)} kg CO₂e
+- **유의미한 영향 요인:** ${reportData.sensitivityAnalysis.significantFactors.length}개
+
+### 6.2 유의미한 영향 요인 (>5% 변화)
+${reportData.sensitivityAnalysis.significantFactors.length > 0 
+    ? reportData.sensitivityAnalysis.significantFactors.map(f => `- ${f}`).join('\n')
+    : '- 유의미한 영향 요인 없음'}
+
+### 6.3 주요 시나리오 결과
+| 시나리오 | 유형 | 기준값 | 대안값 | 변화율 |
+|---------|------|--------|--------|--------|
+${reportData.sensitivityAnalysis.scenarios
+    .filter(s => s.isSignificant)
+    .slice(0, 10)
+    .map(s => `| ${s.name} | ${s.type} | ${s.baseValue} | ${s.alternativeValue} | ${s.percentageChange >= 0 ? '+' : ''}${s.percentageChange.toFixed(1)}% |`)
+    .join('\n')}
+
+### 6.4 ISO 14067 준수 현황
+${reportData.sensitivityAnalysis.isoCompliance.map(c => 
+    `- ${c.satisfied ? '✓' : '✗'} **${c.clause}**: ${c.requirement}`
+).join('\n')}
+
+### 6.5 권장사항
+${reportData.sensitivityAnalysis.recommendations.map(r => `- ${r}`).join('\n')}
+` : '민감도 분석이 수행되지 않았습니다.'}
+
+---
+
+## 7. 제한사항
 
 > ⚠️ **단일 환경 영향:** ${reportData.limitations.singleImpact}
 
@@ -626,7 +699,7 @@ ${reportData.limitations.assumptions.map(a => `- ${a}`).join('\n')}
 
 ---
 
-## 7. 결론
+## 8. 결론
 
 ### 주요 발견사항
 ${reportData.conclusions?.keyFindings.map(f => `- ${f}`).join('\n')}

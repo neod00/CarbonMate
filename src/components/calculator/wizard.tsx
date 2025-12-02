@@ -8,6 +8,7 @@ import { LifecycleStagesStep } from "./steps/lifecycle-stages"
 import { ActivityDataStep } from "./steps/activity-data"
 import { DataQualityStep } from "./steps/data-quality"
 import { AllocationStep } from "./steps/allocation"
+import { SensitivityAnalysisStep } from "./steps/sensitivity-analysis"
 import { ResultsStep } from "./steps/results"
 import { cn } from "@/lib/utils"
 import { 
@@ -16,6 +17,7 @@ import {
     ClipboardList, 
     Shield, 
     Scale,
+    Activity,
     BarChart3,
     ChevronLeft,
     ChevronRight,
@@ -65,6 +67,14 @@ const steps = [
     },
     { 
         id: 6, 
+        title: "민감도 분석", 
+        titleEn: "Sensitivity Analysis",
+        description: "방법론 및 데이터 변동 영향 분석",
+        icon: Activity,
+        component: SensitivityAnalysisStep 
+    },
+    { 
+        id: 7, 
         title: "결과", 
         titleEn: "Results",
         description: "CFP 계산 결과 및 분석",
