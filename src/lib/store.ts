@@ -10,6 +10,7 @@ import {
     LoopType,
     CoProduct
 } from './allocation'
+import { SensitivityAnalysisResult } from './sensitivity-analysis'
 
 // =============================================================================
 // 타입 정의
@@ -169,6 +170,9 @@ export interface PCFState {
     multiOutputAllocation: MultiOutputAllocation
     recyclingAllocation: RecyclingAllocation
     
+    // 민감도 분석 결과 (ISO 14067 6.4.5, 6.4.6.1, 6.6, 7.3 h)
+    sensitivityAnalysis: SensitivityAnalysisResult | null
+    
     // Actions
     setProductInfo: (info: Partial<ProductInfo>) => void
     toggleStage: (stageId: string) => void
@@ -187,6 +191,9 @@ export interface PCFState {
     setRecyclingAllocationMethod: (method: RecyclingAllocationMethod) => void
     setRecyclingParams: (params: Partial<RecyclingAllocation>) => void
     setAllocationJustification: (type: 'multiOutput' | 'recycling', justification: string) => void
+    
+    // 민감도 분석 관련 Actions
+    setSensitivityAnalysis: (result: SensitivityAnalysisResult | null) => void
     
     reset: () => void
 }
@@ -233,6 +240,9 @@ export const usePCFStore = create<PCFState>((set) => ({
     // 할당 초기값
     multiOutputAllocation: DEFAULT_MULTI_OUTPUT_ALLOCATION,
     recyclingAllocation: DEFAULT_RECYCLING_ALLOCATION,
+    
+    // 민감도 분석 초기값
+    sensitivityAnalysis: null,
 
     setProductInfo: (info) =>
         set((state) => ({
@@ -322,7 +332,7 @@ export const usePCFStore = create<PCFState>((set) => ({
             recyclingAllocation: { ...state.recyclingAllocation, ...params }
         })),
     
-    setAllocationJustification: (type, justification) =>
+        setAllocationJustification: (type, justification) =>
         set((state) => {
             if (type === 'multiOutput') {
                 return {
@@ -334,6 +344,12 @@ export const usePCFStore = create<PCFState>((set) => ({
                 }
             }
         }),
+
+    // 민감도 분석 관련 Actions
+    setSensitivityAnalysis: (result) =>
+        set((state) => ({
+            sensitivityAnalysis: result
+        })),
 
     reset: () =>
         set({
@@ -349,7 +365,8 @@ export const usePCFStore = create<PCFState>((set) => ({
             detailedActivityData: undefined,
             dataQualityMeta: DEFAULT_DATA_QUALITY_META,
             multiOutputAllocation: DEFAULT_MULTI_OUTPUT_ALLOCATION,
-            recyclingAllocation: DEFAULT_RECYCLING_ALLOCATION
+            recyclingAllocation: DEFAULT_RECYCLING_ALLOCATION,
+            sensitivityAnalysis: null
         }),
 }))
 

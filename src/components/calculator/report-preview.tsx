@@ -40,8 +40,26 @@ export const ReportPreview = ({ isOpen, onClose, calculatedResults }: ReportPrev
     const state = usePCFStore()
     const [activeTab, setActiveTab] = useState<'checklist' | 'export'>('checklist')
 
+    // 민감도 분석 데이터 변환 (SensitivityAnalysisResult -> SensitivityAnalysisData)
+    const sensitivityData = state.sensitivityAnalysis ? {
+        performed: true,
+        analysisDate: state.sensitivityAnalysis.analysisDate,
+        baselineCFP: state.sensitivityAnalysis.baselineCFP,
+        significantFactors: state.sensitivityAnalysis.significantFactors,
+        scenarios: state.sensitivityAnalysis.scenarios.map(s => ({
+            name: s.name,
+            type: s.type,
+            baseValue: s.baseValue,
+            alternativeValue: s.alternativeValue,
+            percentageChange: s.percentageChange,
+            isSignificant: s.isSignificant
+        })),
+        recommendations: state.sensitivityAnalysis.recommendations,
+        isoCompliance: state.sensitivityAnalysis.isoCompliance
+    } : undefined
+
     // 보고서 데이터 생성
-    const reportData = generateReportData(state, calculatedResults)
+    const reportData = generateReportData(state, calculatedResults, sensitivityData)
     
     // 준수율 계산
     const compliance = calculateComplianceScore(reportData as any)

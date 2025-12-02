@@ -53,7 +53,8 @@ export function SensitivityAnalysisStep() {
         activityData, 
         productInfo,
         recyclingAllocation,
-        stages
+        stages,
+        setSensitivityAnalysis
     } = usePCFStore()
     
     // 분석 결과 상태
@@ -173,13 +174,17 @@ export function SensitivityAnalysisStep() {
                 return true
             })
 
-            setAnalysisResult({
+            const finalResult = {
                 ...result,
                 scenarios: filteredScenarios,
                 significantFactors: filteredScenarios
                     .filter(s => s.isSignificant)
                     .map(s => s.nameKo)
-            })
+            }
+            
+            setAnalysisResult(finalResult)
+            // 스토어에 민감도 분석 결과 저장
+            setSensitivityAnalysis(finalResult)
             setIsAnalyzing(false)
         }, 500)
     }
