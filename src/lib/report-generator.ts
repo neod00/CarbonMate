@@ -38,6 +38,7 @@ import {
     MATERIAL_EMISSION_FACTORS,
     EOL_EMISSION_FACTORS
 } from './emission-factors'
+import { CutOffResult } from './cut-off-criteria'
 
 // =============================================================================
 // 단계 라벨
@@ -103,7 +104,8 @@ export interface SensitivityAnalysisData {
 export const generateReportData = (
     state: PCFState,
     calculatedResults: CalculatedResults,
-    sensitivityData?: SensitivityAnalysisData
+    sensitivityData?: SensitivityAnalysisData,
+    cutOffData?: CutOffResult
 ): CFPReportData => {
     const {
         productInfo,
@@ -111,7 +113,8 @@ export const generateReportData = (
         activityData,
         dataQualityMeta,
         multiOutputAllocation,
-        recyclingAllocation
+        recyclingAllocation,
+        cutOffCriteria
     } = state
 
     // 적용 가능한 제한사항
@@ -151,7 +154,23 @@ export const generateReportData = (
             systemBoundary: BOUNDARY_LABELS[productInfo.boundary]?.ko || productInfo.boundary,
             lifecycleStages: stages.map(s => STAGE_LABELS[s]?.ko || s),
             exclusions: getExcludedStages(productInfo.boundary, stages),
-            cutOffCriteria: '질량 기준 1%, 에너지 기준 1%, 환경 영향 기준 1%'
+            cutOffCriteria: cutOffCriteria?.enabled 
+                ? `질량 기준 ${cutOffCriteria.massThreshold}%, 에너지 기준 ${cutOffCriteria.energyThreshold}%, 환경 영향 기준 ${cutOffCriteria.environmentalThreshold}%`
+                : '제외 기준 미적용 (모든 항목 포함)',
+            cutOffResult: cutOffData ? {
+                enabled: cutOffData.criteria.enabled,
+                totalItems: cutOffData.totalItems,
+                excludedItems: cutOffData.excludedItems,
+                excludedEmissionPercent: cutOffData.excludedEmissionPercent,
+                excludedItemsList: cutOffData.excludedItemsList.map(item => ({
+                    name: item.nameKo,
+                    stage: item.stageKo,
+                    emission: item.emission,
+                    contribution: item.emissionContribution,
+                    reason: item.exclusionReason || ''
+                })),
+                isoCompliance: cutOffData.isoCompliance
+            } : undefined
         },
         
         // 방법론
@@ -443,8 +462,47 @@ export const generateHTMLReport = (
     <p>제외된 단계: ${reportData.scope.exclusions.join(', ')}</p>
     ` : ''}
     
-    <h3>3.3 Cut-off 기준</h3>
+    <h3>3.3 Cut-off 기준 (ISO 14067 6.3.4.3)</h3>
     <p>${reportData.scope.cutOffCriteria}</p>
+    
+    ${reportData.scope.cutOffResult ? `
+    <h4>3.3.1 제외 기준 적용 결과</h4>
+    <table>
+        <tr><th>항목</th><th>값</th></tr>
+        <tr><td>전체 항목 수</td><td>${reportData.scope.cutOffResult.totalItems}</td></tr>
+        <tr><td>제외된 항목 수</td><td>${reportData.scope.cutOffResult.excludedItems}</td></tr>
+        <tr><td>제외된 배출량 비율</td><td>${reportData.scope.cutOffResult.excludedEmissionPercent.toFixed(2)}%</td></tr>
+    </table>
+    
+    ${reportData.scope.cutOffResult.excludedItems > 0 ? `
+    <h4>3.3.2 제외된 항목 목록</h4>
+    <table>
+        <tr><th>항목</th><th>단계</th><th>배출량 (kg CO₂e)</th><th>기여율 (%)</th><th>제외 사유</th></tr>
+        ${reportData.scope.cutOffResult.excludedItemsList.map(item => `
+        <tr>
+            <td>${item.name}</td>
+            <td>${item.stage}</td>
+            <td>${item.emission.toFixed(4)}</td>
+            <td>${item.contribution.toFixed(2)}%</td>
+            <td>${item.reason}</td>
+        </tr>
+        `).join('')}
+    </table>
+    ` : '<p>제외된 항목이 없습니다.</p>'}
+    
+    <h4>3.3.3 ISO 14067 준수 현황</h4>
+    <table>
+        <tr><th>조항</th><th>요구사항</th><th>준수</th><th>비고</th></tr>
+        ${reportData.scope.cutOffResult.isoCompliance.map(c => `
+        <tr>
+            <td>${c.clause}</td>
+            <td>${c.requirement}</td>
+            <td>${c.satisfied ? '✓ 준수' : '✗ 미준수'}</td>
+            <td>${c.notes}</td>
+        </tr>
+        `).join('')}
+    </table>
+    ` : ''}
 
     <div class="page-break"></div>
 

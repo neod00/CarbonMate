@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { usePCFStore } from "@/lib/store"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { AlertTriangle, Info, FileText, Leaf, Flame, Plane, TrendingDown, Shield, CheckCircle2, Scale, Recycle, FileDown } from "lucide-react"
+import { AlertTriangle, Info, FileText, Leaf, Flame, Plane, TrendingDown, Shield, CheckCircle2, Scale, Recycle, FileDown, Scissors, Check, X } from "lucide-react"
 import { ReportPreview } from "../report-preview"
 import {
     LIMITATION_SINGLE_IMPACT,
@@ -32,6 +32,12 @@ import {
     calculateSubstitutionAllocation,
     calculatePEFCircularFootprint
 } from "@/lib/allocation"
+import {
+    applyCutOffCriteria,
+    validateCutOffCriteria,
+    generateCutOffSummary,
+    CutOffResult
+} from "@/lib/cut-off-criteria"
 
 // =============================================================================
 // 단계별 라벨
@@ -57,7 +63,9 @@ export function ResultsStep() {
         activityData, 
         dataQualityMeta,
         multiOutputAllocation,
-        recyclingAllocation
+        recyclingAllocation,
+        cutOffCriteria,
+        setCutOffResult
     } = usePCFStore()
     
     // 보고서 미리보기 상태
@@ -517,6 +525,21 @@ export function ResultsStep() {
         'secondary'
     )
 
+    // 제외 기준 적용 (ISO 14067 6.3.4.3)
+    const cutOffResult = useMemo(() => {
+        return applyCutOffCriteria(activityData, cutOffCriteria, stages)
+    }, [activityData, cutOffCriteria, stages])
+    
+    // 제외 기준 검증
+    const cutOffValidation = useMemo(() => {
+        return validateCutOffCriteria(cutOffResult)
+    }, [cutOffResult])
+    
+    // 제외 기준 결과를 스토어에 저장
+    useEffect(() => {
+        setCutOffResult(cutOffResult)
+    }, [cutOffResult, setCutOffResult])
+
     // =========================================================================
     // 렌더링
     // =========================================================================
@@ -641,6 +664,167 @@ export function ResultsStep() {
                     <p className="mt-4 text-xs text-muted-foreground">
                         * dLUC(직접 토지이용변화) 및 iLUC(간접 토지이용변화) 배출은 현재 버전에서 미지원
                     </p>
+                </CardContent>
+            </Card>
+
+            {/* Cut-off 기준 적용 결과 (ISO 14067 6.3.4.3) */}
+            <Card className={cutOffCriteria.enabled ? 'border-orange-500/30' : ''}>
+                <CardHeader className="px-4 sm:px-6">
+                    <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                        <Scissors className="h-4 w-4 sm:h-5 sm:w-5 text-orange-500" />
+                        Cut-off 기준 적용 결과
+                    </CardTitle>
+                    <CardDescription className="text-xs sm:text-sm">
+                        ISO 14067 6.3.4.3 - 제외 기준 및 적용 내역
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="px-4 sm:px-6">
+                    {!cutOffCriteria.enabled ? (
+                        <div className="p-4 rounded-lg bg-muted/50 border border-border/50">
+                            <div className="flex items-center gap-2">
+                                <Info className="h-4 w-4 text-muted-foreground" />
+                                <p className="text-sm text-muted-foreground">
+                                    제외 기준이 적용되지 않았습니다. 모든 물질 및 에너지 흐름이 계산에 포함되었습니다.
+                                </p>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="space-y-4">
+                            {/* 제외 기준 요약 */}
+                            <div className="grid gap-3 sm:gap-4 md:grid-cols-4">
+                                <div className="p-3 rounded-lg bg-muted/50">
+                                    <p className="text-xs text-muted-foreground">전체 항목</p>
+                                    <p className="text-xl font-bold">{cutOffResult.totalItems}</p>
+                                </div>
+                                <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20">
+                                    <p className="text-xs text-muted-foreground">포함 항목</p>
+                                    <p className="text-xl font-bold text-green-500">{cutOffResult.includedItems}</p>
+                                </div>
+                                <div className="p-3 rounded-lg bg-orange-500/10 border border-orange-500/20">
+                                    <p className="text-xs text-muted-foreground">제외 항목</p>
+                                    <p className="text-xl font-bold text-orange-500">{cutOffResult.excludedItems}</p>
+                                </div>
+                                <div className="p-3 rounded-lg bg-muted/50">
+                                    <p className="text-xs text-muted-foreground">제외 배출량</p>
+                                    <p className="text-xl font-bold">{cutOffResult.excludedEmissionPercent.toFixed(2)}%</p>
+                                </div>
+                            </div>
+
+                            {/* 적용된 기준 */}
+                            <div className="p-3 rounded-lg bg-orange-500/10 border border-orange-500/20">
+                                <p className="text-xs font-medium text-orange-400 mb-2">적용된 제외 기준</p>
+                                <div className="flex flex-wrap gap-2 text-xs">
+                                    <span className="px-2 py-1 rounded bg-background/50">
+                                        질량 {'<'} {cutOffCriteria.massThreshold}%
+                                    </span>
+                                    <span className="px-2 py-1 rounded bg-background/50">
+                                        에너지 {'<'} {cutOffCriteria.energyThreshold}%
+                                    </span>
+                                    <span className="px-2 py-1 rounded bg-background/50">
+                                        환경영향 {'<'} {cutOffCriteria.environmentalThreshold}%
+                                    </span>
+                                </div>
+                            </div>
+
+                            {/* 제외된 항목 목록 */}
+                            {cutOffResult.excludedItemsList.length > 0 && (
+                                <div className="space-y-2">
+                                    <p className="text-sm font-medium">제외된 항목 목록</p>
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-xs">
+                                            <thead>
+                                                <tr className="border-b border-border/50">
+                                                    <th className="text-left py-2 px-2">항목</th>
+                                                    <th className="text-left py-2 px-2">단계</th>
+                                                    <th className="text-right py-2 px-2">수량</th>
+                                                    <th className="text-right py-2 px-2">배출량</th>
+                                                    <th className="text-right py-2 px-2">기여도</th>
+                                                    <th className="text-left py-2 px-2">제외 사유</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {cutOffResult.excludedItemsList.map((item, idx) => (
+                                                    <tr key={idx} className="border-b border-border/30">
+                                                        <td className="py-2 px-2">{item.nameKo}</td>
+                                                        <td className="py-2 px-2">{item.stageKo}</td>
+                                                        <td className="text-right py-2 px-2 font-mono">
+                                                            {item.quantity.toFixed(2)} {item.unit}
+                                                        </td>
+                                                        <td className="text-right py-2 px-2 font-mono">
+                                                            {item.emission.toFixed(4)} kg CO₂e
+                                                        </td>
+                                                        <td className="text-right py-2 px-2 font-mono">
+                                                            {item.emissionContribution.toFixed(2)}%
+                                                        </td>
+                                                        <td className="py-2 px-2 text-muted-foreground">
+                                                            {item.exclusionReason}
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* ISO 준수 현황 */}
+                            <div className="space-y-2">
+                                <p className="text-sm font-medium">ISO 14067 준수 현황</p>
+                                <div className="space-y-1">
+                                    {cutOffResult.isoCompliance.map((compliance, idx) => (
+                                        <div 
+                                            key={idx} 
+                                            className={`flex items-start gap-2 p-2 rounded text-xs ${
+                                                compliance.satisfied 
+                                                    ? 'bg-green-500/10 border border-green-500/20' 
+                                                    : 'bg-red-500/10 border border-red-500/20'
+                                            }`}
+                                        >
+                                            {compliance.satisfied ? (
+                                                <Check className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                                            ) : (
+                                                <X className="h-4 w-4 text-red-500 flex-shrink-0 mt-0.5" />
+                                            )}
+                                            <div>
+                                                <p className="font-medium">{compliance.clause}</p>
+                                                <p className="text-muted-foreground">{compliance.requirement}</p>
+                                                <p className={compliance.satisfied ? 'text-green-400' : 'text-red-400'}>
+                                                    {compliance.notes}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* 검증 결과 경고 */}
+                            {!cutOffValidation.isValid && (
+                                <div className="p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/30">
+                                    <div className="flex items-start gap-2">
+                                        <AlertTriangle className="h-4 w-4 text-yellow-500 flex-shrink-0 mt-0.5" />
+                                        <div className="text-xs">
+                                            <p className="font-medium text-yellow-400 mb-1">제외 기준 검증 경고</p>
+                                            <ul className="space-y-0.5 text-yellow-300">
+                                                {cutOffValidation.warnings.map((warning, idx) => (
+                                                    <li key={idx}>• {warning}</li>
+                                                ))}
+                                            </ul>
+                                            {cutOffValidation.recommendations.length > 0 && (
+                                                <>
+                                                    <p className="font-medium text-yellow-400 mt-2 mb-1">권장사항</p>
+                                                    <ul className="space-y-0.5 text-yellow-300">
+                                                        {cutOffValidation.recommendations.map((rec, idx) => (
+                                                            <li key={idx}>• {rec}</li>
+                                                        ))}
+                                                    </ul>
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </CardContent>
             </Card>
 

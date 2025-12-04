@@ -369,6 +369,25 @@ export interface CFPReportData {
         lifecycleStages: string[]
         exclusions?: string[]
         cutOffCriteria?: string
+        cutOffResult?: {
+            enabled: boolean
+            totalItems: number
+            excludedItems: number
+            excludedEmissionPercent: number
+            excludedItemsList: {
+                name: string
+                stage: string
+                emission: number
+                contribution: number
+                reason: string
+            }[]
+            isoCompliance: {
+                clause: string
+                requirement: string
+                satisfied: boolean
+                notes: string
+            }[]
+        }
     }
     
     // 방법론

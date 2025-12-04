@@ -11,6 +11,7 @@ import {
     CoProduct
 } from './allocation'
 import { SensitivityAnalysisResult } from './sensitivity-analysis'
+import { CutOffCriteria, CutOffResult, CutOffPreset, NO_CUT_OFF, getCutOffPreset } from './cut-off-criteria'
 
 // =============================================================================
 // 타입 정의
@@ -173,6 +174,11 @@ export interface PCFState {
     // 민감도 분석 결과 (ISO 14067 6.4.5, 6.4.6.1, 6.6, 7.3 h)
     sensitivityAnalysis: SensitivityAnalysisResult | null
     
+    // 제외 기준 설정 (ISO 14067 6.3.4.3)
+    cutOffCriteria: CutOffCriteria
+    cutOffPreset: CutOffPreset
+    cutOffResult: CutOffResult | null
+    
     // Actions
     setProductInfo: (info: Partial<ProductInfo>) => void
     toggleStage: (stageId: string) => void
@@ -194,6 +200,11 @@ export interface PCFState {
     
     // 민감도 분석 관련 Actions
     setSensitivityAnalysis: (result: SensitivityAnalysisResult | null) => void
+    
+    // 제외 기준 관련 Actions (ISO 14067 6.3.4.3)
+    setCutOffPreset: (preset: CutOffPreset) => void
+    setCutOffCriteria: (criteria: Partial<CutOffCriteria>) => void
+    setCutOffResult: (result: CutOffResult | null) => void
     
     reset: () => void
 }
@@ -243,6 +254,11 @@ export const usePCFStore = create<PCFState>((set) => ({
     
     // 민감도 분석 초기값
     sensitivityAnalysis: null,
+    
+    // 제외 기준 초기값 (기본: 제외 기준 없음)
+    cutOffCriteria: NO_CUT_OFF,
+    cutOffPreset: 'none',
+    cutOffResult: null,
 
     setProductInfo: (info) =>
         set((state) => ({
@@ -350,6 +366,29 @@ export const usePCFStore = create<PCFState>((set) => ({
         set((state) => ({
             sensitivityAnalysis: result
         })),
+    
+    // 제외 기준 관련 Actions
+    setCutOffPreset: (preset) =>
+        set((state) => {
+            const criteria = getCutOffPreset(preset)
+            return {
+                cutOffPreset: preset,
+                cutOffCriteria: criteria,
+                cutOffResult: null // 기준 변경 시 결과 초기화
+            }
+        }),
+    
+    setCutOffCriteria: (criteria) =>
+        set((state) => ({
+            cutOffCriteria: { ...state.cutOffCriteria, ...criteria },
+            cutOffPreset: 'custom', // 직접 수정 시 custom으로 변경
+            cutOffResult: null // 기준 변경 시 결과 초기화
+        })),
+    
+    setCutOffResult: (result) =>
+        set((state) => ({
+            cutOffResult: result
+        })),
 
     reset: () =>
         set({
@@ -366,7 +405,10 @@ export const usePCFStore = create<PCFState>((set) => ({
             dataQualityMeta: DEFAULT_DATA_QUALITY_META,
             multiOutputAllocation: DEFAULT_MULTI_OUTPUT_ALLOCATION,
             recyclingAllocation: DEFAULT_RECYCLING_ALLOCATION,
-            sensitivityAnalysis: null
+            sensitivityAnalysis: null,
+            cutOffCriteria: NO_CUT_OFF,
+            cutOffPreset: 'none',
+            cutOffResult: null
         }),
 }))
 

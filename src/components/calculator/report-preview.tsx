@@ -58,8 +58,8 @@ export const ReportPreview = ({ isOpen, onClose, calculatedResults }: ReportPrev
         isoCompliance: state.sensitivityAnalysis.isoCompliance
     } : undefined
 
-    // 보고서 데이터 생성
-    const reportData = generateReportData(state, calculatedResults, sensitivityData)
+    // 보고서 데이터 생성 (제외 기준 결과 포함)
+    const reportData = generateReportData(state, calculatedResults, sensitivityData, state.cutOffResult || undefined)
     
     // 준수율 계산
     const compliance = calculateComplianceScore(reportData as any)

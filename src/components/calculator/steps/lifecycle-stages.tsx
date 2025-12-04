@@ -1,22 +1,34 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { usePCFStore } from "@/lib/store"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
-import { AlertTriangle, Check, X, Info, Lock } from "lucide-react"
+import { AlertTriangle, Check, X, Info, Lock, Scissors, Settings2, ChevronDown, ChevronUp } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import {
     LIFECYCLE_STAGES,
     getStageStatus,
     getSystemBoundaryConfig,
     isStageSelectableForBoundary
 } from "@/lib/system-boundary"
+import { CUT_OFF_PRESETS, CutOffPreset } from "@/lib/cut-off-criteria"
 
 export function LifecycleStagesStep() {
-    const { stages, toggleStage, productInfo } = usePCFStore()
+    const { 
+        stages, 
+        toggleStage, 
+        productInfo,
+        cutOffCriteria,
+        cutOffPreset,
+        setCutOffPreset,
+        setCutOffCriteria
+    } = usePCFStore()
     
     const boundaryConfig = getSystemBoundaryConfig(productInfo.boundary)
+    const [showCutOffSettings, setShowCutOffSettings] = useState(false)
 
     // 시스템 경계에 따른 필수 단계 자동 선택
     useEffect(() => {
@@ -197,6 +209,143 @@ export function LifecycleStagesStep() {
                         )}
                     </div>
                 </div>
+            </div>
+
+            {/* Cut-off 기준 설정 (ISO 14067 6.3.4.3) */}
+            <div className="rounded-lg border border-border/50 overflow-hidden">
+                <button
+                    onClick={() => setShowCutOffSettings(!showCutOffSettings)}
+                    className="w-full p-4 flex items-center justify-between bg-muted/30 hover:bg-muted/50 transition-colors"
+                >
+                    <div className="flex items-center gap-3">
+                        <Scissors className="h-5 w-5 text-orange-500" />
+                        <div className="text-left">
+                            <h4 className="font-medium text-sm">Cut-off 기준 설정</h4>
+                            <p className="text-xs text-muted-foreground">
+                                ISO 14067 6.3.4.3 - 중요하지 않은 물질/에너지 흐름 제외 기준
+                            </p>
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <span className="text-xs px-2 py-1 rounded-full bg-orange-500/20 text-orange-400">
+                            {CUT_OFF_PRESETS.find(p => p.id === cutOffPreset)?.nameKo || '사용자 정의'}
+                        </span>
+                        {showCutOffSettings ? (
+                            <ChevronUp className="h-4 w-4 text-muted-foreground" />
+                        ) : (
+                            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                        )}
+                    </div>
+                </button>
+                
+                {showCutOffSettings && (
+                    <div className="p-4 space-y-4 border-t border-border/50">
+                        {/* 프리셋 선택 */}
+                        <div className="space-y-3">
+                            <Label className="text-sm font-medium">기준 선택</Label>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                {CUT_OFF_PRESETS.map((preset) => (
+                                    <button
+                                        key={preset.id}
+                                        type="button"
+                                        onClick={() => setCutOffPreset(preset.id)}
+                                        className={`flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all ${
+                                            cutOffPreset === preset.id
+                                                ? 'border-orange-500 bg-orange-500/10'
+                                                : 'border-muted bg-muted/30 hover:bg-muted/50'
+                                        }`}
+                                    >
+                                        <span className="text-sm font-medium">{preset.nameKo}</span>
+                                        <span className="text-xs text-muted-foreground text-center mt-1">
+                                            {preset.descriptionKo}
+                                        </span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        {/* 사용자 정의 설정 */}
+                        {cutOffPreset === 'custom' && (
+                            <div className="space-y-4 p-4 rounded-lg bg-muted/30 border border-border/50">
+                                <div className="flex items-center gap-2">
+                                    <Settings2 className="h-4 w-4 text-orange-500" />
+                                    <Label className="text-sm font-medium">임계값 설정 (%)</Label>
+                                </div>
+                                <div className="grid grid-cols-3 gap-4">
+                                    <div className="space-y-2">
+                                        <Label className="text-xs text-muted-foreground">질량 기준</Label>
+                                        <Input
+                                            type="number"
+                                            min="0"
+                                            max="10"
+                                            step="0.1"
+                                            value={cutOffCriteria.massThreshold}
+                                            onChange={(e) => setCutOffCriteria({ 
+                                                massThreshold: parseFloat(e.target.value) || 0,
+                                                enabled: true
+                                            })}
+                                            className="text-center"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label className="text-xs text-muted-foreground">에너지 기준</Label>
+                                        <Input
+                                            type="number"
+                                            min="0"
+                                            max="10"
+                                            step="0.1"
+                                            value={cutOffCriteria.energyThreshold}
+                                            onChange={(e) => setCutOffCriteria({ 
+                                                energyThreshold: parseFloat(e.target.value) || 0,
+                                                enabled: true
+                                            })}
+                                            className="text-center"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label className="text-xs text-muted-foreground">환경영향 기준</Label>
+                                        <Input
+                                            type="number"
+                                            min="0"
+                                            max="10"
+                                            step="0.1"
+                                            value={cutOffCriteria.environmentalThreshold}
+                                            onChange={(e) => setCutOffCriteria({ 
+                                                environmentalThreshold: parseFloat(e.target.value) || 0,
+                                                enabled: true
+                                            })}
+                                            className="text-center"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        
+                        {/* 현재 설정 요약 */}
+                        <div className="p-3 rounded-lg bg-orange-500/10 border border-orange-500/30">
+                            <div className="flex items-start gap-2">
+                                <Info className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                                <div className="text-xs text-orange-200">
+                                    {!cutOffCriteria.enabled ? (
+                                        <p>모든 물질 및 에너지 흐름이 계산에 포함됩니다.</p>
+                                    ) : (
+                                        <>
+                                            <p className="font-medium mb-1">현재 설정된 제외 기준:</p>
+                                            <ul className="space-y-0.5 text-orange-300">
+                                                <li>• 질량 기여도 {cutOffCriteria.massThreshold}% 미만</li>
+                                                <li>• 에너지 기여도 {cutOffCriteria.energyThreshold}% 미만</li>
+                                                <li>• 환경영향(배출량) 기여도 {cutOffCriteria.environmentalThreshold}% 미만</li>
+                                            </ul>
+                                            <p className="mt-2 text-orange-400">
+                                                ※ 위 기준을 모두 충족하는 항목은 계산에서 제외됩니다.
+                                            </p>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* ISO 14067 참고사항 */}
