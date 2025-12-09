@@ -15,10 +15,27 @@ const SelectContext = React.createContext<SelectContextType | undefined>(undefin
 
 export function Select({ value, onValueChange, children }: { value?: string, onValueChange?: (value: string) => void, children: React.ReactNode }) {
     const [open, setOpen] = React.useState(false)
+    const ref = React.useRef<HTMLDivElement>(null)
+
+    React.useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (ref.current && !ref.current.contains(event.target as Node)) {
+                setOpen(false)
+            }
+        }
+
+        if (open) {
+            document.addEventListener("mousedown", handleClickOutside)
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [open])
 
     return (
         <SelectContext.Provider value={{ value, onValueChange, open, setOpen }}>
-            <div className="relative">{children}</div>
+            <div ref={ref} className="relative">{children}</div>
         </SelectContext.Provider>
     )
 }
@@ -51,12 +68,12 @@ export function SelectValue({ placeholder }: { placeholder: string }) {
 }
 
 export function SelectContent({ children }: { children: React.ReactNode }) {
-    const { open } = React.useContext(SelectContext)!
+    const { open, setOpen } = React.useContext(SelectContext)!
 
     if (!open) return null
 
     return (
-        <div className="absolute z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in-80 w-full mt-1">
+        <div className="absolute z-50 min-w-[8rem] overflow-hidden rounded-md border bg-[#0a0a0a] text-popover-foreground shadow-md animate-in fade-in-80 w-full mt-1">
             <div className="p-1">{children}</div>
         </div>
     )

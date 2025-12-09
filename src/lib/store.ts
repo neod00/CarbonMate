@@ -116,30 +116,30 @@ export interface SimplifiedActivityData {
     // 원자재
     raw_material_weight?: number
     raw_material_type?: string
-    
+
     // 제조
     electricity?: number
     electricity_grid?: string
     gas?: number
     diesel?: number
-    
+
     // 운송
     transport_distance?: number
     transport_weight?: number
     transport_mode?: TransportMode
-    
+
     // 포장
     packaging_weight?: number
     packaging_material?: string
-    
+
     // 사용
     use_electricity?: number
     use_years?: number
-    
+
     // 폐기
     waste_weight?: number
     recycling_rate?: number
-    
+
     // 항공 운송 (ISO 14067 7.2 e 필수 분리)
     aircraft_transport_distance?: number
     aircraft_transport_weight?: number
@@ -153,32 +153,32 @@ export interface PCFState {
     // 기본 정보
     productInfo: ProductInfo
     stages: string[]
-    
+
     // 활동 데이터 (레거시 호환)
     activityData: SimplifiedActivityData
-    
+
     // 확장된 활동 데이터 (향후 사용)
     detailedActivityData?: Partial<StageActivityData>
-    
+
     // 데이터 품질 메타데이터
     dataQualityMeta: {
         overallType: DataQualityType
         sources: string[]
         baseYear: number
     }
-    
+
     // 할당 설정 (ISO 14067 6.4.9)
     multiOutputAllocation: MultiOutputAllocation
     recyclingAllocation: RecyclingAllocation
-    
+
     // 민감도 분석 결과 (ISO 14067 6.4.5, 6.4.6.1, 6.6, 7.3 h)
     sensitivityAnalysis: SensitivityAnalysisResult | null
-    
+
     // 제외 기준 설정 (ISO 14067 6.3.4.3)
     cutOffCriteria: CutOffCriteria
     cutOffPreset: CutOffPreset
     cutOffResult: CutOffResult | null
-    
+
     // Actions
     setProductInfo: (info: Partial<ProductInfo>) => void
     toggleStage: (stageId: string) => void
@@ -187,7 +187,7 @@ export interface PCFState {
     setTransportMode: (mode: TransportMode) => void
     setElectricityGrid: (grid: string) => void
     setDataQualityMeta: (meta: Partial<PCFState['dataQualityMeta']>) => void
-    
+
     // 할당 관련 Actions
     setMultiOutputAllocationMethod: (method: MultiOutputAllocationMethod) => void
     setPhysicalAllocationBasis: (basis: PhysicalAllocationBasis) => void
@@ -197,15 +197,20 @@ export interface PCFState {
     setRecyclingAllocationMethod: (method: RecyclingAllocationMethod) => void
     setRecyclingParams: (params: Partial<RecyclingAllocation>) => void
     setAllocationJustification: (type: 'multiOutput' | 'recycling', justification: string) => void
-    
+
     // 민감도 분석 관련 Actions
     setSensitivityAnalysis: (result: SensitivityAnalysisResult | null) => void
-    
+
     // 제외 기준 관련 Actions (ISO 14067 6.3.4.3)
     setCutOffPreset: (preset: CutOffPreset) => void
     setCutOffCriteria: (criteria: Partial<CutOffCriteria>) => void
     setCutOffResult: (result: CutOffResult | null) => void
-    
+
+    // 상세 활동 데이터 관련 Actions
+    addRawMaterial: (material: MaterialInput) => void
+    removeRawMaterial: (id: string) => void
+    updateRawMaterial: (id: string, updates: Partial<MaterialInput>) => void
+
     reset: () => void
 }
 
@@ -239,22 +244,29 @@ export const usePCFStore = create<PCFState>((set) => ({
         boundary: 'cradle-to-gate',
         referenceFlow: ''
     },
-    
+
     stages: ['raw_materials', 'manufacturing', 'transport', 'packaging', 'use', 'eol'],
-    
+
     activityData: {},
-    
-    detailedActivityData: undefined,
-    
+
+    detailedActivityData: {
+        raw_materials: [],
+        manufacturing: { electricity: [], fuels: [], processEmissions: [] },
+        transport: [],
+        packaging: [],
+        use: { electricity: [], consumables: [] },
+        eol: { disposal: [], recycling: [] }
+    },
+
     dataQualityMeta: DEFAULT_DATA_QUALITY_META,
-    
+
     // 할당 초기값
     multiOutputAllocation: DEFAULT_MULTI_OUTPUT_ALLOCATION,
     recyclingAllocation: DEFAULT_RECYCLING_ALLOCATION,
-    
+
     // 민감도 분석 초기값
     sensitivityAnalysis: null,
-    
+
     // 제외 기준 초기값 (기본: 제외 기준 없음)
     cutOffCriteria: NO_CUT_OFF,
     cutOffPreset: 'none',
@@ -277,41 +289,77 @@ export const usePCFStore = create<PCFState>((set) => ({
         set((state) => ({
             activityData: { ...state.activityData, [id]: value },
         })),
-    
+
     setActivityDataWithMeta: (id, value, meta) =>
         set((state) => ({
             activityData: { ...state.activityData, [id]: value },
-            dataQualityMeta: meta 
+            dataQualityMeta: meta
                 ? { ...state.dataQualityMeta, ...meta }
                 : state.dataQualityMeta
         })),
-    
+
     setTransportMode: (mode) =>
         set((state) => ({
             activityData: { ...state.activityData, transport_mode: mode }
         })),
-    
+
     setElectricityGrid: (grid) =>
         set((state) => ({
             activityData: { ...state.activityData, electricity_grid: grid }
         })),
-    
+
     setDataQualityMeta: (meta) =>
         set((state) => ({
             dataQualityMeta: { ...state.dataQualityMeta, ...meta }
         })),
-    
+
+    // 상세 활동 데이터 관련 Actions 구현
+    addRawMaterial: (material) =>
+        set((state) => {
+            const currentMaterials = state.detailedActivityData?.raw_materials || []
+            return {
+                detailedActivityData: {
+                    ...state.detailedActivityData,
+                    raw_materials: [...currentMaterials, material]
+                } as StageActivityData
+            }
+        }),
+
+    removeRawMaterial: (id) =>
+        set((state) => {
+            const currentMaterials = state.detailedActivityData?.raw_materials || []
+            return {
+                detailedActivityData: {
+                    ...state.detailedActivityData,
+                    raw_materials: currentMaterials.filter(m => m.id !== id)
+                } as StageActivityData
+            }
+        }),
+
+    updateRawMaterial: (id, updates) =>
+        set((state) => {
+            const currentMaterials = state.detailedActivityData?.raw_materials || []
+            return {
+                detailedActivityData: {
+                    ...state.detailedActivityData,
+                    raw_materials: currentMaterials.map(m =>
+                        m.id === id ? { ...m, ...updates } : m
+                    )
+                } as StageActivityData
+            }
+        }),
+
     // 할당 관련 Actions
     setMultiOutputAllocationMethod: (method) =>
         set((state) => ({
             multiOutputAllocation: { ...state.multiOutputAllocation, method }
         })),
-    
+
     setPhysicalAllocationBasis: (basis) =>
         set((state) => ({
             multiOutputAllocation: { ...state.multiOutputAllocation, physicalBasis: basis }
         })),
-    
+
     addCoProduct: (coProduct) =>
         set((state) => ({
             multiOutputAllocation: {
@@ -319,7 +367,7 @@ export const usePCFStore = create<PCFState>((set) => ({
                 coProducts: [...state.multiOutputAllocation.coProducts, coProduct]
             }
         })),
-    
+
     removeCoProduct: (id) =>
         set((state) => ({
             multiOutputAllocation: {
@@ -327,7 +375,7 @@ export const usePCFStore = create<PCFState>((set) => ({
                 coProducts: state.multiOutputAllocation.coProducts.filter(p => p.id !== id)
             }
         })),
-    
+
     updateCoProduct: (id, updates) =>
         set((state) => ({
             multiOutputAllocation: {
@@ -337,18 +385,18 @@ export const usePCFStore = create<PCFState>((set) => ({
                 )
             }
         })),
-    
+
     setRecyclingAllocationMethod: (method) =>
         set((state) => ({
             recyclingAllocation: { ...state.recyclingAllocation, method }
         })),
-    
+
     setRecyclingParams: (params) =>
         set((state) => ({
             recyclingAllocation: { ...state.recyclingAllocation, ...params }
         })),
-    
-        setAllocationJustification: (type, justification) =>
+
+    setAllocationJustification: (type, justification) =>
         set((state) => {
             if (type === 'multiOutput') {
                 return {
@@ -366,7 +414,7 @@ export const usePCFStore = create<PCFState>((set) => ({
         set((state) => ({
             sensitivityAnalysis: result
         })),
-    
+
     // 제외 기준 관련 Actions
     setCutOffPreset: (preset) =>
         set((state) => {
@@ -377,14 +425,14 @@ export const usePCFStore = create<PCFState>((set) => ({
                 cutOffResult: null // 기준 변경 시 결과 초기화
             }
         }),
-    
+
     setCutOffCriteria: (criteria) =>
         set((state) => ({
             cutOffCriteria: { ...state.cutOffCriteria, ...criteria },
             cutOffPreset: 'custom', // 직접 수정 시 custom으로 변경
             cutOffResult: null // 기준 변경 시 결과 초기화
         })),
-    
+
     setCutOffResult: (result) =>
         set((state) => ({
             cutOffResult: result
@@ -401,7 +449,14 @@ export const usePCFStore = create<PCFState>((set) => ({
             },
             stages: ['raw_materials', 'manufacturing', 'transport', 'packaging', 'use', 'eol'],
             activityData: {},
-            detailedActivityData: undefined,
+            detailedActivityData: {
+                raw_materials: [],
+                manufacturing: { electricity: [], fuels: [], processEmissions: [] },
+                transport: [],
+                packaging: [],
+                use: { electricity: [], consumables: [] },
+                eol: { disposal: [], recycling: [] }
+            },
             dataQualityMeta: DEFAULT_DATA_QUALITY_META,
             multiOutputAllocation: DEFAULT_MULTI_OUTPUT_ALLOCATION,
             recyclingAllocation: DEFAULT_RECYCLING_ALLOCATION,

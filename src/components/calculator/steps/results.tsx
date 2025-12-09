@@ -57,17 +57,18 @@ const STAGE_LABELS: Record<string, string> = {
 // =============================================================================
 
 export function ResultsStep() {
-    const { 
-        productInfo, 
-        stages, 
-        activityData, 
+    const {
+        productInfo,
+        stages,
+        activityData,
+        detailedActivityData,
         dataQualityMeta,
         multiOutputAllocation,
         recyclingAllocation,
         cutOffCriteria,
         setCutOffResult
     } = usePCFStore()
-    
+
     // 보고서 미리보기 상태
     const [showReportPreview, setShowReportPreview] = useState(false)
 
@@ -81,7 +82,7 @@ export function ResultsStep() {
         biogenic: number
         aircraft: number
         uncertainty: number
-        details: { 
+        details: {
             source: string
             value: number
             type: string
@@ -103,33 +104,73 @@ export function ResultsStep() {
 
         switch (stageId) {
             case 'raw_materials': {
-                const weight = activityData['raw_material_weight'] || 0
-                const materialId = activityData['raw_material_type'] || 'material_steel_primary'
-                const factor = MATERIAL_EMISSION_FACTORS.find(f => f.id === materialId)
-                    || MATERIAL_EMISSION_FACTORS.find(f => f.id === 'material_steel_primary')!
+                const rawMaterials = detailedActivityData?.raw_materials || []
 
-                if (weight > 0 && factor) {
-                    const emission = weight * factor.value
-                    result.total += emission
+                // 1. 다중 원자재 입력 처리
+                if (rawMaterials.length > 0) {
+                    rawMaterials.forEach(material => {
+                        const weight = material.quantity || 0
+                        const materialId = material.materialType || 'material_steel_primary'
+                        const factor = MATERIAL_EMISSION_FACTORS.find(f => f.id === materialId)
+                            || MATERIAL_EMISSION_FACTORS.find(f => f.id === 'material_steel_primary')!
 
-                    if (factor.sourceType === 'fossil') {
-                        result.fossil += emission
-                    } else if (factor.sourceType === 'biogenic') {
-                        result.biogenic += emission
-                    } else {
-                        result.fossil += emission * 0.5
-                        result.biogenic += emission * 0.5
-                    }
+                        if (weight > 0 && factor) {
+                            const emission = weight * factor.value
+                            result.total += emission
 
-                    result.uncertainty = factor.uncertainty
-                    result.details.push({
-                        source: factor.nameKo,
-                        value: emission,
-                        type: factor.sourceType,
-                        emissionFactor: `${factor.value} ${factor.unit}`,
-                        quantity: weight,
-                        unit: 'kg'
+                            if (factor.sourceType === 'fossil') {
+                                result.fossil += emission
+                            } else if (factor.sourceType === 'biogenic') {
+                                result.biogenic += emission
+                            } else {
+                                result.fossil += emission * 0.5
+                                result.biogenic += emission * 0.5
+                            }
+
+                            // 불확실성: 가중 평균이나 최댓값 등 방법론에 따라 다름. 여기서는 보수적으로 최댓값 적용
+                            result.uncertainty = Math.max(result.uncertainty, factor.uncertainty)
+
+                            result.details.push({
+                                source: factor.nameKo,
+                                value: emission,
+                                type: factor.sourceType,
+                                emissionFactor: `${factor.value} ${factor.unit}`,
+                                quantity: weight,
+                                unit: 'kg'
+                            })
+                        }
                     })
+                }
+                // 2. 레거시/단일 입력 처리 (Fallback)
+                else {
+                    const weight = activityData['raw_material_weight'] || 0
+                    const materialId = activityData['raw_material_type'] || 'material_steel_primary'
+                    const factor = MATERIAL_EMISSION_FACTORS.find(f => f.id === materialId)
+                        || MATERIAL_EMISSION_FACTORS.find(f => f.id === 'material_steel_primary')!
+
+                    if (weight > 0 && factor) {
+                        const emission = weight * factor.value
+                        result.total += emission
+
+                        if (factor.sourceType === 'fossil') {
+                            result.fossil += emission
+                        } else if (factor.sourceType === 'biogenic') {
+                            result.biogenic += emission
+                        } else {
+                            result.fossil += emission * 0.5
+                            result.biogenic += emission * 0.5
+                        }
+
+                        result.uncertainty = factor.uncertainty
+                        result.details.push({
+                            source: factor.nameKo,
+                            value: emission,
+                            type: factor.sourceType,
+                            emissionFactor: `${factor.value} ${factor.unit}`,
+                            quantity: weight,
+                            unit: 'kg'
+                        })
+                    }
                 }
                 break
             }
@@ -307,7 +348,7 @@ export function ResultsStep() {
 
             case 'eol': {
                 const wasteWeight = activityData['waste_weight'] || 0
-                
+
                 // 재활용 할당 설정에서 파라미터 가져오기
                 const recyclingRateFromAllocation = recyclingAllocation.recyclabilityOutput
                 const recycledContentInput = recyclingAllocation.recycledContentInput
@@ -315,8 +356,8 @@ export function ResultsStep() {
                 const qualityFactor = recyclingAllocation.qualityFactorOutput || 1
 
                 // 활동 데이터 또는 할당 설정에서 재활용률 사용
-                const recyclingRate = recyclingRateFromAllocation > 0 
-                    ? recyclingRateFromAllocation 
+                const recyclingRate = recyclingRateFromAllocation > 0
+                    ? recyclingRateFromAllocation
                     : (activityData['recycling_rate'] || 0) / 100
 
                 if (wasteWeight > 0) {
@@ -529,12 +570,12 @@ export function ResultsStep() {
     const cutOffResult = useMemo(() => {
         return applyCutOffCriteria(activityData, cutOffCriteria, stages)
     }, [activityData, cutOffCriteria, stages])
-    
+
     // 제외 기준 검증
     const cutOffValidation = useMemo(() => {
         return validateCutOffCriteria(cutOffResult)
     }, [cutOffResult])
-    
+
     // 제외 기준 결과를 스토어에 저장
     useEffect(() => {
         setCutOffResult(cutOffResult)
@@ -584,7 +625,7 @@ export function ResultsStep() {
                         <div className="mt-3 sm:mt-4 text-[10px] sm:text-xs text-muted-foreground">
                             불확실성 범위: ±{avgUncertainty.toFixed(0)}%
                             <br />
-                            ({(totalEmission * (1 - avgUncertainty/100)).toFixed(2)} ~ {(totalEmission * (1 + avgUncertainty/100)).toFixed(2)} kg CO₂e)
+                            ({(totalEmission * (1 - avgUncertainty / 100)).toFixed(2)} ~ {(totalEmission * (1 + avgUncertainty / 100)).toFixed(2)} kg CO₂e)
                         </div>
                     </CardContent>
                 </Card>
@@ -772,13 +813,12 @@ export function ResultsStep() {
                                 <p className="text-sm font-medium">ISO 14067 준수 현황</p>
                                 <div className="space-y-1">
                                     {cutOffResult.isoCompliance.map((compliance, idx) => (
-                                        <div 
-                                            key={idx} 
-                                            className={`flex items-start gap-2 p-2 rounded text-xs ${
-                                                compliance.satisfied 
-                                                    ? 'bg-green-500/10 border border-green-500/20' 
+                                        <div
+                                            key={idx}
+                                            className={`flex items-start gap-2 p-2 rounded text-xs ${compliance.satisfied
+                                                    ? 'bg-green-500/10 border border-green-500/20'
                                                     : 'bg-red-500/10 border border-red-500/20'
-                                            }`}
+                                                }`}
                                         >
                                             {compliance.satisfied ? (
                                                 <Check className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
@@ -842,12 +882,12 @@ export function ResultsStep() {
                         <div className="p-3 sm:p-4 rounded-lg bg-muted/50">
                             <p className="text-xs sm:text-sm text-muted-foreground">데이터 유형</p>
                             <p className="text-base sm:text-lg font-bold mt-1">
-                                {dataQualityMeta.overallType === 'primary' ? '1차 데이터' : 
-                                 dataQualityMeta.overallType === 'secondary' ? '2차 데이터' : '추정'}
+                                {dataQualityMeta.overallType === 'primary' ? '1차 데이터' :
+                                    dataQualityMeta.overallType === 'secondary' ? '2차 데이터' : '추정'}
                             </p>
                             <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">
-                                {dataQualityMeta.overallType === 'primary' 
-                                    ? '현장 특정 데이터' 
+                                {dataQualityMeta.overallType === 'primary'
+                                    ? '현장 특정 데이터'
                                     : '데이터베이스 기반'}
                             </p>
                         </div>
@@ -855,7 +895,7 @@ export function ResultsStep() {
                             <p className="text-xs sm:text-sm text-muted-foreground">불확실성 범위</p>
                             <p className="text-base sm:text-lg font-bold mt-1">±{avgUncertainty.toFixed(0)}%</p>
                             <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">
-                                {(totalEmission * (1 - avgUncertainty/100)).toFixed(1)} ~ {(totalEmission * (1 + avgUncertainty/100)).toFixed(1)} kg CO₂e
+                                {(totalEmission * (1 - avgUncertainty / 100)).toFixed(1)} ~ {(totalEmission * (1 + avgUncertainty / 100)).toFixed(1)} kg CO₂e
                             </p>
                         </div>
                         <div className="p-3 sm:p-4 rounded-lg bg-muted/50">
