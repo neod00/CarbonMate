@@ -232,43 +232,93 @@ export function ResultsStep() {
             }
 
             case 'transport': {
-                const weight = activityData['transport_weight'] || 0
-                const distance = activityData['transport_distance'] || 0
-                const mode = activityData['transport_mode'] || 'truck'
+                const transportList = detailedActivityData?.transport || []
 
-                if (weight > 0 && distance > 0) {
-                    const tkm = (weight * distance) / 1000 // ton-km
+                // 1. 다중 운송 단계 처리
+                if (transportList.length > 0) {
+                    transportList.forEach((item, index) => {
+                        const weight = item.weight || 0
+                        const distance = item.distance || 0
+                        const mode = item.transportMode || 'truck'
 
-                    // 운송 모드별 배출계수
-                    let transportFactor = getDefaultTransportFactor()
-                    if (mode === 'rail') {
-                        transportFactor = TRANSPORT_EMISSION_FACTORS.find(f => f.id === 'transport_rail_freight')!
-                    } else if (mode === 'ship') {
-                        transportFactor = TRANSPORT_EMISSION_FACTORS.find(f => f.id === 'transport_ship_container')!
-                    } else if (mode === 'aircraft') {
-                        transportFactor = TRANSPORT_EMISSION_FACTORS.find(f => f.id === 'transport_aircraft_cargo')!
-                    }
+                        if (weight > 0 && distance > 0) {
+                            const tkm = (weight * distance) / 1000 // ton-km
 
-                    const emission = tkm * transportFactor.value
-                    result.total += emission
+                            // 운송 모드별 배출계수 매핑
+                            let transportFactor = getDefaultTransportFactor()
+                            if (mode === 'rail') {
+                                transportFactor = TRANSPORT_EMISSION_FACTORS.find(f => f.id === 'transport_rail_freight')!
+                            } else if (mode === 'ship') {
+                                transportFactor = TRANSPORT_EMISSION_FACTORS.find(f => f.id === 'transport_ship_container')!
+                            } else if (mode === 'aircraft') {
+                                transportFactor = TRANSPORT_EMISSION_FACTORS.find(f => f.id === 'transport_aircraft_cargo')!
+                            } else {
+                                // Default to truck (assumed average)
+                                transportFactor = TRANSPORT_EMISSION_FACTORS.find(f => f.id === 'transport_truck_avg')! || getDefaultTransportFactor()
+                            }
 
-                    if (mode === 'aircraft') {
-                        result.aircraft += emission
-                    }
-                    result.fossil += emission
-                    result.uncertainty = Math.max(result.uncertainty, transportFactor.uncertainty)
+                            const emission = tkm * transportFactor.value
+                            result.total += emission
 
-                    result.details.push({
-                        source: transportFactor.nameKo,
-                        value: emission,
-                        type: 'fossil',
-                        emissionFactor: `${transportFactor.value} ${transportFactor.unit}`,
-                        quantity: tkm,
-                        unit: 'tkm'
+                            if (mode === 'aircraft') {
+                                result.aircraft += emission
+                            }
+                            result.fossil += emission
+                            result.uncertainty = Math.max(result.uncertainty, transportFactor.uncertainty)
+
+                            result.details.push({
+                                source: `${transportFactor.nameKo} #${index + 1}`,
+                                value: emission,
+                                type: 'fossil',
+                                emissionFactor: `${transportFactor.value} ${transportFactor.unit}`,
+                                quantity: tkm,
+                                unit: 'tkm'
+                            })
+                        }
                     })
+                }
+                // 2. 레거시 단일 입력 처리
+                else {
+                    const weight = activityData['transport_weight'] || 0
+                    const distance = activityData['transport_distance'] || 0
+                    const mode = activityData['transport_mode'] || 'truck'
+
+                    if (weight > 0 && distance > 0) {
+                        const tkm = (weight * distance) / 1000 // ton-km
+
+                        let transportFactor = getDefaultTransportFactor()
+                        if (mode === 'rail') {
+                            transportFactor = TRANSPORT_EMISSION_FACTORS.find(f => f.id === 'transport_rail_freight')!
+                        } else if (mode === 'ship') {
+                            transportFactor = TRANSPORT_EMISSION_FACTORS.find(f => f.id === 'transport_ship_container')!
+                        } else if (mode === 'aircraft') {
+                            transportFactor = TRANSPORT_EMISSION_FACTORS.find(f => f.id === 'transport_aircraft_cargo')!
+                        }
+
+                        const emission = tkm * transportFactor.value
+                        result.total += emission
+
+                        if (mode === 'aircraft') {
+                            result.aircraft += emission
+                        }
+                        result.fossil += emission
+                        result.uncertainty = Math.max(result.uncertainty, transportFactor.uncertainty)
+
+                        result.details.push({
+                            source: transportFactor.nameKo,
+                            value: emission,
+                            type: 'fossil',
+                            emissionFactor: `${transportFactor.value} ${transportFactor.unit}`,
+                            quantity: tkm,
+                            unit: 'tkm'
+                        })
+                    }
                 }
 
                 // 항공 운송 (별도 입력, ISO 14067 7.2 e)
+                // * 중요: 멀티 입력 리스트에 'aircraft' 모드가 포함되어 있으면 여기서 중복으로 더해질 수 있음.
+                // 하지만 legacy 필드인 'aircraft_transport_weight'는 별도 필드로 관리되므로,
+                // 사용자가 멀티 리스트에도 추가하고 별도 필드에도 입력하지 않는 한 중복되지 않음.
                 const aircraftWeight = activityData['aircraft_transport_weight'] || 0
                 const aircraftDistance = activityData['aircraft_transport_distance'] || 0
                 if (aircraftWeight > 0 && aircraftDistance > 0) {
@@ -281,7 +331,7 @@ export function ResultsStep() {
                     result.aircraft += aircraftEmission
 
                     result.details.push({
-                        source: '항공 운송',
+                        source: '항공 운송 (별도 입력)',
                         value: aircraftEmission,
                         type: 'fossil',
                         emissionFactor: `${aircraftFactor.value} ${aircraftFactor.unit}`,
@@ -293,33 +343,72 @@ export function ResultsStep() {
             }
 
             case 'packaging': {
-                const weight = activityData['packaging_weight'] || 0
-                const materialId = activityData['packaging_material'] || 'material_paper_cardboard'
-                const factor = MATERIAL_EMISSION_FACTORS.find(f => f.id === materialId)
-                    || MATERIAL_EMISSION_FACTORS.find(f => f.id === 'material_paper_cardboard')!
+                const packagingList = detailedActivityData?.packaging || []
 
-                if (weight > 0 && factor) {
-                    const emission = weight * factor.value
-                    result.total += emission
+                // 1. 다중 포장재 입력 처리
+                if (packagingList.length > 0) {
+                    packagingList.forEach((item, index) => {
+                        const weight = item.quantity || 0
+                        const materialId = item.materialType || 'material_paper_cardboard'
+                        const factor = MATERIAL_EMISSION_FACTORS.find(f => f.id === materialId)
+                            || MATERIAL_EMISSION_FACTORS.find(f => f.id === 'material_paper_cardboard')!
 
-                    if (factor.sourceType === 'fossil') {
-                        result.fossil += emission
-                    } else if (factor.sourceType === 'biogenic') {
-                        result.biogenic += emission
-                    } else {
-                        result.fossil += emission * 0.5
-                        result.biogenic += emission * 0.5
-                    }
+                        if (weight > 0 && factor) {
+                            const emission = weight * factor.value
+                            result.total += emission
 
-                    result.uncertainty = factor.uncertainty
-                    result.details.push({
-                        source: factor.nameKo,
-                        value: emission,
-                        type: factor.sourceType,
-                        emissionFactor: `${factor.value} ${factor.unit}`,
-                        quantity: weight,
-                        unit: 'kg'
+                            if (factor.sourceType === 'fossil') {
+                                result.fossil += emission
+                            } else if (factor.sourceType === 'biogenic') {
+                                result.biogenic += emission
+                            } else {
+                                result.fossil += emission * 0.5
+                                result.biogenic += emission * 0.5
+                            }
+
+                            result.uncertainty = Math.max(result.uncertainty, factor.uncertainty)
+
+                            result.details.push({
+                                source: `${factor.nameKo} #${index + 1}`,
+                                value: emission,
+                                type: factor.sourceType,
+                                emissionFactor: `${factor.value} ${factor.unit}`,
+                                quantity: weight,
+                                unit: 'kg'
+                            })
+                        }
                     })
+                }
+                // 2. 레거시 단일 입력 처리
+                else {
+                    const weight = activityData['packaging_weight'] || 0
+                    const materialId = activityData['packaging_material'] || 'material_paper_cardboard'
+                    const factor = MATERIAL_EMISSION_FACTORS.find(f => f.id === materialId)
+                        || MATERIAL_EMISSION_FACTORS.find(f => f.id === 'material_paper_cardboard')!
+
+                    if (weight > 0 && factor) {
+                        const emission = weight * factor.value
+                        result.total += emission
+
+                        if (factor.sourceType === 'fossil') {
+                            result.fossil += emission
+                        } else if (factor.sourceType === 'biogenic') {
+                            result.biogenic += emission
+                        } else {
+                            result.fossil += emission * 0.5
+                            result.biogenic += emission * 0.5
+                        }
+
+                        result.uncertainty = factor.uncertainty
+                        result.details.push({
+                            source: factor.nameKo,
+                            value: emission,
+                            type: factor.sourceType,
+                            emissionFactor: `${factor.value} ${factor.unit}`,
+                            quantity: weight,
+                            unit: 'kg'
+                        })
+                    }
                 }
                 break
             }
@@ -816,8 +905,8 @@ export function ResultsStep() {
                                         <div
                                             key={idx}
                                             className={`flex items-start gap-2 p-2 rounded text-xs ${compliance.satisfied
-                                                    ? 'bg-green-500/10 border border-green-500/20'
-                                                    : 'bg-red-500/10 border border-red-500/20'
+                                                ? 'bg-green-500/10 border border-green-500/20'
+                                                : 'bg-red-500/10 border border-red-500/20'
                                                 }`}
                                         >
                                             {compliance.satisfied ? (

@@ -160,7 +160,6 @@ function renderStageInputs(
             return <TransportInputs
                 activityData={activityData}
                 setActivityData={setActivityData}
-                setTransportMode={setTransportMode}
             />
         case 'packaging':
             return <PackagingInputs activityData={activityData} setActivityData={setActivityData} />
@@ -421,107 +420,157 @@ function ManufacturingInputs({
 
 function TransportInputs({
     activityData,
-    setActivityData,
-    setTransportMode
+    setActivityData
 }: {
     activityData: Record<string, any>
     setActivityData: (id: string, value: number) => void
-    setTransportMode: (mode: TransportMode) => void
 }) {
-    const selectedMode = (activityData['transport_mode'] as TransportMode) || 'truck'
-    const modeFactors = getTransportFactorsByMode(selectedMode)
+    const {
+        detailedActivityData,
+        addTransportStep,
+        removeTransportStep,
+        updateTransportStep
+    } = usePCFStore()
+
+    const transportList = detailedActivityData?.transport || []
+
+    // 레거시 데이터 마이그레이션
+    useEffect(() => {
+        if (transportList.length === 0 && (activityData['transport_distance'] || 0) > 0) {
+            addTransportStep({
+                id: generateId(),
+                stageId: 'transport',
+                name: 'Legacy Transport',
+                quantity: 0, // Not used directly in this model, but part of interface
+                unit: 'km',
+                emissionSourceType: 'fossil',
+                transportMode: (activityData['transport_mode'] as TransportMode) || 'truck',
+                distance: activityData['transport_distance'],
+                weight: activityData['transport_weight'] || 0,
+                dataQuality: {
+                    type: 'secondary',
+                    source: 'IPCC',
+                    year: 2023,
+                    geographicScope: 'Global',
+                    uncertainty: 30
+                }
+            })
+            // Reset legacy
+            setActivityData('transport_distance', 0)
+        }
+    }, [])
+
+    const handleAddTransport = () => {
+        addTransportStep({
+            id: generateId(),
+            stageId: 'transport',
+            name: 'New Transport Step',
+            quantity: 0,
+            unit: 'km',
+            emissionSourceType: 'fossil',
+            transportMode: 'truck',
+            distance: 0,
+            weight: 0,
+            dataQuality: {
+                type: 'secondary',
+                source: 'IPCC',
+                year: 2023,
+                geographicScope: 'Global',
+                uncertainty: 30
+            }
+        })
+    }
 
     return (
         <div className="space-y-6">
             {/* 주요 운송 */}
             <div className="space-y-4">
-                <div className="flex items-center gap-2">
-                    <Truck className="h-4 w-4 text-blue-500" />
-                    <span className="font-medium">주요 운송</span>
+                <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                        <Truck className="h-4 w-4 text-blue-500" />
+                        <span className="font-medium">운송 단계 (Multi-modal Transport)</span>
+                    </div>
+                    <Button onClick={handleAddTransport} size="sm" variant="outline" className="h-8 gap-2">
+                        <Plus className="h-4 w-4" /> 과정 추가
+                    </Button>
                 </div>
-                <div className="grid gap-4 sm:grid-cols-3">
-                    <div className="space-y-2">
-                        <Label htmlFor="transport_mode">운송 수단</Label>
-                        <Select
-                            value={selectedMode}
-                            onValueChange={(value) => setTransportMode(value as TransportMode)}
-                        >
-                            <SelectTrigger id="transport_mode">
-                                <SelectValue placeholder="운송 수단 선택" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="truck">🚚 트럭 (도로)</SelectItem>
-                                <SelectItem value="rail">🚂 철도</SelectItem>
-                                <SelectItem value="ship">🚢 선박 (해상)</SelectItem>
-                                <SelectItem value="aircraft">✈️ 항공</SelectItem>
-                            </SelectContent>
-                        </Select>
+
+                {transportList.length === 0 ? (
+                    <div className="text-center p-8 border border-dashed rounded-lg text-muted-foreground bg-muted/20">
+                        등록된 운송 과정이 없습니다. '과정 추가' 버튼을 눌러 추가해주세요.
                     </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="transport_distance">운송 거리 (km)</Label>
-                        <Input
-                            id="transport_distance"
-                            type="number"
-                            placeholder="예: 500"
-                            value={activityData['transport_distance'] || ''}
-                            onChange={(e) => setActivityData('transport_distance', parseFloat(e.target.value) || 0)}
-                        />
+                ) : (
+                    <div className="space-y-4">
+                        {transportList.map((item, index) => {
+                            const modeFactors = getTransportFactorsByMode(item.transportMode)
+                            return (
+                                <div key={item.id} className="grid gap-3 p-4 border rounded-lg bg-card relative group">
+                                    <div className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <Button
+                                            variant="ghost"
+                                            size="icon"
+                                            className="h-6 w-6 text-destructive hover:text-destructive hover:bg-destructive/10"
+                                            onClick={() => removeTransportStep(item.id)}
+                                        >
+                                            <Trash2 className="h-4 w-4" />
+                                        </Button>
+                                    </div>
+                                    <div className="grid gap-4 sm:grid-cols-3 pr-8">
+                                        <div className="space-y-2">
+                                            <Label className="text-xs text-muted-foreground">운송 수단 #{index + 1}</Label>
+                                            <Select
+                                                value={item.transportMode}
+                                                onValueChange={(value) => updateTransportStep(item.id, { transportMode: value as TransportMode })}
+                                            >
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder="운송 수단 선택" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="truck">🚚 트럭 (도로)</SelectItem>
+                                                    <SelectItem value="rail">🚂 철도</SelectItem>
+                                                    <SelectItem value="ship">🚢 선박 (해상)</SelectItem>
+                                                    <SelectItem value="aircraft">✈️ 항공</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label className="text-xs text-muted-foreground">운송 거리 (km)</Label>
+                                            <Input
+                                                type="number"
+                                                placeholder="예: 500"
+                                                value={item.distance || ''}
+                                                onChange={(e) => updateTransportStep(item.id, { distance: parseFloat(e.target.value) || 0 })}
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label className="text-xs text-muted-foreground">운송 중량 (kg)</Label>
+                                            <Input
+                                                type="number"
+                                                placeholder="예: 100"
+                                                value={item.weight || ''}
+                                                onChange={(e) => updateTransportStep(item.id, { weight: parseFloat(e.target.value) || 0 })}
+                                            />
+                                        </div>
+                                    </div>
+                                    {modeFactors.length > 0 && (
+                                        <p className="text-xs text-muted-foreground">
+                                            배출계수: {modeFactors[0].value} {modeFactors[0].unit} (출처: {modeFactors[0].source})
+                                        </p>
+                                    )}
+                                </div>
+                            )
+                        })}
                     </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="transport_weight">운송 중량 (kg)</Label>
-                        <Input
-                            id="transport_weight"
-                            type="number"
-                            placeholder="예: 100"
-                            value={activityData['transport_weight'] || ''}
-                            onChange={(e) => setActivityData('transport_weight', parseFloat(e.target.value) || 0)}
-                        />
-                    </div>
-                </div>
-                {modeFactors.length > 0 && (
-                    <p className="text-xs text-muted-foreground">
-                        선택된 배출계수: {modeFactors[0].nameKo} - {modeFactors[0].value} {modeFactors[0].unit}
-                    </p>
                 )}
             </div>
 
-            {/* 항공 운송 (ISO 14067 7.2 e - 별도 보고 필수) */}
-            {selectedMode !== 'aircraft' && (
-                <div className="space-y-4 p-4 rounded-lg bg-blue-500/5 border border-blue-500/20">
-                    <div className="flex items-center gap-2">
-                        <span className="text-sm">✈️</span>
-                        <span className="font-medium text-sm">항공 운송 (별도 입력)</span>
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400">
-                            ISO 14067 필수 분리
-                        </span>
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                        항공 운송은 ISO 14067에 따라 별도로 보고해야 합니다.
-                    </p>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                        <div className="space-y-2">
-                            <Label htmlFor="aircraft_transport_distance">항공 운송 거리 (km)</Label>
-                            <Input
-                                id="aircraft_transport_distance"
-                                type="number"
-                                placeholder="예: 0"
-                                value={activityData['aircraft_transport_distance'] || ''}
-                                onChange={(e) => setActivityData('aircraft_transport_distance', parseFloat(e.target.value) || 0)}
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="aircraft_transport_weight">항공 운송 중량 (kg)</Label>
-                            <Input
-                                id="aircraft_transport_weight"
-                                type="number"
-                                placeholder="예: 0"
-                                value={activityData['aircraft_transport_weight'] || ''}
-                                onChange={(e) => setActivityData('aircraft_transport_weight', parseFloat(e.target.value) || 0)}
-                            />
-                        </div>
-                    </div>
-                </div>
-            )}
+            {/* 항공 운송 (Legacy ISO 14067 7.2 e - Not strictly needed if aircraft is selectable above, but keeping for backward compat if needed or removing? Removing as "aircraft" option covers it, but user might want explicit separation. I'll remove the separate redundant section as Aircraft is now a first-class citizen in the list) */}
+            <div className="p-3 rounded-lg bg-blue-500/5 border border-blue-500/20 text-xs text-muted-foreground">
+                <p>
+                    ISO 14067 7.2 e에 따라 항공 운송은 다른 운송 수단과 구분되어야 합니다.
+                    위 목록에서 '항공'을 선택하면 자동으로 구분되어 계산됩니다.
+                </p>
+            </div>
         </div>
     )
 }
@@ -537,38 +586,121 @@ function PackagingInputs({
     activityData: Record<string, any>
     setActivityData: (id: string, value: number) => void
 }) {
+    const {
+        detailedActivityData,
+        addPackagingPart,
+        removePackagingPart,
+        updatePackagingPart
+    } = usePCFStore()
+
+    const packagingList = detailedActivityData?.packaging || []
+
+    // 레거시 데이터 마이그레이션
+    useEffect(() => {
+        if (packagingList.length === 0 && (activityData['packaging_weight'] || 0) > 0) {
+            addPackagingPart({
+                id: generateId(),
+                stageId: 'packaging',
+                name: 'Legacy Packaging',
+                quantity: activityData['packaging_weight'],
+                unit: 'kg',
+                emissionSourceType: 'fossil',
+                materialType: activityData['packaging_material'] || 'material_paper_cardboard',
+                dataQuality: {
+                    type: 'secondary',
+                    source: '국가 LCI DB',
+                    year: 2023,
+                    geographicScope: 'Korea',
+                    uncertainty: 30
+                }
+            })
+            // Reset legacy
+            setActivityData('packaging_weight', 0)
+        }
+    }, [])
+
+    const handleAddPackaging = () => {
+        addPackagingPart({
+            id: generateId(),
+            stageId: 'packaging',
+            name: 'New Packaging',
+            quantity: 0,
+            unit: 'kg',
+            emissionSourceType: 'fossil',
+            materialType: 'material_paper_cardboard',
+            dataQuality: {
+                type: 'secondary',
+                source: '국가 LCI DB',
+                year: 2023,
+                geographicScope: 'Korea',
+                uncertainty: 30
+            }
+        })
+    }
+
     return (
         <div className="space-y-4">
-            <div className="grid gap-4 sm:grid-cols-2">
-                <div className="space-y-2">
-                    <Label htmlFor="packaging_weight">포장재 중량 (kg)</Label>
-                    <Input
-                        id="packaging_weight"
-                        type="number"
-                        placeholder="예: 5"
-                        value={activityData['packaging_weight'] || ''}
-                        onChange={(e) => setActivityData('packaging_weight', parseFloat(e.target.value) || 0)}
-                    />
+            <div className="flex justify-between items-center">
+                <div className="flex items-center gap-2">
+                    <Package className="h-4 w-4 text-purple-500" />
+                    <span className="font-medium">포장재 목록</span>
                 </div>
-                <div className="space-y-2">
-                    <Label htmlFor="packaging_material">포장재 종류</Label>
-                    <Select
-                        value={activityData['packaging_material'] || 'material_paper_cardboard'}
-                        onValueChange={(value) => setActivityData('packaging_material', value as any)}
-                    >
-                        <SelectTrigger id="packaging_material">
-                            <SelectValue placeholder="포장재 선택" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="material_paper_cardboard">골판지 (0.89 kgCO₂e/kg)</SelectItem>
-                            <SelectItem value="material_paper_kraft">크라프트지 (0.78 kgCO₂e/kg)</SelectItem>
-                            <SelectItem value="material_plastic_pe">PE 필름 (1.89 kgCO₂e/kg)</SelectItem>
-                            <SelectItem value="material_plastic_pp">PP (1.86 kgCO₂e/kg)</SelectItem>
-                            <SelectItem value="material_wood_softwood">목재 팔레트 (0.31 kgCO₂e/kg)</SelectItem>
-                        </SelectContent>
-                    </Select>
-                </div>
+                <Button onClick={handleAddPackaging} size="sm" variant="outline" className="h-8 gap-2">
+                    <Plus className="h-4 w-4" /> 포장재 추가
+                </Button>
             </div>
+
+            {packagingList.length === 0 ? (
+                <div className="text-center p-8 border border-dashed rounded-lg text-muted-foreground bg-muted/20">
+                    등록된 포장재가 없습니다. '포장재 추가' 버튼을 눌러 추가해주세요.
+                </div>
+            ) : (
+                <div className="space-y-3">
+                    {packagingList.map((item, index) => (
+                        <div key={item.id} className="grid gap-3 p-3 border rounded-lg bg-card relative group">
+                            <div className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-6 w-6 text-destructive hover:text-destructive hover:bg-destructive/10"
+                                    onClick={() => removePackagingPart(item.id)}
+                                >
+                                    <Trash2 className="h-4 w-4" />
+                                </Button>
+                            </div>
+                            <div className="grid gap-4 sm:grid-cols-2 pr-8">
+                                <div className="space-y-2">
+                                    <Label className="text-xs text-muted-foreground">포장재 종류 #{index + 1}</Label>
+                                    <Select
+                                        value={item.materialType}
+                                        onValueChange={(value) => updatePackagingPart(item.id, { materialType: value })}
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="포장재 선택" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="material_paper_cardboard">골판지 (0.89 kgCO₂e/kg)</SelectItem>
+                                            <SelectItem value="material_paper_kraft">크라프트지 (0.78 kgCO₂e/kg)</SelectItem>
+                                            <SelectItem value="material_plastic_pe">PE 필름 (1.89 kgCO₂e/kg)</SelectItem>
+                                            <SelectItem value="material_plastic_pp">PP (1.86 kgCO₂e/kg)</SelectItem>
+                                            <SelectItem value="material_wood_softwood">목재 팔레트 (0.31 kgCO₂e/kg)</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label className="text-xs text-muted-foreground">포장재 중량 (kg)</Label>
+                                    <Input
+                                        type="number"
+                                        placeholder="예: 5"
+                                        value={item.quantity || ''}
+                                        onChange={(e) => updatePackagingPart(item.id, { quantity: parseFloat(e.target.value) || 0 })}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     )
 }
